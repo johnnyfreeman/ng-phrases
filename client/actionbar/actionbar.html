@@ -1,0 +1,26 @@
+<template name="actionBar">
+  <!-- Action Bar -->
+  <div class="action-bar">
+
+    <form action="" id="searchForm" method="post"> 
+
+      <a class="btn pull-right" id="sortBtn" href="#"><i class="icon-sort"></i></a>
+      <a class="btn" id="sidebarToggle" href="#"><i class="icon-tags"></i></a>&nbsp;
+
+      <ul id="sortDrop">
+        <li><strong>Sort your phrases&hellip;</strong></li>
+        <!-- <li><a href="#"><i class="icon-user"></i> <em>by</em> Author</a></li> -->
+        <li data-sortby="date"><a href="#"><i class="icon-calendar"></i> <em>by</em> Date</a></li>
+        <li data-sortby="text"><a href="#"><i class="icon-align-justify"></i> <em>by</em> Phrase</a></li>
+        <li data-sortby="title"><a href="#"><i class="icon-font"></i> <em>by</em> Title</a></li>
+      </ul>
+
+      <div class="search-field">
+        <i class="icon-search"></i>
+        <input class="search" name="search" type="text" placeholder="Search your phrases&hellip;">
+      </div>
+
+    </form>
+
+  </div>
+</template>

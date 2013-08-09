@@ -1,0 +1,45 @@
+/* Phrases */
+#phrases {
+  border-bottom: 1px solid #e4e9ed;
+  margin: 0;
+  padding-left: 0;
+}
+
+#phrases li {
+  border-top: 1px solid #e4e9ed;
+  list-style: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+#phrases li:hover {
+  background-color: #F1F5F9;
+}
+
+#phrases .active, 
+#phrases .active:hover {
+  background-color: #F1F5F9;
+}
+
+#phrases .active .tag,
+#phrases .active:hover .tag,
+#phrases .active .date,
+#phrases .active:hover .date {
+  color: #3a5a7a;
+}
+
+#phrases .checkbox {
+  float: left;
+  padding: 15px 0 15px 7px;
+  font-size: 28px;
+  /*text-align: center;*/
+  width: 50px;
+}
+
+#phrases .active .checkbox {
+  color: #13C4A5;
+}
+
+#phrases li:hover .tag {
+  color: #7f8c8d;
+}

@@ -1,0 +1,14 @@
+.info-bar {
+  background-color: #1abc9c;
+  bottom: 0;
+  color: #fff;
+  display: block;
+  padding: 15px 15px 13px;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+
+.info-bar .btn {
+  margin-top: -4px;
+}

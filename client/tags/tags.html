@@ -1,0 +1,16 @@
+<template name="tagNav">
+  <ul id="tags">
+    {{#each tags}}
+      {{> tagNavItem}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="tagNavItem">
+  <li class="{{active}}">
+    <a href="#">
+      <span class="count">{{count}}</span>
+      <i class="icon-tag"></i> {{title}}
+    </a>
+  </li>
+</template>

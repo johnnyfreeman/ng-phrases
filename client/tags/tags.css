@@ -1,0 +1,64 @@
+/* Tags */
+
+#tags {
+  font-size: 14px;
+  height: 591px;
+  margin: 0;
+  padding-left: 0;
+}
+
+#tags li {
+  border-bottom: 1px solid #2c3e50;
+  list-style: none;
+}
+
+#tags a {
+  background-color: #34495e;
+  color: #8e9eae;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+#tags a:hover,
+#tags a:hover .icon-tag,
+#tags a:hover .count {
+  color: #fff;
+}
+
+#tags .active a,
+#tags .active a:hover {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+#tags .icon-tag {
+  color: #798795;
+  margin-right: 3px;
+}
+
+#tags .active .icon-tag {
+  color: #1ABC9C;
+}
+
+#tags .count {
+  background-color: #2c3e50;
+  border-radius: 10px;
+  position:relative;
+  color: #798795;
+  float: right;
+  font-weight: bold;
+  padding: 0 8px 1px;
+}
+
+#tags .active .count {
+  background-color: #ff5f5f;
+  color: #fff;
+}
+
+/* TAGS */
+.tag {
+  color: #bdc3c7;
+  font-size: 12px;
+  margin-right: 10px;
+}

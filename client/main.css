@@ -1,0 +1,78 @@
+* { 
+  box-sizing: border-box; 
+}
+
+/* removes dotted line */
+a:active, a:focus, input { outline-style: none; -moz-outline-style:none; }
+
+body {
+  background-color: white;
+  color: #3a5a7a;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+h1 {
+  font-size: 14px;
+  margin-top: 0;
+}
+
+p {
+  font-size: 12px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+h1 small.date {
+  color: #919599;
+  font-size: 12px;
+  font-weight: normal;
+  float: right;
+  text-decoration: none;
+}
+
+form {
+  margin: 0;
+}
+
+.pull-right {
+  float: right;
+}
+
+.hidden {
+  display: none;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#container {
+  background-color: red;
+  width: 800px;
+}
+
+/* Both Columns */
+#left, #right {
+  float: left;
+  position: relative;
+}
+
+/* Scrolling */
+#left .scroll, #right .scroll { overflow-y: hidden;}
+#left .scroll { height: 591px;}
+#right .scroll { height: 519px;}
+#right .scroll:hover, #left .scroll:hover { overflow-y: scroll;}
+
+/* Left Column */
+#left {
+  background-color: #34495e;
+  width: 220px;
+  border-right: 1px solid #2c3e50;
+}
+
+/* Right Column */
+#right {
+  width: 574px;
+}

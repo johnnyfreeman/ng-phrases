@@ -1,0 +1,32 @@
+<template name="phrases">
+  <form action="" id="phraseForm" method="post">
+    
+    <ul id="phrases">
+      {{#each phrases}}
+        {{> phraseItem}}
+      {{/each}}
+    </ul>
+  </form>
+</template>
+
+
+<template name="phraseItem">
+  <li class="{{active}}">
+    <div class="checkbox">
+      <i class="{{icon}}"></i>
+      <input class="hidden" name="phrases[]" type="checkbox" value="{{text}}" {{{checked}}}>
+    </div>
+    <h1><small class="date">2 hours ago</small>{{title}}</h1>
+    <p class="truncate">{{text}}</p>
+    <p>
+      {{#each tags}}
+        {{> phraseItemTag}}
+      {{/each}}
+    </p>
+  </li>
+</template>
+
+
+<template name="phraseItemTag">
+  <span class="tag"><i class="icon-tag"></i> {{title}}</span>
+</template>

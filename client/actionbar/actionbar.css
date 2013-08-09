@@ -1,0 +1,121 @@
+.action-bar {
+  background-color: #fff;
+  padding: 20px 15px;
+  height: 72px;
+
+  /* place action-bar above phrases */
+  position: relative; 
+  z-index: 1;
+}
+
+/* SEARCH FIELD */
+.search-field {
+  position: relative;
+  display: inline-block;
+}
+
+.search-field .icon-search {
+  color: #919599;
+  left: 10px;
+  position: absolute;
+  top: 9px;
+  z-index: 1;
+}
+
+input.search {
+  background-color: #fff;
+  border-radius: 17px;
+  position:relative;
+  border: 1px solid #13c4a5;
+  color: #3a5a7a;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 7px 12px 7px 30px;
+  width: 185px;
+}
+
+input.search.placeholder {
+  border-color: #cccccc;
+  color: #919599;
+  font-weight: normal;
+}
+
+input.search.placeholder:hover {
+  border-color: #919599;
+}
+
+
+#sortDrop {
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding-left: 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: none;
+}
+
+#sortDrop li {
+  border-top: 1px solid #eee;
+  list-style: none;
+}
+
+/* padding */
+#sortDrop strong,
+#sortDrop a {
+  display: block;
+  padding: 10px 15px;
+}
+
+#sortDrop a {
+  text-decoration: none;
+  color: #657483;
+}
+
+/* hover state */
+#sortDrop a:hover {
+  background-color: #13C4A5;
+  color: #fff;
+}
+#sortDrop a:hover .icon-user,
+#sortDrop a:hover .icon-calendar,
+#sortDrop a:hover .icon-align-justify,
+#sortDrop a:hover .icon-font {
+  color: #fff;
+}
+
+#sortDrop:before, #sortDrop:after {
+position: absolute;
+display: inline-block;
+border-color: transparent;
+border-style: solid;
+content: "";
+}
+
+/* arrow shadow */
+#sortDrop:before {
+margin-top: -7px;
+top: 1px;
+right: 6px;
+border-bottom-color: #d1d4d7;
+border-width: 0 7px 7px 7px;
+-moz-border-top-colors: #fff;
+}
+/* arrow */
+#sortDrop:after {
+margin-top: -6px;
+top: 1px;
+right: 7px;
+border-bottom-color: #fff;
+border-width: 0 6px 6px 6px;
+}
+
+#sortDrop .icon-user,
+#sortDrop .icon-calendar,
+#sortDrop .icon-align-justify,
+#sortDrop .icon-font {
+  color: #A5B6C7;
+}

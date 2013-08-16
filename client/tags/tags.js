@@ -1,21 +1,12 @@
 // active tags list
 Session.setDefault('active_tags', []);
 
+// subscribe to all tags that the server is publishing
 Meteor.subscribe('tags');
 
 // This user's tags
 Template.tagNav.tags = function () {
-  var uniqueTags = [];
-
-  Phrases.find().forEach(function(phrase) {
-    _.each(phrase.tags, function(tag) {
-      if (!_.contains(uniqueTags, tag)) {
-        uniqueTags.push(tag);
-      };
-    });
-  });
-
-  return Tags.find({_id: {$in: uniqueTags}}, {sort: {title: 1}});
+  return Tags.find();
 };
 
 // is this id in the active_tags list?

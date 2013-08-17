@@ -7,7 +7,10 @@ Meteor.startup(function () {
   if (Meteor.users.find().count() === 0) {
     userId = Accounts.createUser({
       email: 'jfreeman@veroortho.com',
-      password: '29483270'
+      password: '29483270',
+      profile: {
+        providerId: '30F4761C-EF78-49FB-9492-98526A6A5A38' // coren
+      }
     });
   };
 
@@ -29,37 +32,39 @@ Meteor.startup(function () {
   }
 
   var injectionId = Tags.findOne({title: 'Injection'})._id;
+  var hpiId = Tags.findOne({title: 'HPI'})._id;
+  var planId = Tags.findOne({title: 'Plan'})._id;
 
   var phrases = [
     {
       title: 'Biceps Tendon Sheath Injection', 
       text: 'The risks, benefits and alternatives to a therapeutic steroid injection of the proximal bicipital tendon sheath were discussed and reviewed.  The injection consent form outlining the proposed procedure, risks, and complications as well as the alternatives was reviewed by the nurse.  The patient signed this form and wishes to proceed.  The patient was positioned in a seated position, and the anterior aspect of the  shoulder and arm was prepped and draped in the usual sterile fashion with the arm at the side.  Aerosolized ethyl chloride was used as preinjection topical anesthetic.  A solution of 1cc of 40mg/mL Depo-Medrol and 4cc of 0.25% Marcaine with epinephrine was injected along the area of maximal tenderness deep to the level of the bicipital tendon sheath via a 25-gauge needle.  The patient tolerated the procedure well.  There were no known complications.  The patient noted immediate relief of discomfort over this region.  A sterile Band-Aid was applied.  The onset and potential duration of effect of the medications were reviewed.', 
-      tags: [injectionId],
+      tags: [injectionId, planId],
       userId: userId
     }, 
     {
       title: 'Orthovisc Injection', 
       text: 'It is my medical opinion that the patient is an acceptable candidate for viscosupplementation injections. The evidence to support this is consistent with the Medicare regulations regarding the use of this therapy.  The patient has persistent pain interfering with daily activities including ambulation. Plain film radiographs confirm a diagnosis of osteoarthritis of the joint. The patient has failed three months of conservative therapy defined by Medicare as nonpharmacologic therapy including a home exercise program incorporating activity modification and education, analgesics where not contraindicated, and a failed response to an intraarticular corticosteroid injection previously. The risks, benefits and alternatives to intraarticular viscosupplementation to the knee were reviewed.  The injection consent form outlining the proposed procedure, risks and complications as well as alternatives was reviewed by the nurse. The patient signed this form and wished to proceed. The patient was positioned in a supine position and the  knee was prepped in the usual sterile fashion.  Aerosolized Ethyl Chloride was used as a pre-injection topical anesthetic.  A lateral suprapatellar approach to the intraarticular space of the knee was obtained with the use of an 18-gauge needle. A 2 mm solution of Orthovisc was then injected.  A sterile Band-Aid was applied. The patient tolerated the procedure well and there were no observable complications.', 
-      tags: [injectionId],
+      tags: [injectionId, hpiId],
       userId: userId
     }, 
     {
       title: 'Trigger finger injection', 
       text: 'The risks, benefits and alternatives of corticosteroid injection for trigger finger were discussed and reviewed with the patient. The injection consent form outlining the proposed procedure, risks and complications as well as alternatives was reviewed by the nurse. The patient signed this form and wished to proceed. The patients  hand was prepped with the palmer aspect of the hand facing up with the fingers in extension. The flexor tendon sheath was palpated over the affected finger.  Aerosolized Ethyl Chloride was used as a pre-injection topical anesthetic.  Local anesthetic of 1% lidocaine without epinephrine and 1 cc of 1% lidocaine was utilized and a combination of 1 cc of 40 mg Depo Medrol and 1 cc 0.25% marcaine without epinephrine, were injected in combination at the level of the flexor tendon sheath with a positive wave sign and no resistance. A sterile Band-Aid was applied. The patient tolerated this procedure well with no observable complications.  The patient had immediate relief of discomfort on finger flexion.  The onset and potential duration of effect of the medications were reviewed.', 
-      tags: [injectionId],
+      tags: [injectionId, planId, hpiId],
       userId: userId
     }, 
     {
       title: 'Knee Injection', 
       text: 'The risks, benefits and alternatives to corticosteroid injection to the knee were reviewed. The injection consent form outlining the proposed procedure, risks and complications as well as alternatives was reviewed by the nurse. The patient signed this form and wished to proceed. The patient was positioned in a supine position and the  knee was prepped in the usual sterile fashion.  Aerosolized Ethyl Chloride was used as a pre-injection topical anesthetic.  A lateral suprapatellar approach to the intraarticular space of the knee was obtained with the use of an 18 gauge needle. 2 cc of 40 mg per ml Depo-Medrol and 7 cc 0.25% marcaine with epinephrine was injected. A sterile Band-Aid was applied. The patient tolerated the procedure well with no  observable complications.  The patient noted immediate relief of discomfort  within the knee.  The onset and potential duration of effect of the medications were reviewed.', 
       tags: [injectionId],
-      userId: null
+      userId: userId
     }, 
     {
       title: 'Knee Joint Aspiration', 
       text: 'The risks, benefits and alternatives to aspiration of the knee were reviewed.  The injection consent form outlining the proposed procedure, risks and complications as well as alternatives was reviewed by the nurse. The patient signed this form and wished to proceed. The patient was positioned in a supine position and the  knee was prepped in the usual sterile fashion.  A lateral suprapatellar approach to the intraarticular space of the knee was obtained with the use of an 18 gauge needle.   cc of straw-colored fluid was aspirated from the intraarticular space of the knee.  A sterile Band-Aid was applied. The patient tolerated the procedure well.  There were no observable complications.', 
-      tags: [injectionId],
-      userId: null
+      tags: [],
+      userId: userId
     }, 
     {
       title: 'Glenohumeral injection', 

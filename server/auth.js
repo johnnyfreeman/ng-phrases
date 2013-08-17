@@ -9,7 +9,7 @@ Accounts.registerLoginHandler(function (options) {
     return undefined;
 
   // search for user by provider id
-  var user = Meteor.users.findOne({providerId: options.providerId});
+  var user = Meteor.users.findOne({profile: { providerId: options.providerId}});
   if (!user)
     throw new Meteor.Error(403, "This provider id '"+options.providerId+"'' has not been tethered to an account yet");
 

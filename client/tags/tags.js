@@ -6,7 +6,7 @@ Meteor.subscribe('tags');
 
 // This user's tags
 Template.tagNav.tags = function () {
-  return Tags.find();
+  return Tags.find({}, {sort:{title:1}});
 };
 
 // is this id in the active_tags list?

@@ -8,5 +8,6 @@ Npm.depends({
 
 Package.on_use(function (api){
 	api.use('webapp', 'server');
+	api.use('accounts-base', 'server');
 	api.add_files('send-to-nextgen.js', 'server');
 });

@@ -6,6 +6,7 @@ Meteor.startup(function () {
   $searchField = $('.search-field .search');
   $leftCol = $('#left');
   $rightCol = $('#right');
+  $addPhraseForm = $('#addPhraseForm');
 
   // PLACEHOLDER
   $('input[placeholder]').placeHolder();
@@ -17,18 +18,28 @@ Meteor.startup(function () {
 
     // open dropdown
     if ($target.closest('#sortBtn').length && $sortDrop.is(':hidden')) {
-      $sortDrop.show(0);
+      $sortDrop.show();
     }
 
     // close dropdown
     else if (!$target.closest('#sortDrop').length || ($target.closest('#sortBtn').length && !$sortDrop.is(':hidden'))) {
-      $sortDrop.hide(0);
+      $sortDrop.hide();
+    }
+
+    // open dropdown
+    if ($target.closest('#addPhrase').length && $addPhraseForm.is(':hidden')) {
+      $addPhraseForm.show();
+    }
+
+    // close dropdown
+    else if (!$target.closest('#addPhraseForm').length || ($target.closest('#addPhrase').length && !$addPhraseForm.is(':hidden'))) {
+      $addPhraseForm.hide();
     }
   });
 
   $sortDrop.find('li').on('click', function () {
     Session.set('sortPhrasesBy', $(this).data('sortby'));
-    $sortDrop.hide(0);
+    $sortDrop.hide();
   });
 
 

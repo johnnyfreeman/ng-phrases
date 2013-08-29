@@ -2,9 +2,30 @@
   <!-- Action Bar -->
   <div class="action-bar">
 
+
+
+      <form action="" id="addPhraseForm" method="post">
+        <div>
+          <strong>Add a new phrase&hellip;</strong>
+        </div>
+        <div>
+          <input name="title" placeholder="title&hellip;" type="text" value="">
+        </div>
+        <div>
+          <textarea name="phrase" placeholder="body&hellip;"></textarea>
+        </div>
+        <div>
+          <input class="tags" name="title" placeholder="tags&hellip;" type="text" value="">
+        </div>
+        <div>
+          <button class="btn btn-success pull-right" type="submit">Save Phrase</button>
+        </div>
+      </form>
+
     <form action="" id="searchForm" method="post"> 
 
       <a class="btn pull-right" id="sortBtn" href="#"><i class="icon-sort"></i></a>
+      <a class="btn btn-primary" id="addPhrase" href="#"><i class="icon-plus"></i></a>&nbsp;
       <a class="btn" id="sidebarToggle" href="#"><i class="icon-tags"></i></a>&nbsp;
 
       <ul id="sortDrop">

@@ -31,8 +31,8 @@ input.search {
   background-color: #fff;
   border-radius: 17px;
   position:relative;
-  border: 1px solid #13c4a5;
-  color: #3a5a7a;
+  border: 1px solid #5DCFF3;
+  color: #545454;
   font-size: 14px;
   font-weight: bold;
   padding: 7px 12px 7px 30px;
@@ -40,13 +40,13 @@ input.search {
 }
 
 input.search.placeholder {
-  border-color: #cccccc;
+  border-color: #E4E8F2;
   color: #919599;
   font-weight: normal;
 }
 
 input.search.placeholder:hover {
-  border-color: #919599;
+  border-color: #DDE2EE;
 }
 
 

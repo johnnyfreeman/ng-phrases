@@ -5,7 +5,7 @@
 
 /* General button style (reset) */
 .btn {
-  border: 1px solid #E4E9ED;
+  border: none;
   cursor: pointer;
   outline: none;
   position: relative;

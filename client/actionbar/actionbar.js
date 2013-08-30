@@ -43,6 +43,53 @@ Meteor.startup(function () {
     }
   });
 
+  // add new phrase
+  $addPhraseForm.on('submit', function(e) {
+    e.preventDefault();
+
+    var $form  = $(this);
+    var tagIds = [];
+    var tags   = $('#tagsField').val().split(',');
+
+    // get tag ids
+    _.each(tags, function(tagTitle) {
+      var tag = Tags.findOne({title: tagTitle});
+      var tagId = tag === undefined ? Tags.insert({title: tagTitle}) : tag._id;
+      tagIds.push(tagId);
+    });
+
+    // save phrase
+    Phrases.insert({
+      title: $form.find('input.title').val(), 
+      text: $form.find('textarea').val(), 
+      tags: tagIds,
+      userId: Meteor.userId()
+    });
+
+    // clear form
+
+    // close form or keep open and focus on title field
+
+  });
+
+  $('#tagsField').selectize({
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+      return {
+        value: input,
+        text: input
+      }
+    },
+    valueField: '_id',
+    labelField: 'title',
+    searchField: ['title'],
+    options: Tags.find().fetch(),
+    maxOptions: 5,
+    hideSelected: true,
+    sortField: 'title'
+  });
+
 });
 
 Session.setDefault('sortPhrasesBy', 'title');

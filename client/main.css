@@ -78,6 +78,7 @@ form {
   background-color: #F9FAFC;
 }
 
+/* override the default animation speed for all animations */
 .animated {
   /* fadeIn animation speed */
   -webkit-animation-duration: .3s;
@@ -85,4 +86,22 @@ form {
   -ms-animation-duration: .3s;
   -o-animation-duration: .3s;
   animation-duration: .3s;
+}
+
+/* normalize selectize */
+.selectize-input {
+  font-family: inherit;
+  font-size: 100%;
+  padding: 10px 15px;
+  border: none;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.selectize-input.focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }

@@ -4,6 +4,16 @@
   $.fn.popup = function (options) {
       var $allToggleEls = this;
 
+      // preventDefault click functionality 
+      // on all links for popups
+      $allToggleEls.each(function() {
+        if (this.nodeName === 'A') {
+          $(this).on('click', function(e) {
+            e.preventDefault();
+          });
+        };
+      })
+
       $('body').on('click', function(e) {
         var $clickedEl = $(e.target);
 

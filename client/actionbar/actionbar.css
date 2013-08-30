@@ -143,19 +143,20 @@ border-width: 0 6px 6px 6px;
   display: none;
 }
 
-#addPhraseForm div {
+#addPhraseForm div.form-control {
   border-top: 1px solid #eee;
   list-style: none;
 }
-#addPhraseForm div:first-child {
+#addPhraseForm div.form-control:first-child {
   border-top: none;
 }
 
 /* padding */
-#addPhraseForm input,
+#addPhraseForm input.title,
+#addPhraseForm #tagsField,
 #addPhraseForm textarea,
-#addPhraseForm strong,
-#addPhraseForm button {
+#addPhraseForm .popup-title,
+#addPhraseForm .btn-submit {
   display: block;
   padding: 10px 15px;
   border: 0;

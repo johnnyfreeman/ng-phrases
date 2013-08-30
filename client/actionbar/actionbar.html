@@ -5,20 +5,20 @@
 
 
       <form action="" class="animated fadeInDown" id="addPhraseForm" method="post">
-        <div>
+        <div class="popup-title form-control">
           <strong>Add a new phrase&hellip;</strong>
         </div>
-        <div>
-          <input name="title" placeholder="title&hellip;" type="text" value="">
+        <div class="form-control">
+          <input class="title" name="title" placeholder="Title&hellip;" type="text" value="">
+        </div>
+        <div class="form-control">
+          <input class="tags" id="tagsField" name="tags" placeholder="Tags&hellip;" type="text" value="">
+        </div>
+        <div class="form-control">
+          <textarea name="phrase" placeholder="Body&hellip;"></textarea>
         </div>
         <div>
-          <textarea name="phrase" placeholder="body&hellip;"></textarea>
-        </div>
-        <div>
-          <input class="tags" name="title" placeholder="tags&hellip;" type="text" value="">
-        </div>
-        <div>
-          <button class="btn btn-success pull-right" type="submit">Save Phrase</button>
+          <button class="btn btn-success pull-right btn-submit" type="submit"><i class="icon-save"></i> Save Phrase</button>
         </div>
       </form>
 

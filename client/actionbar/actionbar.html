@@ -2,46 +2,79 @@
   <!-- Action Bar -->
   <div class="action-bar">
 
+    <form action="" id="searchForm" method="post">
+      <!-- settings button -->
+      <a class="btn pull-right" data-popup="settingsForm" id="settingsBtn" href="#"><i class="icon-cog"></i></a>
 
-
-      <form action="" class="animated fadeInDown" id="addPhraseForm" method="post">
-        <div class="popup-title form-control">
-          <strong>Add a new phrase&hellip;</strong>
-        </div>
-        <div class="form-control">
-          <input class="title" name="title" placeholder="Title&hellip;" type="text" value="">
-        </div>
-        <div class="form-control">
-          <input class="tags" id="tagsField" name="tags" placeholder="Tags&hellip;" type="text" value="">
-        </div>
-        <div class="form-control">
-          <textarea name="phrase" placeholder="Body&hellip;"></textarea>
-        </div>
-        <div>
-          <button class="btn btn-success pull-right btn-submit" type="submit"><i class="icon-save"></i> Save Phrase</button>
-        </div>
-      </form>
-
-    <form action="" id="searchForm" method="post"> 
-
-      <a class="btn pull-right" data-popup="sortDrop" id="sortBtn" href="#"><i class="icon-sort"></i></a>
-      <a class="btn btn-info" data-popup="addPhraseForm" id="addPhrase" href="#"><i class="icon-plus"></i></a>&nbsp;
-<!--      <a class="btn" id="sidebarToggle" href="#"><i class="icon-tags"></i></a>&nbsp;-->
-
-      <ul class="animated fadeInDown" id="sortDrop">
-        <li><strong>Sort your phrases&hellip;</strong></li>
-        <!-- <li><a href="#"><i class="icon-user"></i> <em>by</em> Author</a></li> -->
-        <li><a data-sortby="date" href="#"><i class="icon-calendar"></i> <em>by</em> Date</a></li>
-        <li><a data-sortby="text" href="#"><i class="icon-align-justify"></i> <em>by</em> Phrase</a></li>
-        <li><a data-sortby="title" href="#"><i class="icon-font"></i> <em>by</em> Title</a></li>
-      </ul>
-
+      <!-- add button -->
+      <a class="btn btn-success" data-popup="addPhraseForm" id="addPhrase" href="#"><i class="icon-plus"></i></a>&nbsp;
+      <!-- search field -->
       <div class="search-field">
         <i class="icon-search"></i>
         <input class="search" name="search" type="text" placeholder="Search your phrases&hellip;">
       </div>
+    </form>
 
+    <!-- Add new phrase popup -->
+    <form action="" class="popup animated fadeInDown" id="addPhraseForm" method="post">
+      <div class="popup-title">
+        <strong>Add a new phrase&hellip;</strong>
+      </div>
+      <div class="popup-section no-padding">
+        <input class="title" name="title" placeholder="Title&hellip;" type="text" value="">
+      </div>
+      <div class="popup-section no-padding">
+        <input class="tags" id="tagsField" name="tags" placeholder="Tags&hellip;" type="text" value="">
+      </div>
+      <div class="popup-section no-padding">
+        <textarea name="phrase" placeholder="Body&hellip;"></textarea>
+      </div>
+      <div>
+        <button class="btn btn-success pull-right btn-submit" type="submit"><i class="icon-ok"></i> Save New Phrase</button>
+      </div>
+    </form>
+
+    <!-- Settings popup -->
+    <form action="" class="popup animated fadeInDown" id="settingsForm" method="post">
+      <div class="popup-title">
+        <strong>Settings</strong>
+      </div>
+      <div class="popup-section">
+        <label>
+          <input class="pull-right" name="bulk-insert-mode" type="checkbox">
+          Bulk Insert Mode
+        </label>
+      </div>
+      <div class="popup-section">
+        <label>
+          <input class="pull-right" name="bulk-insert-mode" type="checkbox">
+          Bulk Delete Mode
+        </label>
+      </div>
+      <div class="popup-section">
+        <label>
+          <select name="sort-phrases-by" class="pull-right">
+            <option>Body</option>
+            <option>Date</option>
+            <option>Title</option>
+          </select>
+          Sort Phrases By&hellip;
+        </label>
+      </div>
+      <div class="popup-section">
+        <label>
+          <span class="pull-right">346513543184</span>
+          User ID
+        </label>
+      </div>
     </form>
 
   </div>
+
+<!--       <ul class="animated fadeInDown" id="sortDrop">
+        <li><strong>Sort your phrases&hellip;</strong></li>
+        <li><a data-sortby="date" href="#"><i class="icon-calendar"></i> <em>by</em> Date</a></li>
+        <li><a data-sortby="text" href="#"><i class="icon-align-justify"></i> <em>by</em> Phrase</a></li>
+        <li><a data-sortby="title" href="#"><i class="icon-font"></i> <em>by</em> Title</a></li>
+      </ul> -->
 </template>

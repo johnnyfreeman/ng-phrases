@@ -16,7 +16,7 @@ Meteor.startup(function () {
   $rightCol.find('.scroll').slimScroll({
     color: '#999',
     size: '5px',
-    height: '519px'
+    height: '463px'
   });
   
 

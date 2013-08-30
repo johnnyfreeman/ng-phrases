@@ -3,11 +3,11 @@
 }
 
 /* removes dotted line */
-a:active, a:focus, input { outline-style: none; -moz-outline-style:none; }
+a:active, a:focus, input, textarea { outline-style: none; -moz-outline-style:none; }
 
 body {
   background-color: white;
-  color: #3a5a7a;
+  color: #575757;
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 
@@ -60,19 +60,29 @@ form {
 }
 
 /* Scrolling */
-#left .scroll, #right .scroll { overflow-y: hidden;}
+#left .scroll, #right .scroll { overflow-y: hidden; }
 #left .scroll { height: 591px;}
-#right .scroll { height: 519px;}
+#right .scroll { height: 463px;}
 #right .scroll:hover, #left .scroll:hover { overflow-y: scroll;}
 
 /* Left Column */
 #left {
-  background-color: #34495e;
-  width: 220px;
-  border-right: 1px solid #2c3e50;
+  background-color: #4C5566;
+  width: 200px;
+  border-right: 1px solid #3D4452;
 }
 
 /* Right Column */
 #right {
-  width: 574px;
+  width: 594px;
+  background-color: #F9FAFC;
+}
+
+.animated {
+  /* fadeIn animation speed */
+  -webkit-animation-duration: .3s;
+  -moz-animation-duration: .3s;
+  -ms-animation-duration: .3s;
+  -o-animation-duration: .3s;
+  animation-duration: .3s;
 }

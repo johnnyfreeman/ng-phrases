@@ -1,60 +1,78 @@
 /* BUTTONS */
+
+
+
+
+/* General button style (reset) */
 .btn {
+  border: 1px solid #E4E9ED;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  box-shadow: 0 2px #e4e9ed;
+  text-decoration: none;
+  
+  
+  
   background-color: #fff;
   border-radius: 4px;
-  border: 1px solid #c3c6c9;
   display: inline-block;
-  color: #657483;
+  color: #575757;
+  text-shadow: 0 1px 0px #fff;
   font-size: 14px;
   font-weight: bold;
-  padding: 5px 12px 7px;
+  padding: 7px 12px;
   text-decoration: none;
-  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1);
 }
 
+.btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+}
+
+.btn:hover {
+	box-shadow: 0 1px #e4e9ed;
+	top: 1px;
+}
+
+.btn:active {
+	box-shadow: 0 0 #e4e9ed;
+	top: 2px;
+}
+
+/* Success */
 .btn-success {
-  background-color: #2ecc71;
-  box-shadow: inset 0 -2px 0 #27ae60;
-  border-color: transparent;
+  background-color: #92CF5C;
+  border-color: #80C740;
+  box-shadow: 0 2px 0 #80C740;
   color: #fff;
+  text-shadow: 0 1px 0px rgba(0,0,0,0.2);
 }
+.btn-success:hover  { box-shadow: 0 1px #80C740; }
+.btn-success:active { box-shadow: 0 0 #80C740; }
 
-.btn-success:hover {
-  background-color: #58d68d;
-}
-
+/* Danger */
 .btn-danger {
-  background-color: #e74c3c;
-  box-shadow: inset 0 -2px 0 #c0392b;
-  border-color: transparent;
+  background-color: #FB6B5B;
+  border-color: #FB5B4A;
+  box-shadow: 0 2px 0 #FB5B4A;
   color: #fff;
+  text-shadow: 0 1px 0px rgba(0,0,0,0.2);
 }
+.btn-danger:hover  { box-shadow: 0 1px #FB5B4A; }
+.btn-danger:active { box-shadow: 0 0 #FB5B4A; }
 
-.btn-danger:hover {
-  background-color: #ec7063;
-}
-
+/* Info */
 .btn-info {
-  background-color: #3498db;
-  box-shadow: inset 0 -2px 0 #2980b9;
-  border-color: transparent;
+  background-color: #6ED4F4;
+  border-color: #3CC5F1;
+  box-shadow: 0 2px 0 #3CC5F1;
   color: #fff;
+  text-shadow: 0 1px 0px rgba(0,0,0,0.2);
 }
-
-.btn-info:hover {
-  background-color: #5dade2;
-}
-
-.btn-dark {
-  background-color: #34495e;
-  box-shadow: inset 0 -2px 0 #2c3e50;
-  border-color: transparent;
-  color: #fff;
-}
-
-.btn-dark:hover {
-  background-color: #5C6D7E;
-}
+.btn-info:hover  { box-shadow: 0 1px #3CC5F1; }
+.btn-info:active { box-shadow: 0 0 #3CC5F1; }
 
 .btn-disabled, .btn-disabled:hover {
   opacity: .5;

@@ -1,23 +1,31 @@
 /* Tags */
 
 #tags {
-  font-size: 14px;
+  font-size: 13px;
   height: 591px;
   margin: 0;
   padding-left: 0;
 }
 
 #tags li {
-  border-bottom: 1px solid #2c3e50;
+  border-bottom: 1px solid #444C5C;
+  border-top: 1px solid #545E70;
   list-style: none;
 }
 
+#tags li.active {
+  border-bottom: 1px solid #3D4452;
+  border-top: 1px solid #4C5566;
+}
+
 #tags a {
-  background-color: #34495e;
-  color: #8e9eae;
+  background-color: #4C5566;
+  color: #a7afbd;
   display: block;
-  padding: 10px 15px;
+  font-weight: bold;
+  padding: 15px 15px;
   text-decoration: none;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
 }
 
 #tags a:hover,
@@ -28,31 +36,32 @@
 
 #tags .active a,
 #tags .active a:hover {
-  background-color: #2c3e50;
+  background-color: #444C5C;
   color: #fff;
 }
 
 #tags .icon-tag {
-  color: #798795;
+  color: #a7afbd;
   margin-right: 3px;
 }
 
 #tags .active .icon-tag {
-  color: #1ABC9C;
+  color: #fff;
 }
 
 #tags .count {
-  background-color: #2c3e50;
+  background-color: #545E70;
   border-radius: 10px;
   position:relative;
-  color: #798795;
+  color: #a7afbd;
   float: right;
+  font-size: 11px;
   font-weight: bold;
-  padding: 0 8px 1px;
+  padding: 3px 8px 4px;
 }
 
 #tags .active .count {
-  background-color: #ff5f5f;
+  background-color: #4C5566;
   color: #fff;
 }
 

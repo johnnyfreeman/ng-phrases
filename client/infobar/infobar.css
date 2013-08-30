@@ -1,12 +1,16 @@
 .info-bar {
-  background-color: #1abc9c;
-  bottom: 0;
-  color: #fff;
+  background-color: #F2F4F8;
+  box-shadow: 0 -3px 6px rgba(0,0,0,0.1);
+/*  bottom: 0;*/
+  color: #545454;
   display: block;
   padding: 15px 15px 13px;
-  position: absolute;
-  right: 0;
+/*  position: absolute;*/
+/*  right: 0;*/
   width: 100%;
+  height: 56px;
+  position: relative;
+  z-index: 1;
 }
 
 .info-bar .btn {

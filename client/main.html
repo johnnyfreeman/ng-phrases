@@ -7,7 +7,12 @@
 
     <!-- Left Column -->
     <div id="left">
-      <!-- <div class="action-bar"></div> -->
+<!--
+      <div class="action-bar">
+        <h1>Tags</h1>
+        <p>Select one or more tags to show only those phrases.</p>
+      </div>
+-->
       <div class="scroll">
         {{> tagNav}}
       </div>
@@ -17,9 +22,9 @@
     <div id="right">
       {{> actionBar}}
       <div class="scroll">
-      {{> phrases}}
-      {{> infoBar}}
+        {{> phrases}}
       </div>
+      {{> infoBar}}
     </div>
     
   </div>

@@ -1,11 +1,16 @@
+#left .action-bar {
+  background-color: #4C5566;
+  color: #fff;
+}
+
 .action-bar {
-  background-color: #fff;
+  background-color: #F2F4F8;
   padding: 20px 15px;
   height: 72px;
 
-  /* place action-bar above phrases */
+  /* place action-bar above phrases AND infobar ** DO NOT REMOVE */
   position: relative; 
-  z-index: 1;
+  z-index: 2;
 }
 
 /* SEARCH FIELD */
@@ -47,14 +52,14 @@ input.search.placeholder:hover {
 
 #sortDrop {
   position: absolute;
-  top: 45px;
+  top: 50px;
   right: 15px;
   font-size: 14px;
   background-color: white;
-  border: 1px solid #ccc;
+/*  border: 1px solid #ccc;*/
   padding-left: 0;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 0px 8px rgba(0,0,0,0.3);
   display: none;
   overflow: visible;
 }
@@ -62,6 +67,9 @@ input.search.placeholder:hover {
 #sortDrop li {
   border-top: 1px solid #eee;
   list-style: none;
+}
+#sortDrop li:first-child {
+  border-top: none;
 }
 
 /* padding */
@@ -78,7 +86,7 @@ input.search.placeholder:hover {
 
 /* hover state */
 #sortDrop a:hover {
-  background-color: #13C4A5;
+  background-color: #5DCFF3;
   color: #fff;
 }
 #sortDrop a:hover .icon-user,
@@ -124,20 +132,23 @@ border-width: 0 6px 6px 6px;
 
 #addPhraseForm {
   position: absolute;
-  top: 59px;
+  top: 64px;
   left: 15px;
   font-size: 14px;
   background-color: white;
-  border: 1px solid #ccc;
+/*  border: 1px solid #ccc;*/
   padding-left: 0;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 0px 8px rgba(0,0,0,0.3);
   display: none;
 }
 
 #addPhraseForm div {
   border-top: 1px solid #eee;
   list-style: none;
+}
+#addPhraseForm div:first-child {
+  border-top: none;
 }
 
 /* padding */
@@ -148,7 +159,11 @@ border-width: 0 6px 6px 6px;
   display: block;
   padding: 10px 15px;
   border: 0;
-  width: 300px;
+  width: 564px;
+}
+
+#addPhraseForm textarea {
+  height: 359px;
 }
 
 #addPhraseForm a:hover .icon-user,

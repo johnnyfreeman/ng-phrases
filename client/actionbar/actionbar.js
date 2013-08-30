@@ -22,15 +22,15 @@ Meteor.startup(function () {
 
 
     // SIDEBAR TOGGLE
-  $('#sidebarToggle').on('click', function() {
-    if ($leftCol.width() > 0) {
-      $leftCol.animate({width: 0, 'border-width': 0});
-      $rightCol.animate({width: 794});
-    } else {
-      $leftCol.animate({width: 220, 'border-width': 1});
-      $rightCol.animate({width: 574});
-    }
-  });
+  // $('#sidebarToggle').on('click', function() {
+  //   if ($leftCol.width() > 0) {
+  //     $leftCol.animate({width: 0, 'border-width': 0});
+  //     $rightCol.animate({width: 794});
+  //   } else {
+  //     $leftCol.animate({width: 220, 'border-width': 1});
+  //     $rightCol.animate({width: 574});
+  //   }
+  // });
 
   // EXPANDING SEARCH FIELD
   $searchField.on('focus', function() {
@@ -40,17 +40,6 @@ Meteor.startup(function () {
   $searchField.on('blur', function() {
     if (0 === $(this).val().length) {
       $(this).animate({width: 185});
-    }
-  });
-
-  // SIDEBAR TOGGLE
-  $('#sidebarToggle').on('click', function() {
-    if ($leftCol.width() > 0) {
-      $leftCol.animate({width: 0, 'border-width': 0});
-      $rightCol.animate({width: 794});
-    } else {
-      $leftCol.animate({width: 220, 'border-width': 1});
-      $rightCol.animate({width: 574});
     }
   });
 

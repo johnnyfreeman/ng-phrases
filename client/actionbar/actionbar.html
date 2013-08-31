@@ -36,37 +36,7 @@
 
     <!-- Settings popup -->
     <form action="" class="popup animated fadeInDown" id="settingsForm" method="post">
-      <div class="popup-title">
-        <strong>Settings</strong>
-      </div>
-      <div class="popup-section">
-        <label>
-          <input class="pull-right" name="bulk-insert-mode" type="checkbox">
-          Bulk Insert Mode
-        </label>
-      </div>
-      <div class="popup-section">
-        <label>
-          <input class="pull-right" name="bulk-insert-mode" type="checkbox">
-          Bulk Delete Mode
-        </label>
-      </div>
-      <div class="popup-section">
-        <label>
-          <select name="sort-phrases-by" class="pull-right">
-            <option>Body</option>
-            <option>Date</option>
-            <option>Title</option>
-          </select>
-          Sort Phrases By&hellip;
-        </label>
-      </div>
-      <div class="popup-section">
-        <label>
-          <span class="pull-right">346513543184</span>
-          User ID
-        </label>
-      </div>
+      {{> settingsForm}}
     </form>
 
   </div>

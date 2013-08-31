@@ -64,11 +64,19 @@ Meteor.startup(function () {
       text: $form.find('textarea').val(), 
       tags: tagIds,
       userId: Meteor.userId()
+    }, 
+    // callback
+    function (error) {
+      if (!error) {
+
+        // clear form
+        $form.find('input.title').val('');
+        $form.find('textarea').val('');
+        $form.find('input.tags').val('');
+
+        // close form or keep open and focus on title field
+      }
     });
-
-    // clear form
-
-    // close form or keep open and focus on title field
 
   });
 
@@ -91,5 +99,3 @@ Meteor.startup(function () {
   });
 
 });
-
-Session.setDefault('sortPhrasesBy', 'title');

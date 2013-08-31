@@ -1,0 +1,30 @@
+<template name="settingsForm">
+    <div class="popup-title">
+      <strong>Settings</strong>
+    </div>
+    <div class="popup-section">
+      <label>
+        <input {{bulkInsertModeChecked}} class="pull-right" name="bulk-insert-mode" type="checkbox" value="true">
+        Bulk Insert Mode
+      </label>
+    </div>
+    <div class="popup-section">
+      <label>
+        <input {{bulkDeleteModeChecked}} class="pull-right" name="bulk-delete-mode" type="checkbox">
+        Bulk Delete Mode
+      </label>
+    </div>
+    <div class="popup-section">
+      <label>
+        <select class="pull-right" id="sortPhrasesBy" name="sort-phrases-by">
+          <option {{sortPhrasesByBody}} value="body">Body</option>
+          <option {{sortPhrasesByDate}} value="date">Date</option>
+          <option {{sortPhrasesByTitle}} value="title">Title</option>
+        </select>
+        Sort Phrases By
+      </label>
+    </div>
+    <div class="popup-section">
+      <small>Click here for debugging info.</small>
+    </div>
+</template>

@@ -74,9 +74,9 @@ Meteor.startup(function () {
 
   var $settingsForm = $('#settingsForm');
 
-  $('#sortPhrasesBy').selectize({
-    sortField: 'text'
-  });
+  // $('#sortPhrasesBy').selectize({
+  //   sortField: 'text'
+  // });
 
   $settingsForm.find('[name="bulk-insert-mode"]').on('change', function() {
     setSetting('bulkInsertMode', $(this).is(':checked'));

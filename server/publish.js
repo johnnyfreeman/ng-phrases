@@ -22,6 +22,6 @@ Meteor.startup(function () {
 
   // User Settings
   Meteor.publish('settings', function() {
-    return Settings.find({userId: this.userId});
+    return Settings.find({userId: {$in: [this.userId, 'default']}});
   });
 });

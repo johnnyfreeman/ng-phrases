@@ -5,18 +5,43 @@ Meteor.subscribe('settings', function() {
 
 Session.setDefault('sortPhrasesBy', 'title');
 
-var getSetting = function(key) {
-  return Session.get('settingsLoaded') ? Settings.findOne()[key] : undefined;
+settings = function() {
+  return Settings.findOne({userId:Meteor.userId()}) 
+      || Settings.findOne({userId:'default'});
 };
 
-var setSetting = function(key, value) {
+getSetting = function(key) {
+  return Session.get('settingsLoaded') ? settings()[key] : undefined;
+};
+
+setSetting = function(key, value) {
   if (!Session.get('settingsLoaded'))
     return;
 
   var data = {};
   data[key] = value;
   // console.log('updating settings with...', data);
-  return Settings.update(Settings.findOne()._id, {$set: data});
+  
+  // get default settings
+  var defaultSettings = Settings.findOne({userId:'default'});
+  delete defaultSettings._id;
+  delete defaultSettings.userId;
+
+  // get user settings
+  var userSettings = settings();
+  userSettings[key] = value;
+  delete userSettings._id;
+  delete userSettings.userId;
+  
+  // if currently using defaults AND new settings are not equal to the defaults
+  if (settings().userId === 'default' && JSON.stringify(userSettings) !== JSON.stringify(defaultSettings))
+    Settings.insert(_.extend(userSettings, {userId:Meteor.userId()}));
+  // if NOT currently using defaults AND new settings are not equal to the defaults
+  else if (JSON.stringify(userSettings) !== JSON.stringify(defaultSettings))
+    Settings.update(settings()._id, {$set: data});
+  // if NOT currently using defaults AND new settings are equal to the defaults
+  else
+    Settings.remove(settings()._id);
 };
 
 var modeEnabled = function (key) {

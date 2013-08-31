@@ -134,6 +134,10 @@ Meteor.startup(function () {
       Phrases.insert(phrases[i]);
     }
   }
+
+  // default settings
+  if (!Settings.findOne({userId:'default'}))
+    Settings.insert({bulkInsertMode:false,bulkDeleteMode:false,sortPhrasesBy:'title',userId:'default'});
 });
 
 // delete all phrases from console

@@ -1,16 +1,9 @@
 <template name="phrases">
-  <form action="" class="{{bulkDeleteMode}}" id="phraseForm" method="post">
-    
-    <div class="scroll">
-      <ul id="phrases">
-        {{#each phrases}}
-          {{> phraseItem}}
-        {{/each}}
-      </ul>
-    </div>
-
-    {{> infoBar}}
-  </form>
+  <ul class="{{bulkDeleteMode}}" id="phrases">
+    {{#each phrases}}
+      {{> phraseItem}}
+    {{/each}}
+  </ul>
 </template>
 
 

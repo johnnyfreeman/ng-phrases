@@ -34,8 +34,8 @@
   color: #fff;
 }
 
-.bulk-delete-mode #phrases .active,
-.bulk-delete-mode #phrases .active:hover {
+#phrases.bulk-delete-mode .active,
+#phrases.bulk-delete-mode .active:hover {
   background-color: #FB6B5B;
   border-color: #FB6B5B;
   color: #fff;

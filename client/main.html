@@ -21,7 +21,14 @@
     <!-- Right Column -->
     <div id="right">
       {{> actionBar}}
-      {{> phrases}}
+      
+      <form action="" id="phraseForm" method="post">
+        <div class="scroll">
+          {{> phrases}}
+        </div>
+
+        {{> infoBar}}
+      </form>
     </div>
     
   </div>

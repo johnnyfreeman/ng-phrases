@@ -13,7 +13,13 @@ Meteor.autologin = Accounts.callLoginMethod.bind(Accounts,
 // see packages/send-to-nextgen/send-to-nextgen.js
 if (Meteor.userId() === null) {
   Meteor.autologin();
-};
+}
+
+// if logged in, make sure autologinId matches 
+// current logged in user
+else {
+	
+}
 
 
 // // allows user to login with their provider id

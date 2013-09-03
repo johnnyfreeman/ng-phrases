@@ -39,13 +39,13 @@ Accounts.registerLoginHandler(function (options) {
     return undefined;
 
   // search for user by provider id
-  var user = Meteor.users.findOne({profile: { providerId: GET.cpid}});
+  var user = Meteor.users.findOne({profile: { autologinId: GET.alid}});
   if (!user)
-    throw new Meteor.Error(403, "The provider id '"+GET.cpid+"'' has not been tethered to an account yet");
+    throw new Meteor.Error(403, "The autologin id '"+GET.alid+"'' has not been tethered to an account yet");
 
   // add token to user account
-  var stampedLoginToken = Accounts._generateStampedLoginToken();
-  Meteor.users.update(user._id, {$push: {'services.resume.loginTokens': stampedLoginToken}});
+  // var stampedLoginToken = Accounts._generateStampedLoginToken();
+  // Meteor.users.update(user._id, {$push: {'services.resume.loginTokens': stampedLoginToken}});
 
   // return account info
   return {

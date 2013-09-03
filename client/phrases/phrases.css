@@ -34,6 +34,13 @@
   color: #fff;
 }
 
+.bulk-delete-mode #phrases .active,
+.bulk-delete-mode #phrases .active:hover {
+  background-color: #FB6B5B;
+  border-color: #FB6B5B;
+  color: #fff;
+}
+
 #phrases .active .tag,
 #phrases .active:hover .tag,
 #phrases .active .date,

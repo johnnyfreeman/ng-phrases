@@ -6,7 +6,18 @@ Meteor.subscribe('tags');
 
 // This user's tags
 Template.tagNav.tags = function () {
-  return Tags.find({}, {sort:{title:1}});
+  var uniqueTags = [];
+
+  Phrases.find().forEach(function(phrase) {
+    _.each(phrase.tags, function(tag) {
+      if (!_.contains(uniqueTags, tag)) {
+        uniqueTags.push(tag);
+      };
+    });
+  });
+
+  return Tags.find({_id: {$in: uniqueTags}}, {sort:{title:1}});
+  // return Tags.find({}, {sort:{title:1}});
 };
 
 // is this id in the active_tags list?

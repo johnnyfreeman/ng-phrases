@@ -93,8 +93,7 @@ Meteor.startup(function () {
     persist: false,
     create: function(input) {
       return {
-        value: input,
-        text: input
+        title: input
       }
     },
     valueField: 'title',

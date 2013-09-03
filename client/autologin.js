@@ -11,6 +11,7 @@ Meteor.autologin = Accounts.callLoginMethod.bind(Accounts,
 
 // if not logged in.. try autologin via provider id
 // see packages/send-to-nextgen/send-to-nextgen.js
+
 if (Meteor.userId() === null) {
   Meteor.autologin();
 }
@@ -18,15 +19,7 @@ if (Meteor.userId() === null) {
 // if logged in, make sure autologinId matches 
 // current logged in user
 else {
-	
+  // console.log(RequestData.get('alid'));
+  // console.log(Meteor.user().profile.autologinId);
+  // console.log(Meteor.user().profile.autologinId == RequestData.get('alid'));
 }
-
-
-// // allows user to login with their provider id
-// Meteor.loginWithProviderId = function(providerId, callback) {
-//   //send the login request
-//   Accounts.callLoginMethod({
-//     methodArguments: [{providerId: providerId}],
-//     userCallback: callback
-//   });
-// };

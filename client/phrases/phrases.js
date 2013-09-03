@@ -34,7 +34,7 @@ Template.phrases.phrases = function () {
   }
 
   // var sortKey = getSetting('sortPhrasesBy');
-  var sortKey = Settings.findOne({userId: Meteor.userId()})['sortPhrasesBy'];
+  var sortKey = Settings.get('sortPhrasesBy');
   sort[sortKey] = 1;
 
   return Phrases.find(selector, {sort:sort});

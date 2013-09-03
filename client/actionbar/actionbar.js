@@ -67,15 +67,23 @@ Meteor.startup(function () {
     }, 
     // callback
     function (error) {
-      if (!error) {
-
-        // clear form
-        $form.find('input.title').val('');
-        $form.find('textarea').val('');
-        $form.find('input.tags').val('');
-
-        // close form or keep open and focus on title field
+      if (error) {
+        alert(error);
+        return;
       }
+
+      // clear form
+      $form.find('input.title').val('');
+      $form.find('input.tags').val('');
+      $form.find('input.tags')[0].selectize.clearOptions();
+      $form.find('textarea').val('');
+
+      // close form or keep open and focus on title field
+      if (Settings.get('bulkInsertMode'))
+        $form.find('input.title').trigger('focus');
+      else
+        $form.hide();
+      
     });
 
   });
@@ -89,7 +97,7 @@ Meteor.startup(function () {
         text: input
       }
     },
-    valueField: '_id',
+    valueField: 'title',
     labelField: 'title',
     searchField: ['title'],
     options: Tags.find().fetch(),

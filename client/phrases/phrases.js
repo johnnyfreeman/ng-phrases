@@ -33,9 +33,9 @@ Template.phrases.phrases = function () {
     selector = {tags: {$in: activeTags}}
   }
 
-  // var sortKey = getSetting('sortPhrasesBy');
-  var sortKey = Settings.get('sortPhrasesBy');
-  sort[sortKey] = 1;
+  if (Settings.get('sortPhrasesBy')) {
+    sort[Settings.get('sortPhrasesBy')] = 1;
+  };
 
   return Phrases.find(selector, {sort:sort});
 };
@@ -45,7 +45,7 @@ Template.phraseItem.active = function () {
 };
 
 Template.phraseItem.checked = function () {
-  return phraseIsActive(this._id) ? 'checked="checked"' : '';
+  return phraseIsActive(this._id) ? 'checked' : '';
 };
 
 Template.phraseItem.icon = function () {

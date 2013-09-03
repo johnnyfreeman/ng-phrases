@@ -11,7 +11,7 @@ Meteor.methods({
 
     // delete all active phrases
     Phrases.remove({_id: {$in: phraseIds}}, function(error) {
-      if (error) throw new Meteor.Error(500, error);
+      if (error) console.log(error);
     });
   }
 });

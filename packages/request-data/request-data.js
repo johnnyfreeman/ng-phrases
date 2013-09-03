@@ -1,3 +1,4 @@
+RequestData = {};
 
 
 if (Meteor.isServer) {
@@ -18,6 +19,7 @@ if (Meteor.isServer) {
 
   Meteor.methods({
     requestDataGet: function (key) {
+      // console.log('====================================================================',GET);
       if (!GET.hasOwnProperty(key)) {
         throw new Meteor.Error(404, 'GET param not found');
       }
@@ -34,8 +36,6 @@ if (Meteor.isServer) {
     }
   });
 }
-
-RequestData = {};
     
 RequestData.get = function(key, callback) {
   return Meteor.call('requestDataGet', key, callback);

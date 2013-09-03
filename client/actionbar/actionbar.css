@@ -87,6 +87,11 @@ input.search.placeholder:hover {
   border-radius: 0px 0px 4px 4px;
 }
 
+#addPhraseForm .selectize-input input {
+  font-family: inherit;
+  font-size: 100%;
+}
+
 /* ------- SETTINGS FORM --------- */
 #settingsForm {
   /* popup position */

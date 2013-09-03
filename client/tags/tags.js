@@ -27,7 +27,8 @@ Template.tagNavItem.count = function () {
 
 // click on tag to make it "active"
 Template.tagNavItem.events({
-  'click': function () {
+  'click': function (e) {
+    e.preventDefault();
     var tags = Session.get('active_tags');
 
     if (tagIsActive(this._id)) {

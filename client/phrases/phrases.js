@@ -13,6 +13,29 @@ Meteor.startup(function () {
       $actionBar.css('box-shadow', '0 3px 6px rgba(0,0,0,0.1)');
     };
   });
+
+  $phraseForm.on('submit', function (e) {
+    // submit normally if delete mode off
+    if (!Settings.get('bulkDeleteMode')) return;
+
+    // prevent form submittion
+    e.preventDefault();
+
+    // get active phrases
+    var activePhrases = Session.get('active_phrases');
+
+    // delete all active phrases
+    Meteor.call('removePhrases', activePhrases, function (error, result) {
+      console.log(error, result);
+      if (error) return;
+
+      _.each(activePhrases, function(phraseId) {
+        activePhrases.remove(phraseId);
+      });
+
+      Session.set('active_phrases', activePhrases);
+    });
+  });
 });
 
 Session.setDefault('active_phrases', []);
@@ -43,32 +66,6 @@ Template.phrases.phrases = function () {
 Template.phrases.bulkDeleteMode = function () {
   return Settings.get('bulkDeleteMode') ? 'bulk-delete-mode' : '';
 };
-
-Template.phrases.events({
-  'submit form': function (e) {
-
-    // submit normally if delete mode off
-    if (!Settings.get('bulkDeleteMode')) return;
-
-    // prevent form submittion
-    e.preventDefault();
-
-    // get active phrases
-    var activePhrases = Session.get('active_phrases');
-
-    // delete all active phrases
-    Meteor.call('removePhrases', activePhrases, function (error, result) {
-      console.log(error, result);
-      if (error) return;
-
-      _.each(activePhrases, function(phraseId) {
-        activePhrases.remove(phraseId);
-      });
-
-      Session.set('active_phrases', activePhrases);
-    });
-  }
-});
 
 Template.phraseItem.active = function () {
   return phraseIsActive(this._id) ? 'active' : '';

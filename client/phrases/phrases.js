@@ -33,7 +33,9 @@ Template.phrases.phrases = function () {
     selector = {tags: {$in: activeTags}}
   }
 
-  sort[Session.get('sortPhrasesBy')] = 1;
+  // var sortKey = getSetting('sortPhrasesBy');
+  var sortKey = Settings.findOne({userId: Meteor.userId()})['sortPhrasesBy'];
+  sort[sortKey] = 1;
 
   return Phrases.find(selector, {sort:sort});
 };

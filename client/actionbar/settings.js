@@ -3,8 +3,6 @@ Meteor.subscribe('settings', function() {
   Session.set('settingsLoaded', true);
 });
 
-Session.setDefault('sortPhrasesBy', 'title');
-
 settings = function() {
   return Settings.findOne({userId:Meteor.userId()}) 
       || Settings.findOne({userId:'default'});

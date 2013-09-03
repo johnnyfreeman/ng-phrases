@@ -19,9 +19,4 @@ Meteor.startup(function () {
 
     return Tags.find({_id: {$in: uniqueTags}});
   });
-
-  // User Settings
-  Meteor.publish('settings', function() {
-    return Settings.find({userId: {$in: [this.userId, 'default']}});
-  });
 });

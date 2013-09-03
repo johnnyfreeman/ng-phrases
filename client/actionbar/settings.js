@@ -1,49 +1,5 @@
-Session.setDefault('settingsLoaded', false);
-Meteor.subscribe('settings', function() {
-  Session.set('settingsLoaded', true);
-});
-
-settings = function() {
-  return Settings.findOne({userId:Meteor.userId()}) 
-      || Settings.findOne({userId:'default'});
-};
-
-getSetting = function(key) {
-  return Session.get('settingsLoaded') ? settings()[key] : undefined;
-};
-
-setSetting = function(key, value) {
-  if (!Session.get('settingsLoaded'))
-    return;
-
-  var data = {};
-  data[key] = value;
-  // console.log('updating settings with...', data);
-  
-  // get default settings
-  var defaultSettings = Settings.findOne({userId:'default'});
-  delete defaultSettings._id;
-  delete defaultSettings.userId;
-
-  // get user settings
-  var userSettings = settings();
-  userSettings[key] = value;
-  delete userSettings._id;
-  delete userSettings.userId;
-  
-  // if currently using defaults AND new settings are not equal to the defaults
-  if (settings().userId === 'default' && JSON.stringify(userSettings) !== JSON.stringify(defaultSettings))
-    Settings.insert(_.extend(userSettings, {userId:Meteor.userId()}));
-  // if NOT currently using defaults AND new settings are not equal to the defaults
-  else if (JSON.stringify(userSettings) !== JSON.stringify(defaultSettings))
-    Settings.update(settings()._id, {$set: data});
-  // if NOT currently using defaults AND new settings are equal to the defaults
-  else
-    Settings.remove(settings()._id);
-};
-
 var modeEnabled = function (key) {
-  return getSetting(key) === true;
+  return Settings.get(key) === true;
 };
 
 Template.settingsForm.bulkInsertModeChecked = function () {
@@ -55,15 +11,15 @@ Template.settingsForm.bulkDeleteModeChecked = function () {
 };
 
 Template.settingsForm.sortPhrasesByBody = function () {
-  return getSetting('sortPhrasesBy') === 'body' ? 'selected' : '';
+  return Settings.get('sortPhrasesBy') === 'body' ? 'selected' : '';
 };
 
 Template.settingsForm.sortPhrasesByDate = function () {
-  return getSetting('sortPhrasesBy') === 'date' ? 'selected' : '';
+  return Settings.get('sortPhrasesBy') === 'date' ? 'selected' : '';
 };
 
 Template.settingsForm.sortPhrasesByTitle = function () {
-  return getSetting('sortPhrasesBy') === 'title' ? 'selected' : '';
+  return Settings.get('sortPhrasesBy') === 'title' ? 'selected' : '';
 };
 
 
@@ -77,15 +33,15 @@ Meteor.startup(function () {
   // });
 
   $settingsForm.find('[name="bulk-insert-mode"]').on('change', function() {
-    setSetting('bulkInsertMode', $(this).is(':checked'));
+    Settings.set('bulkInsertMode', $(this).is(':checked'));
   });
 
   $settingsForm.find('[name="bulk-delete-mode"]').on('change', function() {
-    setSetting('bulkDeleteMode', $(this).is(':checked'));
+    Settings.set('bulkDeleteMode', $(this).is(':checked'));
   });
 
   $settingsForm.find('[name="sort-phrases-by"]').on('change', function() {
-    setSetting('sortPhrasesBy', $(this).val());
+    Settings.set('sortPhrasesBy', $(this).val());
   });
 
 });

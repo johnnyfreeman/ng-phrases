@@ -50,8 +50,6 @@ input.search.placeholder:hover {
 }
 
 
-
-
 /* ------- ADD PHRASE FORM --------- */
 #addPhraseForm {
   /* popup position */
@@ -59,10 +57,9 @@ input.search.placeholder:hover {
   left: 15px;
 }
 
-
 /* padding */
 #addPhraseForm input.title,
-#addPhraseForm #tagsField,
+#addPhraseForm input.tags,
 #addPhraseForm textarea,
 #addPhraseForm .popup-title,
 #addPhraseForm .btn-submit {

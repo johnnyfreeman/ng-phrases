@@ -22,26 +22,14 @@ Template.settingsForm.sortPhrasesByTitle = function () {
   return Settings.get('sortPhrasesBy') === 'title' ? 'selected' : '';
 };
 
-
-
-Meteor.startup(function () {
-
-  var $settingsForm = $('#settingsForm');
-
-  // $('#sortPhrasesBy').selectize({
-  //   sortField: 'text'
-  // });
-
-  $settingsForm.find('[name="bulk-insert-mode"]').on('change', function() {
-    Settings.set('bulkInsertMode', $(this).is(':checked'));
-  });
-
-  $settingsForm.find('[name="bulk-delete-mode"]').on('change', function() {
-    Settings.set('bulkDeleteMode', $(this).is(':checked'));
-  });
-
-  $settingsForm.find('[name="sort-phrases-by"]').on('change', function() {
-    Settings.set('sortPhrasesBy', $(this).val());
-  });
-
+Template.settingsForm.events({
+  'change [name="bulk-insert-mode"]': function(e) {
+    Settings.set('bulkInsertMode', $(e.currentTarget).is(':checked'));
+  },
+  'change [name="bulk-delete-mode"]': function(e) {
+    Settings.set('bulkDeleteMode', $(e.currentTarget).is(':checked'));
+  },
+  'change [name="sort-phrases-by"]': function(e) {
+    Settings.set('sortPhrasesBy', $(e.currentTarget).val());
+  }
 });

@@ -1,12 +1,11 @@
 <head>
   <title>Web Phrases</title>
+  <!-- <script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script> -->
 </head>
 
 <body>
   <div id="container">
-
     {{> main}}
-    
   </div>
 </body>
 
@@ -22,14 +21,7 @@
   <!-- Right Column -->
   <div id="right">
     {{> actionBar}}
-    
-    <form action="" id="phraseForm" method="post">
-      <div class="scroll">
-        {{> phrases}}
-      </div>
-
-      {{> infoBar}}
-    </form>
+    {{> phrases}}
   </div>
   {{else}}
     <div class="loading"><i class="icon-spinner icon-spin"></i> Loading&hellip;</div>

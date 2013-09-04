@@ -3,9 +3,7 @@ Meteor.autologin = Accounts.callLoginMethod.bind(Accounts,
 {
   methodArguments: [{autologin: true}],
   userCallback: function(error) {
-    if (error) {
-      console.log(error);
-    };
+    if (error) console.log(error);
   }
 });
 

@@ -1,55 +1,54 @@
-var $sortDrop, $searchField, $leftCol, $rightCol;
-
-Meteor.startup(function () {
-
-  $sortDrop = $('#sortDrop');
-  $searchField = $('.search-field .search');
-  $leftCol = $('#left');
-  $rightCol = $('#right');
-  $addPhraseForm = $('#addPhraseForm');
-
+// plugins
+Template.actionBar.rendered = function () {
   // PLACEHOLDER
   $('input[placeholder]').placeHolder();
 
   // Init popups
   $('[data-popup]').popup();
 
-  // hide sort popup when option is selected
-  $sortDrop.find('a').on('click', function () {
-    Session.set('sortPhrasesBy', $(this).data('sortby'));
-    $sortDrop.hide();
+  $(this.find('input.tags')).selectize({
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+      return {
+        title: input
+      }
+    },
+    valueField: 'title',
+    labelField: 'title',
+    searchField: ['title'],
+    options: Tags.find().fetch(),
+    maxOptions: 5,
+    hideSelected: true,
+    sortField: 'title'
   });
 
+};
 
-    // SIDEBAR TOGGLE
-  // $('#sidebarToggle').on('click', function() {
-  //   if ($leftCol.width() > 0) {
-  //     $leftCol.animate({width: 0, 'border-width': 0});
-  //     $rightCol.animate({width: 794});
-  //   } else {
-  //     $leftCol.animate({width: 220, 'border-width': 1});
-  //     $rightCol.animate({width: 574});
-  //   }
-  // });
+Template.actionBar.events({
+  // SEARCH FILTERING
+  'input input.search': function(e) {
+    // get search term
+    var term = $(e.currentTarget).val();
 
-  // EXPANDING SEARCH FIELD
-  $searchField.on('focus', function() {
-    $(this).animate({width: 285});
-  });
-
-  $searchField.on('blur', function() {
-    if (0 === $(this).val().length) {
-      $(this).animate({width: 185});
-    }
-  });
+    // loop through the list of fields and get all with
+    $('#phrases li').hide().contents().each(function() {
+      var $this = $(this);
+      var haystack = $this.text().toLowerCase();
+      var needle = term.toLowerCase();
+      if (_.str.contains(haystack, needle)) {
+        $this.closest('li').show();
+      };
+    });
+  },
 
   // add new phrase
-  $addPhraseForm.on('submit', function(e) {
+  'submit #addPhraseForm': function(e) {
     e.preventDefault();
 
-    var $form  = $(this);
+    var $form  = $(e.currentTarget);
     var tagIds = [];
-    var tags   = $('#tagsField').val().split(',');
+    var tags   = $form.find('input.tags').val().split(',');
 
     // get tag ids
     _.each(tags, function(tagTitle) {
@@ -86,23 +85,16 @@ Meteor.startup(function () {
       
     });
 
-  });
+  },
 
-  $('#tagsField').selectize({
-    delimiter: ',',
-    persist: false,
-    create: function(input) {
-      return {
-        title: input
-      }
-    },
-    valueField: 'title',
-    labelField: 'title',
-    searchField: ['title'],
-    options: Tags.find().fetch(),
-    maxOptions: 5,
-    hideSelected: true,
-    sortField: 'title'
-  });
-
+  // EXPANDING SEARCH FIELD
+  'focus input.search': function(e) {
+    $(e.currentTarget).animate({width: 285});
+  },
+  'blur input.search': function(e) {
+    var $input = $(e.currentTarget);
+    if (0 === $input.val().length) {
+      $input.animate({width: 185});
+    }
+  }
 });

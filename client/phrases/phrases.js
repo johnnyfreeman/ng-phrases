@@ -1,43 +1,3 @@
-var $phraseForm, $actionBar;
-
-Meteor.startup(function () {
-  $phraseForm = $('#phraseForm');
-  $actionBar  = $('.action-bar');
-
-  // SCROLL SHADOW
-  $phraseForm.on('scroll', function(e) {
-    var scrollPos = this.scrollTop;
-    if (scrollPos == 0) {
-      $actionBar.css('box-shadow', 'none');
-    } else {
-      $actionBar.css('box-shadow', '0 3px 6px rgba(0,0,0,0.1)');
-    };
-  });
-
-  $phraseForm.on('submit', function (e) {
-    // submit normally if delete mode off
-    if (!Settings.get('bulkDeleteMode')) return;
-
-    // prevent form submittion
-    e.preventDefault();
-
-    // get active phrases
-    var activePhrases = Session.get('active_phrases');
-
-    // delete all active phrases
-    Meteor.call('removePhrases', activePhrases, function (error, result) {
-      console.log(error, result);
-      if (error) return;
-
-      _.each(activePhrases, function(phraseId) {
-        activePhrases.remove(phraseId);
-      });
-
-      Session.set('active_phrases', activePhrases);
-    });
-  });
-});
-
 Session.setDefault('active_phrases', []);
 
 var phraseIsActive = function (phraseId) {
@@ -59,6 +19,50 @@ Template.phrases.phrases = function () {
   };
 
   return Phrases.find(selector, {sort:sort});
+};
+
+Template.phrases.events({
+  'submit form': function (e) {
+    // submit normally if delete mode off
+    if (!Settings.get('bulkDeleteMode')) return;
+
+    // prevent form submittion
+    e.preventDefault();
+
+    // get active phrases
+    var activePhrases = Session.get('active_phrases');
+
+    // delete all active phrases
+    Meteor.call('removePhrases', activePhrases, function (error, result) {
+      if (error) return;
+
+      _.each(activePhrases, function(phraseId) {
+        activePhrases.remove(phraseId);
+      });
+
+      Session.set('active_phrases', activePhrases);
+    });
+  },
+  // add shadow to action bar when 
+  // scrolling through phrases
+  'scroll .scroll': function(e) {
+    var $actionBar = $('.action-bar');
+    var scrollPos = e.currentTarget.scrollTop;
+    if (scrollPos == 0) {
+      $actionBar.css('box-shadow', 'none');
+    } else {
+      $actionBar.css('box-shadow', '0 3px 6px rgba(0,0,0,0.1)');
+    };
+  }
+});
+
+Template.phrases.rendered = function(e) {
+  // slimscroll for phrases
+  $(this.find('.scroll')).slimScroll({
+    color: '#999',
+    size: '5px',
+    height: '463px'
+  });
 };
 
 Template.phrases.bulkDeleteMode = function () {

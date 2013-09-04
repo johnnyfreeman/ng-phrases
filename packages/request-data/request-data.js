@@ -1,9 +1,18 @@
+// Namespace for our request data methods 
+// on both the server and the client
 RequestData = {};
 
-// TODO: GET and POST data isn't available on the client side yet.
-// this needs to be addressed so that we can have a better autologin
-// system.
+// Getter for GET data
+RequestData.get = function(key, callback) {
+  return Meteor.call('requestDataGet', key, callback);
+};
 
+// Getter for POST data
+RequestData.post = function(key, callback) {
+  return Meteor.call('requestDataPost', key, callback);
+};
+
+// Server only
 if (Meteor.isServer) {
   var connect = Npm.require('connect');
   var GET = {}, POST = {};
@@ -38,11 +47,3 @@ if (Meteor.isServer) {
     }
   });
 }
-    
-RequestData.get = function(key, callback) {
-  return Meteor.call('requestDataGet', key, callback);
-};
-
-RequestData.post = function(key, callback) {
-  return Meteor.call('requestDataPost', key, callback);
-};

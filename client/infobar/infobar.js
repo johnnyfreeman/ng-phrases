@@ -1,3 +1,5 @@
+Session.setDefault('active_phrases_char_count', 0);
+
 Template.infoBar.phrases = function () {
   return Session.get('active_phrases').length == 1 ? 'phrase' : 'phrases';
 };
@@ -11,7 +13,7 @@ Template.infoBar.characters = function () {
 };
 
 Template.infoBar.charCount = function () {
-  return Session.get('active_phrases_char_count') || 0;
+  return Session.get('active_phrases_char_count');
 };
 
 Template.infoBar.bulkDeleteMode = function () {

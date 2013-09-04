@@ -1,19 +1,46 @@
 // active tags list
 Session.setDefault('active_tags', []);
 
+Tag = {};
+
+Tag.toggleActivation = function(id) {
+  if (Tag.isActive(id)) {
+    Tag.deactivate(id);
+  } else {
+    Tag.activate(id);
+  }
+};
+
+Tag.deactivate = function(id) {
+  if (Tag.isActive(id)) {
+    var tags = Session.get('active_tags');
+    tags.remove(id);
+    Session.set('active_tags', tags);
+  }
+};
+
+Tag.activate = function(id) {
+  if (!Tag.isActive(id)) {
+    var tags = Session.get('active_tags');
+    tags.push(id);
+    Session.set('active_tags', tags);
+  }
+};
+
+// is this id in the active_tags list?
+Tag.isActive = function(id) {
+  return Session.get('active_tags').indexOf(id) >= 0 ? true : false;
+};
+
+
 // This user's tags
 Template.tagNav.tags = function () {
   return Tags.find({}, {sort:{title:1}});
 };
 
-// is this id in the active_tags list?
-var tagIsActive = function(tagId) {
-  return Session.get('active_tags').indexOf(tagId) >= 0 ? true : false;
-};
-
 // return "active" class if contained in the active_tags list
 Template.tagNavItem.active = function () {
-  return tagIsActive(this._id) ? 'active' : '';
+  return Tag.isActive(this._id) ? 'active' : '';
 };
 
 // Tag's phrase-count
@@ -26,14 +53,14 @@ Template.tagNavItem.events({
   // click on tag to make it "active"
   'click': function (e) {
     e.preventDefault();
-    var tags = Session.get('active_tags');
-
-    if (tagIsActive(this._id)) {
-      tags.remove(this._id);
-    } else {
-      tags.push(this._id);
-    }
-
-    Session.set('active_tags', tags);
+    Tag.toggleActivation(this._id);
   }
 });
+
+Template.tagNavItem.rendered = function() {
+  // automatically deactivate tags with zero phrases
+  // this will ensure the when Phrases are deleted, 
+  // that the phrases list doesn't go blank afterwards
+  if (Tag.isActive(this.data._id) && !Phrases.find({tags: this.data._id}).count())
+    Tag.deactivate(this.data._id);
+};

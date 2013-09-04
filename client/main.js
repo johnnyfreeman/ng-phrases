@@ -35,8 +35,6 @@ Meteor.startup(function () {
     });
   });
 
-
-
   // SCROLL SHADOW
   $rightCol.find('.scroll').on('scroll', function(e) {
     var scrollPos = this.scrollTop;
@@ -48,3 +46,16 @@ Meteor.startup(function () {
   });
 
 });
+
+
+// subscribe to all tags that the server is publishing
+var tagSubscription = Meteor.subscribe('tags');
+var phraseSubscription = Meteor.subscribe('phrases');
+
+
+// loading
+Template.main.appReady = function () {
+  if (tagSubscription && phraseSubscription && tagSubscription.ready() && phraseSubscription.ready()) {
+    return true;
+  }
+};

@@ -5,31 +5,33 @@
 <body>
   <div id="container">
 
-    <!-- Left Column -->
-    <div id="left">
-<!--
-      <div class="action-bar">
-        <h1>Tags</h1>
-        <p>Select one or more tags to show only those phrases.</p>
-      </div>
--->
-      <div class="scroll">
-        {{> tagNav}}
-      </div>
-    </div>
-
-    <!-- Right Column -->
-    <div id="right">
-      {{> actionBar}}
-      
-      <form action="" id="phraseForm" method="post">
-        <div class="scroll">
-          {{> phrases}}
-        </div>
-
-        {{> infoBar}}
-      </form>
-    </div>
+    {{> main}}
     
   </div>
 </body>
+
+<template name="main">
+  {{#if appReady}}
+  <!-- Left Column -->
+  <div id="left">
+    <div class="scroll">
+      {{> tagNav}}
+    </div>
+  </div>
+
+  <!-- Right Column -->
+  <div id="right">
+    {{> actionBar}}
+    
+    <form action="" id="phraseForm" method="post">
+      <div class="scroll">
+        {{> phrases}}
+      </div>
+
+      {{> infoBar}}
+    </form>
+  </div>
+  {{else}}
+    <div class="loading"><i class="icon-spinner icon-spin"></i> Loading&hellip;</div>
+  {{/if}}
+</template>

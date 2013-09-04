@@ -40,8 +40,6 @@ Meteor.startup(function () {
 
 Session.setDefault('active_phrases', []);
 
-Meteor.subscribe('phrases');
-
 var phraseIsActive = function (phraseId) {
   return Session.get('active_phrases').indexOf(phraseId) >= 0 ? true : false;
 };

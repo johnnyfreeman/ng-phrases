@@ -1,9 +1,6 @@
 // active tags list
 Session.setDefault('active_tags', []);
 
-// subscribe to all tags that the server is publishing
-Meteor.subscribe('tags');
-
 // This user's tags
 Template.tagNav.tags = function () {
   return Tags.find({}, {sort:{title:1}});

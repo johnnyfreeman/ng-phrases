@@ -7,10 +7,12 @@
 </template>
 
 <template name="tagNavItem">
+  {{#if count}}
   <li class="{{active}}">
     <a href="#">
       <span class="count">{{count}}</span>
       <i class="icon-tag"></i> {{title}}
     </a>
   </li>
+  {{/if}}
 </template>

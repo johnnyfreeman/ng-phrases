@@ -1,5 +1,4 @@
 Meteor.publish('phrases', function () {
-  console.log('publishing phrases...');
   return Phrases.find({userId:this.userId});
 });
 

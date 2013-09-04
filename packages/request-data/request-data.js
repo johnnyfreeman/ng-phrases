@@ -1,5 +1,8 @@
 RequestData = {};
 
+// TODO: GET and POST data isn't available on the client side yet.
+// this needs to be addressed so that we can have a better autologin
+// system.
 
 if (Meteor.isServer) {
   var connect = Npm.require('connect');
@@ -19,7 +22,6 @@ if (Meteor.isServer) {
 
   Meteor.methods({
     requestDataGet: function (key) {
-      // console.log('====================================================================',GET);
       if (!GET.hasOwnProperty(key)) {
         throw new Meteor.Error(404, 'GET param not found');
       }

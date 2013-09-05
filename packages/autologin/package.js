@@ -5,6 +5,6 @@ Package.describe({
 var everywhere = ['server', 'client'];
 
 Package.on_use(function (api) {
-  api.use(['accounts-base', 'request-data'], everywhere);
+  api.use(['accounts-base', 'request-data', 'deps'], everywhere);
   api.add_files('autologin.js', everywhere);
 });

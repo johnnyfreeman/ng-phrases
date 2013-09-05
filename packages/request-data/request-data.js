@@ -1,3 +1,4 @@
+
 // local store used for 
 // building request data
 var GET = {}, POST = {};
@@ -20,6 +21,10 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isClient) {
+  // local store used for 
+  // building request data
+  var GET = {}, POST = {};
+
   // form GET object
   var query       = window.location.search;
   var queryString = query.slice(1, query.length);
@@ -36,6 +41,7 @@ if (Meteor.isClient) {
   // POST data not available on the client
 }
 
+
 // Namespace for our request data methods 
 // on both the server and the client
 RequestData = {};
@@ -43,7 +49,7 @@ RequestData = {};
 // Getter for GET data
 RequestData.get = function (key) {
   if (!GET.hasOwnProperty(key)) {
-    throw new Meteor.Error(404, 'GET param not found');
+    throw new Meteor.Error(404, 'GET param "'+key+'" not found on client', GET);
   }
 
   return GET[key];
@@ -52,7 +58,7 @@ RequestData.get = function (key) {
 // Getter for POST data
 RequestData.post = function (key) {
   if (!POST.hasOwnProperty(key)) {
-    throw new Meteor.Error(404, 'POST param not found');
+    throw new Meteor.Error(404, 'POST param "'+key+'" not found on client', POST);
   }
 
   return POST[key];

@@ -1,7 +1,34 @@
 Session.setDefault('active_phrases', []);
 
-var phraseIsActive = function (phraseId) {
-  return Session.get('active_phrases').indexOf(phraseId) >= 0 ? true : false;
+Phrase = {};
+
+Phrase.toggleActivation = function(id) {
+  if (Phrase.isActive(id)) {
+    Phrase.deactivate(id);
+  } else {
+    Phrase.activate(id);
+  }
+};
+
+Phrase.deactivate = function(id) {
+  if (Phrase.isActive(id)) {
+    var phrases = Session.get('active_phrases');
+    phrases.remove(id);
+    Session.set('active_phrases', phrases);
+  }
+};
+
+Phrase.activate = function(id) {
+  if (!Phrase.isActive(id)) {
+    var phrases = Session.get('active_phrases');
+    phrases.push(id);
+    Session.set('active_phrases', phrases);
+  }
+};
+
+// is this id in the active_phrases list?
+Phrase.isActive = function(id) {
+  return Session.get('active_phrases').indexOf(id) >= 0 ? true : false;
 };
 
 Template.phrases.phrases = function () {
@@ -63,6 +90,10 @@ Template.phrases.rendered = function(e) {
     size: '5px',
     height: '463px'
   });
+
+  // reset the action bar shadow when phrases 
+  // are (re)rendered to keep ui consistant
+  $('.action-bar').css('box-shadow', 'none');
 };
 
 Template.phrases.bulkDeleteMode = function () {
@@ -70,15 +101,15 @@ Template.phrases.bulkDeleteMode = function () {
 };
 
 Template.phraseItem.active = function () {
-  return phraseIsActive(this._id) ? 'active' : '';
+  return Phrase.isActive(this._id) ? 'active' : '';
 };
 
 Template.phraseItem.checked = function () {
-  return phraseIsActive(this._id) ? 'checked' : '';
+  return Phrase.isActive(this._id) ? 'checked' : '';
 };
 
 Template.phraseItem.icon = function () {
-  return phraseIsActive(this._id) ? 'icon-check' : 'icon-check-empty';
+  return Phrase.isActive(this._id) ? 'icon-check' : 'icon-check-empty';
 };
 
 Template.phraseItem.tags = function () {
@@ -86,18 +117,10 @@ Template.phraseItem.tags = function () {
 };
 
 Template.phraseItem.events({
-  'click': function () {
-    var phrases = Session.get('active_phrases');
-    var phraseId = this._id;
-
-    if (phraseIsActive(phraseId)) {
-      phrases.remove(phraseId);
-    } else {
-      phrases.push(phraseId);
-    }
-
-    Session.set('active_phrases', phrases);
-    Deps.flush();
-    Session.set('active_phrases_char_count', $('#phrases .active .truncate').text().length);
+  'click': function (e) {
+    e.preventDefault();
+    Phrase.toggleActivation(this._id);
+    // Deps.flush();
+    // Session.set('active_phrases_char_count', $('#phrases .active .truncate').text().length);
   }
 });

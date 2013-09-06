@@ -1,3 +1,4 @@
+
 // plugins
 Template.actionBar.rendered = function () {
   // PLACEHOLDER
@@ -48,14 +49,19 @@ Template.actionBar.events({
 
     var $form  = $(e.currentTarget);
     var tagIds = [];
-    var tags   = $form.find('input.tags').val().split(',');
+    var tags = [];
 
     // get tag ids
-    _.each(tags, function(tagTitle) {
-      var tag = Tags.findOne({title: tagTitle});
-      var tagId = tag === undefined ? Tags.insert({title: tagTitle}) : tag._id;
-      tagIds.push(tagId);
-    });
+    if ($form.find('input.tags').val().length) {
+      tags = $form.find('input.tags').val().split(',');
+
+      // get tag ids
+      _.each(tags, function(tagTitle) {
+        var tag = Tags.findOne({title: tagTitle});
+        var tagId = tag === undefined ? Tags.insert({title: tagTitle}) : tag._id;
+        tagIds.push(tagId);
+      });
+    }
 
     // save phrase
     Phrases.insert({
@@ -73,7 +79,6 @@ Template.actionBar.events({
 
       // clear form
       $form.find('input.title').val('');
-      $form.find('input.tags').val('');
       $form.find('input.tags')[0].selectize.clearOptions();
       $form.find('textarea').val('');
 

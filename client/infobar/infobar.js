@@ -1,4 +1,10 @@
-Session.setDefault('active_phrases_char_count', 0);
+var getActiveCharacterCount = function() {
+  var count = 0;
+  Phrases.find({_id: {$in: Session.get('active_phrases')}}).forEach(function(phrase){
+    count += phrase.text.length;
+  });
+  return count;
+};
 
 Template.infoBar.phrases = function () {
   return Session.get('active_phrases').length == 1 ? 'phrase' : 'phrases';
@@ -9,11 +15,11 @@ Template.infoBar.phraseCount = function () {
 };
 
 Template.infoBar.characters = function () {
-  return Session.get('active_phrases_char_count') == 1 ? 'character' : 'characters';
+  return getActiveCharacterCount() == 1 ? 'character' : 'characters';
 };
 
 Template.infoBar.charCount = function () {
-  return Session.get('active_phrases_char_count');
+  return getActiveCharacterCount();
 };
 
 Template.infoBar.bulkDeleteMode = function () {

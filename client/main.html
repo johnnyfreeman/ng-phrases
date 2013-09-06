@@ -5,6 +5,7 @@
 
 <body>
   <div id="container">
+    {{> notifications}}
     {{> main}}
   </div>
 </body>
@@ -23,7 +24,5 @@
     {{> actionBar}}
     {{> phrases}}
   </div>
-  {{else}}
-    <div class="loading"><i class="icon-spinner icon-spin"></i> Loading&hellip;</div>
   {{/if}}
 </template>

@@ -50,7 +50,7 @@ if (Meteor.isClient) {
         if (error) {
           // use alertify here so that the id 
           // can be selected and copied for diagnosis
-          alert(error);
+          Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
         } 
         autorun.stop();
       });

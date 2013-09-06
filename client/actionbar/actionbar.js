@@ -82,6 +82,9 @@ Template.actionBar.events({
       $form.find('input.tags')[0].selectize.clearOptions();
       $form.find('textarea').val('');
 
+      // notification
+      Notifications.insert({iconClass:'icon-ok',message:'New phrase added!', type: 'success', timeout: 2000, closeBtn: false});
+
       // close form or keep open and focus on title field
       if (Settings.get('bulkInsertMode'))
         $form.find('input.title').trigger('focus');

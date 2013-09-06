@@ -2,6 +2,12 @@
   <ul id="tags">
     {{#each tags}}
       {{> tagNavItem}}
+    {{else}}
+      <li>
+        <a href="#">
+          No tags yet&hellip;
+        </a>
+      </li>
     {{/each}}
   </ul>
 </template>

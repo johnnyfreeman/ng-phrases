@@ -24,12 +24,19 @@ Template.settingsForm.sortPhrasesByTitle = function () {
 
 Template.settingsForm.events({
   'change [name="bulk-insert-mode"]': function(e) {
-    Settings.set('bulkInsertMode', $(e.currentTarget).is(':checked'));
+    var val = $(e.currentTarget).is(':checked');
+    Settings.set('bulkInsertMode', val);
+    Notifications.insert({iconClass:'icon-ok',message:'Bulk Insert Mode is '+(val?'on':'off'), type: 'info', timeout: 2000, closeBtn: false});
   },
   'change [name="bulk-delete-mode"]': function(e) {
-    Settings.set('bulkDeleteMode', $(e.currentTarget).is(':checked'));
+    var val = $(e.currentTarget).is(':checked');
+    Settings.set('bulkDeleteMode', val);
+    Notifications.insert({iconClass:'icon-ok',message:'Bulk Delete Mode is '+(val?'on':'off'), type: 'info', timeout: 2000, closeBtn: false});
   },
   'change [name="sort-phrases-by"]': function(e) {
-    Settings.set('sortPhrasesBy', $(e.currentTarget).val());
+    var val = $(e.currentTarget).val();
+    var label = $(e.currentTarget).find(':selected').text();
+    Settings.set('sortPhrasesBy', val);
+    Notifications.insert({iconClass:'icon-ok',message:'Phrases sorted by '+label, type: 'info', timeout: 2000, closeBtn: false});
   }
 });

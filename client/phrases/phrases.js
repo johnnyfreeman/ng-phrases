@@ -56,18 +56,17 @@ Template.phrases.events({
     // prevent form submittion
     e.preventDefault();
 
-    // get active phrases
-    var activePhrases = Session.get('active_phrases');
-
     // delete all active phrases
-    Meteor.call('removePhrases', activePhrases, function (error, result) {
+    Meteor.call('removePhrases', Session.get('active_phrases'), function (error, result) {
       if (error) return;
 
-      _.each(activePhrases, function(phraseId) {
-        activePhrases.remove(phraseId);
-      });
+      var message = Session.get('active_phrases').length == 1 ? 'Phrase deleted!' : 'Phrases deleted!';
 
-      Session.set('active_phrases', activePhrases);
+      // notification
+      Notifications.insert({iconClass:'icon-remove',message:message, type: 'danger', timeout: 2000, closeBtn: false});
+
+      // deactivate all phrases
+      Session.set('active_phrases', []);
     });
   },
   // add shadow to action bar when 
@@ -120,7 +119,5 @@ Template.phraseItem.events({
   'click': function (e) {
     e.preventDefault();
     Phrase.toggleActivation(this._id);
-    // Deps.flush();
-    // Session.set('active_phrases_char_count', $('#phrases .active .truncate').text().length);
   }
 });

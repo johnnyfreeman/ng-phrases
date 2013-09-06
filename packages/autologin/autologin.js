@@ -34,7 +34,7 @@ if (Meteor.isClient) {
     });
   };
 
-  Deps.autorun(function() {
+  Deps.autorun(function(autorun) {
     var user = Meteor.user();
 
     // if autologinid doesn't matched logged in user, logout
@@ -46,7 +46,14 @@ if (Meteor.isClient) {
 
     // if user is not logged in, do autologin
     if (!user) {
-      Meteor.autologin();
+      Meteor.autologin(function(error) { 
+        if (error) {
+          // use alertify here so that the id 
+          // can be selected and copied for diagnosis
+          alert(error);
+        } 
+        autorun.stop();
+      });
     }
   });
 }

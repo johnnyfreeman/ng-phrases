@@ -5,9 +5,8 @@ Meteor.publish('phrases', function () {
 Meteor.methods({
   removePhrases: function (phraseIds) {
     
-    // make sure is array
-    if (typeof phraseIds === 'string')
-      phraseIds = [phraseIds];
+    // make sure is array of strings
+    check(phraseIds, [String]);
 
     // delete all active phrases
     Phrases.remove({_id: {$in: phraseIds}}, function(error) {

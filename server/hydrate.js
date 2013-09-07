@@ -9,7 +9,7 @@ Meteor.startup(function () {
       email: 'jfreeman@veroortho.com',
       password: '29483270',
       profile: {
-        autologinId: '30F4761C-EF78-49FB-9492-98526A6A5A38' // coren
+        alid: '30F4761C-EF78-49FB-9492-98526A6A5A38' // coren
       }
     });
   };

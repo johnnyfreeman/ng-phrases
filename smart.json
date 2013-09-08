@@ -1,7 +1,7 @@
 {
   "packages": {
     "font-awesome": {},
-    "iron-router": {},
-    "animate-css": {}
+    "animate-css": {},
+    "moment-alternative": {}
   }
 }

@@ -21,7 +21,7 @@
       <i class="{{icon}}"></i>
       <input class="hidden" name="phrases[]" type="checkbox" value="{{text}}" {{{checked}}}>
     </div>
-    <h1><small class="date">2 hours ago</small>{{title}}</h1>
+    <h1><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}}</h1>
     <p class="truncate">{{text}}</p>
     <p>
       {{#each tags}}

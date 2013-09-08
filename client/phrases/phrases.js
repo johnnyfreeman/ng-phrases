@@ -115,6 +115,10 @@ Template.phraseItem.tags = function () {
   return Tags.find({_id: {$in: this.tags}});
 };
 
+Template.phraseItem.timeago = function () {
+  return moment(this.timestamp).fromNow();
+};
+
 Template.phraseItem.events({
   'click': function (e) {
     e.preventDefault();

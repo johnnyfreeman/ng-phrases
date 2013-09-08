@@ -78,7 +78,8 @@ Template.actionBar.events({
       title: $titleField.val(), 
       text: $bodyField.val(), 
       tags: tagIds,
-      userId: Meteor.userId()
+      userId: Meteor.userId(),
+      timestamp: new Date()
     }, 
     // callback
     function (error) {

@@ -5,7 +5,6 @@ var selectize = null;
 
 // plugins
 Template.actionBar.rendered = function () {
-  console.log('action bar rendered...');
   // PLACEHOLDER
   $('input[placeholder]').placeHolder();
 
@@ -32,7 +31,6 @@ Template.actionBar.rendered = function () {
     });
     selectize = $tags[0].selectize;
   }
-
 };
 
 Template.actionBar.events({

@@ -1,28 +1,37 @@
 
+// selectize plugin is pretty quirky
+// so when can only init once
+var selectize = null;
+
 // plugins
 Template.actionBar.rendered = function () {
+  console.log('action bar rendered...');
   // PLACEHOLDER
   $('input[placeholder]').placeHolder();
 
   // Init popups
   $('[data-popup]').popup();
 
-  $(this.find('input.tags')).selectize({
-    delimiter: ',',
-    persist: false,
-    create: function(input) {
-      return {
-        title: input
-      }
-    },
-    valueField: 'title',
-    labelField: 'title',
-    searchField: ['title'],
-    options: Tags.find().fetch(),
-    maxOptions: 5,
-    hideSelected: true,
-    sortField: 'title'
-  });
+  // init selectize
+  if (!selectize) {
+    var $tags = $(this.find('input.tags'));
+    $tags.selectize({
+      delimiter: ',',
+      persist: false,
+      create: function(input) {
+        return {
+          title: input
+        }
+      },
+      valueField: 'title',
+      labelField: 'title',
+      searchField: ['title'],
+      options: Tags.find().fetch(),
+      maxOptions: 5,
+      sortField: 'title'
+    });
+    selectize = $tags[0].selectize;
+  }
 
 };
 
@@ -48,12 +57,15 @@ Template.actionBar.events({
     e.preventDefault();
 
     var $form  = $(e.currentTarget);
+    var $titleField = $form.find('input.title');
+    var $tagsField = $form.find('input.tags');
+    var $bodyField = $form.find('textarea');
     var tagIds = [];
     var tags = [];
 
     // get tag ids
-    if ($form.find('input.tags').val().length) {
-      tags = $form.find('input.tags').val().split(',');
+    if ($tagsField.val().length) {
+      tags = $tagsField.val().split(',');
 
       // get tag ids
       _.each(tags, function(tagTitle) {
@@ -65,29 +77,29 @@ Template.actionBar.events({
 
     // save phrase
     Phrases.insert({
-      title: $form.find('input.title').val(), 
-      text: $form.find('textarea').val(), 
+      title: $titleField.val(), 
+      text: $bodyField.val(), 
       tags: tagIds,
       userId: Meteor.userId()
     }, 
     // callback
     function (error) {
       if (error) {
-        alert(error);
+        Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
         return;
       }
 
       // clear form
-      $form.find('input.title').val('');
-      $form.find('input.tags')[0].selectize.clearOptions();
-      $form.find('textarea').val('');
+      $titleField.val('');
+      selectize.clear();
+      $bodyField.val('');
 
       // notification
       Notifications.insert({iconClass:'icon-ok',message:'New phrase added!', type: 'success', timeout: 2000, closeBtn: false});
 
       // close form or keep open and focus on title field
       if (Settings.get('bulkInsertMode'))
-        $form.find('input.title').trigger('focus');
+        $titleField.trigger('focus');
       else
         $form.hide();
       

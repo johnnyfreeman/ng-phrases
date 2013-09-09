@@ -3,13 +3,13 @@ if (Meteor.isServer) {
   Accounts.registerLoginHandler(function (options) {
 
     // if not autologin, don't handle
-    if (!options.autologin || RequestData.get('alid') === undefined)
+    if (!options.autologin)
       return undefined;
 
     // search for user by autologin id
-    var user = Meteor.users.findOne({profile: { autologinId: RequestData.get('alid')}});
+    var user = Meteor.users.findOne({profile: { autologinId: options.autologin}});
     if (!user)
-      throw new Meteor.Error(403, "The autologin id '"+RequestData.get('alid')+"' has not been tethered to an account yet");
+      throw new Meteor.Error(403, "The autologin id '"+options.autologin+"' has not been tethered to an account yet");
 
     // add token to user account
     var stampedLoginToken = Accounts._generateStampedLoginToken();
@@ -27,9 +27,9 @@ if (Meteor.isServer) {
 
 if (Meteor.isClient) {
   // allows user to login with their provider id
-  Meteor.autologin = function(callback) {
+  Meteor.autologin = function(id, callback) {
     return Accounts.callLoginMethod({
-      methodArguments: [{autologin: true}],
+      methodArguments: [{autologin: id}],
       userCallback: callback
     });
   };
@@ -48,7 +48,7 @@ if (Meteor.isClient) {
 
     // if user is not logged in, do autologin
     if (!user) {
-      Meteor.autologin(function(error) { 
+      Meteor.autologin(alid, function(error) { 
         if (error) {
           // use alertify here so that the id 
           // can be selected and copied for diagnosis

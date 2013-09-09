@@ -34,12 +34,14 @@ if (Meteor.isClient) {
     });
   };
 
+  var alid = RequestData.get('alid');
+
   Deps.autorun(function(autorun) {
     var user = Meteor.user();
 
     // if autologinid doesn't matched logged in user, logout
     if (user) {
-      if (user.profile.autologinId !== RequestData.get('alid')) {
+      if (user.profile.autologinId !== alid) {
         Meteor.logout();
       }
     }

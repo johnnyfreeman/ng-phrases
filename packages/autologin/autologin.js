@@ -48,12 +48,9 @@ if (Meteor.isClient) {
 
     // if user is not logged in, do autologin
     if (!user) {
-      Meteor.autologin(alid, function(error) { 
-        if (error) {
-          // use alertify here so that the id 
-          // can be selected and copied for diagnosis
-          Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
-        } 
+      Meteor.autologin(alid, function(error) {
+        if (error) Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
+        // error or not, stop the subscription
         autorun.stop();
       });
     }

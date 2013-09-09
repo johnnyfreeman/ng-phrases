@@ -2,6 +2,7 @@
 // local store used for 
 // building request data
 var GET = {}, POST = {};
+var ENV;
 
 // Server only
 if (Meteor.isServer) {
@@ -18,12 +19,11 @@ if (Meteor.isServer) {
       GET = req.query;
       return next();
     });
+
+  ENV = 'server';
 }
 
 if (Meteor.isClient) {
-  // local store used for 
-  // building request data
-  var GET = {}, POST = {};
 
   // form GET object
   var query       = window.location.search;
@@ -38,6 +38,8 @@ if (Meteor.isClient) {
     GET[k] = v;
   }
 
+  ENV = 'client';
+
   // POST data not available on the client
 }
 
@@ -49,7 +51,7 @@ RequestData = {};
 // Getter for GET data
 RequestData.get = function (key) {
   if (!GET.hasOwnProperty(key)) {
-    throw new Meteor.Error(404, 'GET param "'+key+'" not found on client', GET);
+    throw new Meteor.Error(404, 'GET param "'+key+'" not found on '+ENV, GET);
   }
 
   return GET[key];
@@ -58,7 +60,7 @@ RequestData.get = function (key) {
 // Getter for POST data
 RequestData.post = function (key) {
   if (!POST.hasOwnProperty(key)) {
-    throw new Meteor.Error(404, 'POST param "'+key+'" not found on client', POST);
+    throw new Meteor.Error(404, 'POST param "'+key+'" not found on '+ENV, POST);
   }
 
   return POST[key];

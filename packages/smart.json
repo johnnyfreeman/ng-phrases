@@ -1,0 +1,7 @@
+{
+  "packages": {
+    "spin": {},
+    "router": {},
+    "z-mongo-admin": {}
+  }
+}

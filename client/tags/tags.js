@@ -60,6 +60,7 @@ Template.tagNavItem.events({
   }
 });
 
+
 Template.tagNavItem.rendered = function() {
   // automatically deactivate tags with zero phrases
   // this will ensure the when Phrases are deleted, 

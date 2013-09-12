@@ -1,3 +1,6 @@
+// subscribe to all tags that the server is publishing
+App.subs.tags = Meteor.subscribe('tags');
+
 // active tags list
 Session.setDefault('active_tags', []);
 
@@ -64,3 +67,16 @@ Template.tagNavItem.rendered = function() {
   if (Tag.isActive(this.data._id) && !Phrases.find({tags: this.data._id}).count())
     Tag.deactivate(this.data._id);
 };
+
+// auto activate tags
+Meteor.startup(function() {
+  Deps.autorun(function(autorun) {
+    if (App.subs.tags.ready()) {
+      var tags = RequestData.get('tags').split(',');
+      Tags.find({title: {$in: tags}}).forEach(function(tag) {
+        Tag.activate(tag._id);
+      });
+      autorun.stop();
+    }
+  });
+});

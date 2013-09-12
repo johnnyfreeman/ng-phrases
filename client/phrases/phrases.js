@@ -1,3 +1,6 @@
+// subscribe to all phrases that the server is publishing
+App.subs.phrases = Meteor.subscribe('phrases');
+
 Session.setDefault('active_phrases', []);
 
 Phrase = {};

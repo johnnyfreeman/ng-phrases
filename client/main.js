@@ -1,3 +1,5 @@
+
+
 Template.main.rendered = function(e) {
   // slimscroll for tags
   $(this.find('#left .scroll')).slimScroll({
@@ -7,27 +9,27 @@ Template.main.rendered = function(e) {
   });
 };
 
-// subscribe to all tags that the server is publishing
-var tagSubscription = Meteor.subscribe('tags');
-var phraseSubscription = Meteor.subscribe('phrases');
-
-var appReady = function() {
-  return tagSubscription && phraseSubscription && tagSubscription.ready() && phraseSubscription.ready();
-}
 
 // loading helper
 Template.main.appReady = function () {
-  return appReady();
+  return App.subs.tags.ready() && App.subs.phrases.ready();
 };
 
-
+// storage for loading notification
 var loadingId;
+
+// on every start up add loading notification
 Meteor.startup(function() {
   loadingId = Notifications.insert({iconClass:'icon-spinner icon-spin',message:'Loading...', timeout: 0, closeBtn: false});
 });
-Deps.autorun(function(autorun) {
-  if (appReady()) {
-    Notifications.remove(loadingId);
-    autorun.stop();
-  }
+
+
+// when app is ready, remove loading notification
+Meteor.startup(function() {
+  Deps.autorun(function(autorun) {
+    if (App.subs.tags.ready() && App.subs.phrases.ready()) {
+      Notifications.remove(loadingId);
+      autorun.stop();
+    }
+  });
 });

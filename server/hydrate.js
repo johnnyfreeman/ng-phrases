@@ -6,10 +6,10 @@ Meteor.startup(function () {
   // create sample user
   if (Meteor.users.find().count() === 0) {
     userId = Accounts.createUser({
-      email: 'jfreeman@veroortho.com',
-      password: '29483270',
+      email: 'prsjohnny@gmail.com',
+      password: 'jB29483270',
       profile: {
-        autologinId: '30F4761C-EF78-49FB-9492-98526A6A5A38' // coren
+        autologinId: null
       }
     });
   };

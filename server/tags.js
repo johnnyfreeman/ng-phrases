@@ -24,3 +24,15 @@ Meteor.publish('tags', function() {
   // return Tags cursor
   return Tags.find({_id: {$in: uniqueTags}});
 });
+
+Tags.allow({
+  insert: function(userId, doc) {
+    return true;
+  },
+  update: function(userId, doc, fieldNames, modifier) {
+    return false;
+  },
+  remove: function(userId, doc) {
+    return false;
+  }
+});

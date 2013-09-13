@@ -14,3 +14,17 @@ Meteor.methods({
     });
   }
 });
+
+Phrases.allow({
+  insert: function(userId, doc) {
+    return true;
+  },
+  update: function(userId, doc, fieldNames, modifier) {
+  	// allow users to update their own phrases
+    return doc.userId === userId;
+  },
+  remove: function(userId, doc) {
+  	// allow users to delete their own phrases
+    return doc.userId === userId;
+  }
+});

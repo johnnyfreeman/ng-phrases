@@ -126,5 +126,12 @@ Template.phraseItem.events({
   'click': function (e) {
     e.preventDefault();
     Phrase.toggleActivation(this._id);
+  },
+  'dblclick': function (e) {
+    Session.set('phraseInEdit', this._id);
+    $('#addPhraseForm').show();
   }
 });
+
+Session.setDefault('phraseInEdit', null);
+

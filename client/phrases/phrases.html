@@ -35,3 +35,27 @@
 <template name="phraseItemTag">
   <span class="tag"><i class="icon-tag"></i> {{title}}</span>
 </template>
+
+
+<template name="addPhraseForm">
+  <div class="popup-title">
+    {{#if _id}}
+      <strong>Editing phrase&hellip;</strong>
+    {{else}}
+      <strong>Add a new phrase&hellip;</strong>
+    {{/if}}
+  </div>
+  <input class="_id" name="_id" type="hidden" value="{{_id}}">
+  <div class="popup-section no-padding">
+    <input class="title" name="title" placeholder="Title&hellip;" type="text" value="{{title}}">
+  </div>
+  <div class="popup-section no-padding">
+    <input class="tags" name="tags" placeholder="Tags&hellip;" type="text" value="{{tags}}">
+  </div>
+  <div class="popup-section no-padding">
+    <textarea name="phrase" placeholder="Body&hellip;">{{text}}</textarea>
+  </div>
+  <div>
+    <button class="btn btn-success pull-right btn-submit" type="submit"><i class="icon-ok"></i> Save Phrase</button>
+  </div>
+</template>

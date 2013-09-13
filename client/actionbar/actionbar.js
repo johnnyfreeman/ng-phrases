@@ -1,7 +1,7 @@
 
 // selectize plugin is pretty quirky
 // so when can only init once
-var selectize = null;
+selectize = null;
 
 // plugins
 Template.actionBar.rendered = function () {
@@ -22,7 +22,7 @@ Template.actionBar.rendered = function () {
           title: input
         }
       },
-      valueField: 'title',
+      valueField: '_id',
       labelField: 'title',
       searchField: ['title'],
       options: Tags.find().fetch(),
@@ -55,6 +55,7 @@ Template.actionBar.events({
     e.preventDefault();
 
     var $form  = $(e.currentTarget);
+    var $idField = $form.find('input.id');
     var $titleField = $form.find('input.title');
     var $tagsField = $form.find('input.tags');
     var $bodyField = $form.find('textarea');
@@ -66,43 +67,77 @@ Template.actionBar.events({
       tags = $tagsField.val().split(',');
 
       // get tag ids
-      _.each(tags, function(tagTitle) {
-        var tag = Tags.findOne({title: tagTitle});
-        var tagId = tag === undefined ? Tags.insert({title: tagTitle}) : tag._id;
+      _.each(tags, function(tag) {
+        var tag = Tags.findOne(tag);
+        var tagId = tag === undefined ? Tags.insert({title: tag}) : tag._id;
         tagIds.push(tagId);
       });
     }
 
-    // save phrase
-    Phrases.insert({
-      title: $titleField.val(), 
-      text: $bodyField.val(), 
-      tags: tagIds,
-      userId: Meteor.userId(),
-      timestamp: new Date()
-    }, 
-    // callback
-    function (error) {
-      if (error) {
-        Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
-        return;
-      }
+    if (Session.get('phraseInEdit')) {
+      console.log('updating...');
+      // save phrase
+      Phrases.update($idField.val(), {$set: 
+        {
+          title: $titleField.val(), 
+          text: $bodyField.val(), 
+          tags: tagIds,
+          userId: Meteor.userId(),
+          timestamp: new Date()
+        }
+      }, 
+      // callback
+      function (error) {
+        if (error) {
+          Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
+          return;
+        }
 
-      // clear form
-      $titleField.val('');
-      selectize.clear();
-      $bodyField.val('');
+        // clear form
+        $titleField.val('');
+        selectize.clear();
+        $bodyField.val('');
 
-      // notification
-      Notifications.insert({iconClass:'icon-ok',message:'New phrase added!', type: 'success', timeout: 2000, closeBtn: false});
+        // notification
+        Notifications.insert({iconClass:'icon-ok',message:'Phrase updated!', type: 'success', timeout: 2000, closeBtn: false});
 
-      // close form or keep open and focus on title field
-      if (Settings.get('bulkInsertMode'))
-        $titleField.trigger('focus');
-      else
+        // close form
         $form.hide();
-      
-    });
+        Session.set('phraseInEdit', null);
+        
+      });
+    } else {
+      // save phrase
+      Phrases.insert({
+        title: $titleField.val(), 
+        text: $bodyField.val(), 
+        tags: tagIds,
+        userId: Meteor.userId(),
+        timestamp: new Date()
+      }, 
+      // callback
+      function (error) {
+        if (error) {
+          Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
+          return;
+        }
+
+        // clear form
+        $titleField.val('');
+        selectize.clear();
+        $bodyField.val('');
+
+        // notification
+        Notifications.insert({iconClass:'icon-ok',message:'New phrase added!', type: 'success', timeout: 2000, closeBtn: false});
+
+        // close form or keep open and focus on title field
+        if (Settings.get('bulkInsertMode'))
+          $titleField.trigger('focus');
+        else
+          $form.hide();
+        
+      });
+    }
 
   },
 
@@ -117,3 +152,19 @@ Template.actionBar.events({
     }
   }
 });
+
+Template.actionBar.phraseInEdit = function() {
+
+  var phraseInEdit = Phrases.findOne(Session.get('phraseInEdit'));
+
+  if (!phraseInEdit) {
+    phraseInEdit = {
+      _id: '',
+      title: '',
+      text: '',
+      tags: []
+    }
+  };
+  
+  return phraseInEdit;
+};

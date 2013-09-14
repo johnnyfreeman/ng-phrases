@@ -5,6 +5,10 @@ Template.actionBar.rendered = function () {
 
   // Init popups
   $('[data-popup]').popup();
+
+  if (Session.get('phraseInEdit')) {
+    $('#addPhraseForm').show();
+  }
 };
 
 Template.actionBar.events({
@@ -48,74 +52,19 @@ Template.actionBar.events({
       });
     }
 
-    if (Session.get('phraseInEdit')) {
-      console.log('updating...', $idField.val(),{
-          title: $titleField.val(), 
-          text: $bodyField.val(), 
-          tags: tagIds,
-          timestamp: new Date()
-        });
-      // save phrase
-      Phrases.update($idField.val(), {$set: 
-        {
-          title: $titleField.val(), 
-          text: $bodyField.val(), 
-          tags: tagIds,
-          timestamp: new Date()
-        }
-      }, 
-      // callback
-      function (error) {
-        if (error) {
-          Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
-          return;
-        }
+    var phrase = {
+      title: $titleField.val(), 
+      text: $bodyField.val(), 
+      tags: tagIds,
+      userId: Meteor.userId(),
+      timestamp: new Date()
+    };
 
-        // clear form
-        $titleField.val('');
-        selectize.clear();
-        $bodyField.val('');
-
-        // notification
-        Notifications.insert({iconClass:'icon-ok',message:'Phrase updated!', type: 'success', timeout: 2000, closeBtn: false});
-
-        // close form
-        $form.hide();
-        Session.set('phraseInEdit', null);
-        
-      });
-    } else {
-      // save phrase
-      Phrases.insert({
-        title: $titleField.val(), 
-        text: $bodyField.val(), 
-        tags: tagIds,
-        userId: Meteor.userId(),
-        timestamp: new Date()
-      }, 
-      // callback
-      function (error) {
-        if (error) {
-          Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
-          return;
-        }
-
-        // clear form
-        $titleField.val('');
-        selectize.clear();
-        $bodyField.val('');
-
-        // notification
-        Notifications.insert({iconClass:'icon-ok',message:'New phrase added!', type: 'success', timeout: 2000, closeBtn: false});
-
-        // close form or keep open and focus on title field
-        if (Settings.get('bulkInsertMode'))
-          $titleField.trigger('focus');
-        else
-          $form.hide();
-        
-      });
-    }
+    // do update or insert
+    if (Session.get('phraseInEdit'))
+      Phrases.update($idField.val(), {$set: phrase}, Phrase.afterSave);
+    else
+      Phrases.insert(phrase, Phrase.afterSave);
 
   },
 
@@ -131,8 +80,8 @@ Template.actionBar.events({
   }
 });
 
-Template.actionBar.phraseInEdit = function() {
 
+Template.actionBar.phraseInEdit = function() {
   var phraseInEdit = Phrases.findOne(Session.get('phraseInEdit'));
 
   if (!phraseInEdit) {

@@ -56,3 +56,9 @@
 #phrases li:hover .tag {
   color: #7f8c8d;
 }
+
+#phrases .edit,
+#phrases .delete {
+  color: #545454;
+  text-decoration: none;
+}

@@ -3,37 +3,6 @@ App.subs.phrases = Meteor.subscribe('phrases');
 
 Session.setDefault('active_phrases', []);
 
-Phrase = {};
-
-Phrase.toggleActivation = function(id) {
-  if (Phrase.isActive(id)) {
-    Phrase.deactivate(id);
-  } else {
-    Phrase.activate(id);
-  }
-};
-
-Phrase.deactivate = function(id) {
-  if (Phrase.isActive(id)) {
-    var phrases = Session.get('active_phrases');
-    phrases.remove(id);
-    Session.set('active_phrases', phrases);
-  }
-};
-
-Phrase.activate = function(id) {
-  if (!Phrase.isActive(id)) {
-    var phrases = Session.get('active_phrases');
-    phrases.push(id);
-    Session.set('active_phrases', phrases);
-  }
-};
-
-// is this id in the active_phrases list?
-Phrase.isActive = function(id) {
-  return Session.get('active_phrases').indexOf(id) >= 0 ? true : false;
-};
-
 Template.phrases.phrases = function () {
   // get phrases based on active tags
   var activeTags = Session.get('active_tags');
@@ -66,7 +35,7 @@ Template.phrases.events({
       var message = Session.get('active_phrases').length == 1 ? 'Phrase deleted!' : 'Phrases deleted!';
 
       // notification
-      Notifications.insert({iconClass:'icon-remove',message:message, type: 'danger', timeout: 2000, closeBtn: false});
+      Notifications.insert({iconClass:'icon-remove',message:message, type: 'success', timeout: 2000, closeBtn: false});
 
       // deactivate all phrases
       Session.set('active_phrases', []);
@@ -125,22 +94,46 @@ Template.phraseItem.timeago = function () {
 Template.phraseItem.events({
   'click': function (e) {
     e.preventDefault();
-    Phrase.toggleActivation(this._id);
-  },
-  'dblclick': function (e) {
-    Session.set('phraseInEdit', this._id);
-    $('#addPhraseForm').show();
+
+    var $target = $(e.currentTarget);
+      
+    // edit button clicked
+    if ($target.closest('.edit').length) {
+      Session.set('phraseInEdit', this._id);
+    }
+
+    // delete button clicked
+    else if ($target.closest('.delete').length) {
+      // confirm and delete
+    }
+
+    // just activate the phrase
+    else {
+      Phrase.toggleActivation(this._id);
+    }
   }
 });
 
 Session.setDefault('phraseInEdit', null);
 
+// render tags field value
 Template.addPhraseForm.tags = function() {
   return this.tags.join(',');
 };
 
+// the popup title depends on 
+Template.addPhraseForm.id = function() {
+  return this._id.length ? this._id : false;
+};
 
-selectize = null;
+
+Template.addPhraseForm.isEditing = function() {
+  return Session.get('phraseInEdit') !== null;
+};
+
+// global var to store the 
+// selectize instance in
+Phrase.selectize = null;
 Template.addPhraseForm.rendered = function() {
   // init selectize
   var $tags = $(this.find('input.tags'));
@@ -160,8 +153,8 @@ Template.addPhraseForm.rendered = function() {
       maxOptions: 5,
       sortField: 'title'
     });
-    selectize = $tags[0].selectize;
+    Phrase.selectize = $tags[0].selectize;
   // }
 
-  
+
 };

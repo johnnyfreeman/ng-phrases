@@ -21,7 +21,7 @@
       <i class="{{icon}}"></i>
       <input class="hidden" name="phrases[]" type="checkbox" value="{{text}}" {{{checked}}}>
     </div>
-    <h1><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}}</h1>
+    <h1><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}} <a class="edit" href="#"><i class="icon-pencil"></i></a> <a class="delete" href="#"><i class="icon-remove"></i></a></h1>
     <p class="truncate">{{text}}</p>
     <p>
       {{#each tags}}
@@ -39,13 +39,13 @@
 
 <template name="addPhraseForm">
   <div class="popup-title">
-    {{#if _id}}
+    {{#if isEditing}}
       <strong>Editing phrase&hellip;</strong>
     {{else}}
       <strong>Add a new phrase&hellip;</strong>
     {{/if}}
   </div>
-  <input class="id" name="id" type="hidden" value="{{_id}}">
+  <input class="id" name="id" type="hidden" value="{{id}}">
   <div class="popup-section no-padding">
     <input class="title" name="title" placeholder="Title&hellip;" type="text" value="{{title}}">
   </div>

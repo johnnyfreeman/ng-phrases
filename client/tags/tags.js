@@ -69,14 +69,20 @@ Template.tagNavItem.rendered = function() {
 };
 
 // auto activate tags
-Meteor.startup(function() {
-  Deps.autorun(function(autorun) {
-    if (App.subs.tags.ready()) {
-      var tags = RequestData.get('tags').split(',');
-      Tags.find({title: {$in: tags}}).forEach(function(tag) {
-        Tag.activate(tag._id);
-      });
-      autorun.stop();
-    }
+var autoActivate = RequestData.get('tags');
+
+// if tags param passed
+// do auto activation
+if (autoActivate) {
+  Meteor.startup(function() {
+    Deps.autorun(function(autorun) {
+      if (App.subs.tags.ready()) {
+        var tags = RequestData.get('tags').split(',');
+        Tags.find({title: {$in: tags}}).forEach(function(tag) {
+          Tag.activate(tag._id);
+        });
+        autorun.stop();
+      }
+    });
   });
-});
+}

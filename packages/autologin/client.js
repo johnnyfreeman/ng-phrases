@@ -8,6 +8,8 @@ Meteor.autologin = function(id, callback) {
 
 var alid = RequestData.get('alid');
 
+// if autologin param passed
+// do autologin 
 if (alid) {
   Meteor.startup(function() {
     Deps.autorun(function(autorun) {

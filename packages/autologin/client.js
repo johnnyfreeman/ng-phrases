@@ -8,22 +8,26 @@ Meteor.autologin = function(id, callback) {
 
 var alid = RequestData.get('alid');
 
-Deps.autorun(function(autorun) {
-  var user = Meteor.user();
+if (alid) {
+  Meteor.startup(function() {
+    Deps.autorun(function(autorun) {
+      var user = Meteor.user();
 
-  // if autologinid doesn't matched logged in user, logout
-  if (user) {
-    if (user.profile.autologinId !== alid) {
-      Meteor.logout();
-    }
-  }
+      // if autologinid doesn't matched logged in user, logout
+      if (user) {
+        if (user.profile.autologinId !== alid) {
+          Meteor.logout();
+        }
+      }
 
-  // if user is not logged in, do autologin
-  if (!user) {
-    Meteor.autologin(alid, function(error) {
-      if (error) Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
-      // error or not, stop the subscription
-      autorun.stop();
+      // if user is not logged in, do autologin
+      if (!user) {
+        Meteor.autologin(alid, function(error) {
+          if (error) Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
+          // error or not, stop the subscription
+          autorun.stop();
+        });
+      }
     });
-  }
-});
+  });
+}

@@ -137,7 +137,7 @@ Phrase.selectize = null;
 Template.addPhraseForm.rendered = function() {
   // init selectize
   var $tags = $(this.find('input.tags'));
-  // if (!selectize) {
+  // if (!Phrase.selectize) {
     $tags.selectize({
       delimiter: ',',
       persist: false,

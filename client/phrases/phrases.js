@@ -135,3 +135,33 @@ Template.phraseItem.events({
 
 Session.setDefault('phraseInEdit', null);
 
+Template.addPhraseForm.tags = function() {
+  return this.tags.join(',');
+};
+
+
+selectize = null;
+Template.addPhraseForm.rendered = function() {
+  // init selectize
+  var $tags = $(this.find('input.tags'));
+  // if (!selectize) {
+    $tags.selectize({
+      delimiter: ',',
+      persist: false,
+      create: function(input) {
+        return {
+          title: input
+        }
+      },
+      valueField: '_id',
+      labelField: 'title',
+      searchField: ['title'],
+      options: Tags.find().fetch(),
+      maxOptions: 5,
+      sortField: 'title'
+    });
+    selectize = $tags[0].selectize;
+  // }
+
+  
+};

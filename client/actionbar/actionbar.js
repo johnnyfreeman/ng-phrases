@@ -1,8 +1,3 @@
-
-// selectize plugin is pretty quirky
-// so when can only init once
-selectize = null;
-
 // plugins
 Template.actionBar.rendered = function () {
   // PLACEHOLDER
@@ -10,27 +5,6 @@ Template.actionBar.rendered = function () {
 
   // Init popups
   $('[data-popup]').popup();
-
-  // init selectize
-  if (!selectize) {
-    var $tags = $(this.find('input.tags'));
-    $tags.selectize({
-      delimiter: ',',
-      persist: false,
-      create: function(input) {
-        return {
-          title: input
-        }
-      },
-      valueField: '_id',
-      labelField: 'title',
-      searchField: ['title'],
-      options: Tags.find().fetch(),
-      maxOptions: 5,
-      sortField: 'title'
-    });
-    selectize = $tags[0].selectize;
-  }
 };
 
 Template.actionBar.events({
@@ -75,14 +49,18 @@ Template.actionBar.events({
     }
 
     if (Session.get('phraseInEdit')) {
-      console.log('updating...');
+      console.log('updating...', $idField.val(),{
+          title: $titleField.val(), 
+          text: $bodyField.val(), 
+          tags: tagIds,
+          timestamp: new Date()
+        });
       // save phrase
       Phrases.update($idField.val(), {$set: 
         {
           title: $titleField.val(), 
           text: $bodyField.val(), 
           tags: tagIds,
-          userId: Meteor.userId(),
           timestamp: new Date()
         }
       }, 

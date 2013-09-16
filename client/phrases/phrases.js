@@ -106,7 +106,7 @@ Template.phraseItem.events({
     var $target = $(e.currentTarget);
       
     // do nothing if delete or edit button clicked
-    if ($target.closest('.edit').length || $target.closest('.delete').length) {
+    if ($target.closest('.edit').length || $target.closest('.delete').length || $target.closest('.tag').length) {
       return;
     }
 
@@ -181,3 +181,10 @@ Template.addPhraseForm.rendered = function() {
 
 
 };
+
+// activate tag when clicking on tag
+Template.phraseItemTag.events({
+  'click': function() {
+    Tag.activate(this._id);
+  }
+});

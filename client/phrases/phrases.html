@@ -24,14 +24,9 @@
     <h1><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}}</h1>
     <p class="truncate">{{text}}</p>
     <p class="actions">
-      <a class="edit" href="#">Edit</a> <a class="delete" href="#">Delete</a> <span>Tags:</span> {{#each tags}}{{> phraseItemTag}} {{else}}<span>(none)</span>{{/each}}
+      <a class="edit" href="#">Edit</a> <a class="delete" href="#">Delete</a> <span>Tags:</span> {{#each tags}}{{> tagLink}} {{else}}<span>(none)</span>{{/each}}
     </p>
   </li>
-</template>
-
-
-<template name="phraseItemTag">
-  <a class="tag" href="#">{{title}}</a>
 </template>
 
 

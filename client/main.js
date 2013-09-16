@@ -33,3 +33,9 @@ Meteor.startup(function() {
     }
   });
 });
+
+
+Template.listingInfo.activeTags = function() {
+  var activeTags = Tags.find({_id: {$in: Session.get('active_tags')}});
+  return activeTags.count() > 0 ? activeTags : false;
+}

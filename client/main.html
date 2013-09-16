@@ -23,7 +23,14 @@
   <!-- Right Column -->
   <div id="right">
     {{> actionBar}}
+    {{> listingInfo}}
     {{> phrases}}
   </div>
   {{/if}}
+</template>
+
+<template name="listingInfo">
+  <div class="listingInfo">
+    Listing all phrases{{#if activeTags}} tagged with {{#each activeTags}}<span class="tagContainer"><span class="and"> and </span>{{> tagSpan}}</span>{{/each}}{{/if}}.
+  </div>
 </template>

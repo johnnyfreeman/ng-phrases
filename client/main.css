@@ -62,7 +62,7 @@ form {
 /* Scrolling */
 #left .scroll, #right .scroll { overflow-y: hidden; }
 #left .scroll { height: 591px;}
-#right .scroll { height: 463px;}
+#right .scroll { height: 426px;}
 #right .scroll:hover, #left .scroll:hover { overflow-y: scroll;}
 
 /* Left Column */
@@ -152,4 +152,32 @@ form {
 }
 
 .loading .icon-spinner {
+}
+
+
+/* LISTING INFO */
+.listingInfo {
+  background-color: #5DCFF3;
+  border-bottom: 1px solid #4CCAF2;
+  border-top: 1px solid #4CCAF2;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 15px;
+  text-shadow: 0 1px 0px rgba(0,0,0,0.2);
+  /* places the listingInfo el above the phrases so the shadow will be visible */
+  z-index: 1;
+  position: relative;
+}
+
+.listingInfo .tagContainer:first-child .and {
+  display: none;
+}
+
+.listingInfo .tag {
+  background-color: #3CC5F1;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  padding: 2px 5px;
+  margin: -2px 0;
 }

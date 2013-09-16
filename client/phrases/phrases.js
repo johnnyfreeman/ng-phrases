@@ -10,7 +10,8 @@ Template.phrases.phrases = function () {
   var sort = {};
 
   if (activeTags.length > 0) {
-    selector = {tags: {$in: activeTags}}
+    selector = {tags: {$all: activeTags}};
+    // selector = {tags: {$in: activeTags}};
   }
 
   if (Settings.get('sortPhrasesBy')) {
@@ -52,12 +53,12 @@ Template.phrases.events({
   // add shadow to action bar when 
   // scrolling through phrases
   'scroll .scroll': function(e) {
-    var $actionBar = $('.action-bar');
+    var $element = $('.listingInfo');
     var scrollPos = e.currentTarget.scrollTop;
     if (scrollPos == 0) {
-      $actionBar.css('box-shadow', 'none');
+      $element.css('box-shadow', 'none');
     } else {
-      $actionBar.css('box-shadow', '0 3px 6px rgba(0,0,0,0.1)');
+      $element.css('box-shadow', '0 3px 6px rgba(0,0,0,0.1)');
     };
   }
 });
@@ -67,7 +68,7 @@ Template.phrases.rendered = function(e) {
   $(this.find('.scroll')).slimScroll({
     color: '#999',
     size: '5px',
-    height: '463px'
+    height: '426px'
   });
 
   // reset the action bar shadow when phrases 
@@ -191,13 +192,6 @@ Template.addPhraseForm.rendered = function() {
   // save new instance
   Phrase.selectize = $tags[0].selectize;
 };
-
-// activate tag when clicking on tag
-Template.phraseItemTag.events({
-  'click': function() {
-    Tag.activate(this._id);
-  }
-});
 
 // Meteor.startup(function() {
 //   Deps.autorun(function() {

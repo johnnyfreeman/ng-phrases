@@ -59,3 +59,10 @@ if (autoActivate) {
     });
   });
 }
+
+// activate tag when clicking on tag
+Template.tagLink.events({
+  'click': function() {
+    Tag.activate(this._id);
+  }
+});

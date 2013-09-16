@@ -121,7 +121,7 @@ Template.phraseItem.events({
 
   // Delete phrase
   // TODO: add confirmation for better user experience
-  'click .remove': function() {
+  'click .delete': function() {
     // Notifications.insert({iconClass:'icon-warning-sign',message:'Are you sure you want to delete this phrase? Yes No', type: 'warning', timeout: 0, closeBtn: true});
 
     // delete all active phrases

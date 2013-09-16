@@ -45,9 +45,14 @@ Template.actionBar.events({
       tags = $tagsField.val().split(',');
 
       // get tag ids
-      _.each(tags, function(tag) {
-        var tag = Tags.findOne(tag);
-        var tagId = tag === undefined ? Tags.insert({title: tag}) : tag._id;
+      _.each(tags, function(tagId) {
+        var title;
+
+        if (tagId.indexOf('NEW:') === 0) {
+          title = tagId.substr(4);
+          tagId = Tags.insert({title: title});
+        }
+
         tagIds.push(tagId);
       });
     }

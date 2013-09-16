@@ -171,10 +171,14 @@ Template.addPhraseForm.rendered = function() {
     delimiter: ',',
     persist: true,
     create: function(input) {
-      return {
-        title: input,
-        _id: input
+      var result = Tags.findOne({title:input});
+
+      // if not found
+      if (!result) {
+        result = {title: input, _id: 'NEW:' + input};
       }
+
+      return result;
     },
     valueField: '_id',
     labelField: 'title',
@@ -194,3 +198,19 @@ Template.phraseItemTag.events({
     Tag.activate(this._id);
   }
 });
+
+// Meteor.startup(function() {
+//   Deps.autorun(function() {
+//     console.log('refreshing selectize options...');
+//     if (!Phrase.selectize) 
+//       return;
+
+//     Phrase.selectize.clearOptions();
+
+//     Tags.find().forEach(function(tag) {
+//       Phrase.selectize.addOption(tag);
+//     });
+
+
+//   });
+// });

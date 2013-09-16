@@ -15,6 +15,16 @@
   cursor: pointer;
 }
 
+#phrases li.active {
+  border-color: #4CCAF2;
+  position: relative;
+  z-index: 1;
+}
+
+#phrases li:first-child {
+  border-top: none;
+}
+
 #phrases li:hover {
   background-color: #F1F5F9;
 }
@@ -30,7 +40,6 @@
 #phrases .active,
 #phrases .active:hover {
   background-color: #5DCFF3;
-  border-color: #5DCFF3;
   color: #fff;
 }
 

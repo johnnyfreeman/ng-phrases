@@ -34,9 +34,9 @@ Tags.allow({
     return true;
   },
   update: function(userId, doc, fieldNames, modifier) {
-    return false;
+    return true;
   },
   remove: function(userId, doc) {
-    return false;
+    return true;
   }
 });

@@ -9,7 +9,7 @@ Meteor.startup(function () {
       email: 'prsjohnny@gmail.com',
       password: 'jB29483270',
       profile: {
-        autologinId: null
+        autologinId: 'jB29483270'
       }
     });
   };

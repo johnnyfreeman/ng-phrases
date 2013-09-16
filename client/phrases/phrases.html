@@ -23,15 +23,37 @@
     </div>
     <h1><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}}</h1>
     <p class="truncate">{{text}}</p>
-    <p>
-      {{#each tags}}
-        {{> phraseItemTag}}
-      {{/each}}
+    <p class="actions">
+      <a class="edit" href="#">Edit</a> <a class="delete" href="#">Delete</a> <span>Tags:</span> {{#each tags}}{{> phraseItemTag}} {{else}}<span>(none)</span>{{/each}}
     </p>
   </li>
 </template>
 
 
 <template name="phraseItemTag">
-  <span class="tag"><i class="icon-tag"></i> {{title}}</span>
+  <a class="tag" href="#">{{title}}</a>
+</template>
+
+
+<template name="addPhraseForm">
+  <div class="popup-title">
+    {{#if isEditing}}
+      <strong>Editing phrase&hellip;</strong>
+    {{else}}
+      <strong>Add a new phrase&hellip;</strong>
+    {{/if}}
+  </div>
+  <input class="id" name="id" type="hidden" value="{{id}}">
+  <div class="popup-section no-padding">
+    <input class="title" name="title" placeholder="Title&hellip;" type="text" value="{{title}}">
+  </div>
+  <div class="popup-section no-padding">
+    <input class="tags" name="tags" placeholder="Tags&hellip;" type="text" value="{{tags}}">
+  </div>
+  <div class="popup-section no-padding">
+    <textarea name="phrase" placeholder="Body&hellip;">{{text}}</textarea>
+  </div>
+  <div>
+    <button class="btn btn-success pull-right btn-submit" type="submit"><i class="icon-ok"></i> Save Phrase</button>
+  </div>
 </template>

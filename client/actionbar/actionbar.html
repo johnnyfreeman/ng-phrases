@@ -17,21 +17,7 @@
 
     <!-- Add new phrase popup -->
     <form action="" class="popup animated fadeInDown" id="addPhraseForm" method="post">
-      <div class="popup-title">
-        <strong>Add a new phrase&hellip;</strong>
-      </div>
-      <div class="popup-section no-padding">
-        <input class="title" name="title" placeholder="Title&hellip;" type="text" value="">
-      </div>
-      <div class="popup-section no-padding">
-        <input class="tags" name="tags" placeholder="Tags&hellip;" type="text" value="">
-      </div>
-      <div class="popup-section no-padding">
-        <textarea name="phrase" placeholder="Body&hellip;"></textarea>
-      </div>
-      <div>
-        <button class="btn btn-success pull-right btn-submit" type="submit"><i class="icon-ok"></i> Save New Phrase</button>
-      </div>
+      {{> addPhraseForm phraseInEdit}}
     </form>
 
     <!-- Settings popup -->
@@ -40,11 +26,4 @@
     </form>
 
   </div>
-
-<!--       <ul class="animated fadeInDown" id="sortDrop">
-        <li><strong>Sort your phrases&hellip;</strong></li>
-        <li><a data-sortby="date" href="#"><i class="icon-calendar"></i> <em>by</em> Date</a></li>
-        <li><a data-sortby="text" href="#"><i class="icon-align-justify"></i> <em>by</em> Phrase</a></li>
-        <li><a data-sortby="title" href="#"><i class="icon-font"></i> <em>by</em> Title</a></li>
-      </ul> -->
 </template>

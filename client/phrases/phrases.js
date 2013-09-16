@@ -14,7 +14,12 @@ Template.phrases.phrases = function () {
   }
 
   if (Settings.get('sortPhrasesBy')) {
-    sort[Settings.get('sortPhrasesBy')] = 1;
+    // sort phrase decending for timestamp
+    if (Settings.get('sortPhrasesBy') == 'timestamp')
+      sort[Settings.get('sortPhrasesBy')] = -1;
+    // ascending otherwise
+    else
+      sort[Settings.get('sortPhrasesBy')] = 1;
   };
 
   return Phrases.find(selector, {sort:sort});
@@ -25,12 +30,15 @@ Template.phrases.events({
     // submit normally if delete mode off
     if (!Settings.get('bulkDeleteMode')) return;
 
-    // prevent form submittion
+    // prevent form submission
     e.preventDefault();
 
     // delete all active phrases
     Meteor.call('removePhrases', Session.get('active_phrases'), function (error, result) {
-      if (error) return;
+      if (error) {
+        Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
+        return;
+      }
 
       var message = Session.get('active_phrases').length == 1 ? 'Phrase deleted!' : 'Phrases deleted!';
 
@@ -97,20 +105,35 @@ Template.phraseItem.events({
 
     var $target = $(e.currentTarget);
       
-    // edit button clicked
-    if ($target.closest('.edit').length) {
-      Session.set('phraseInEdit', this._id);
+    // do nothing if delete or edit button clicked
+    if ($target.closest('.edit').length || $target.closest('.delete').length) {
+      return;
     }
 
-    // delete button clicked
-    else if ($target.closest('.delete').length) {
-      // confirm and delete
-    }
+    // activate the phrase
+    Phrase.toggleActivation(this._id);
+  },
 
-    // just activate the phrase
-    else {
-      Phrase.toggleActivation(this._id);
-    }
+  // Edit phrase
+  'click .edit': function() {
+    Session.set('phraseInEdit', this._id);
+  },
+
+  // Delete phrase
+  // TODO: add confirmation for better user experience
+  'click .remove': function() {
+    // Notifications.insert({iconClass:'icon-warning-sign',message:'Are you sure you want to delete this phrase? Yes No', type: 'warning', timeout: 0, closeBtn: true});
+
+    // delete all active phrases
+    Meteor.call('removePhrases', [this._id], function (error, result) {
+      if (error) {
+        Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
+        return;
+      }
+
+      // notification
+      Notifications.insert({iconClass:'icon-ok',message:'Phrase deleted', type: 'success', timeout: 2000, closeBtn: false});
+    });
   }
 });
 

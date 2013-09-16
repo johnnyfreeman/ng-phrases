@@ -21,19 +21,17 @@
       <i class="{{icon}}"></i>
       <input class="hidden" name="phrases[]" type="checkbox" value="{{text}}" {{{checked}}}>
     </div>
-    <h1><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}} <a class="edit" href="#"><i class="icon-pencil"></i></a> <a class="delete" href="#"><i class="icon-remove"></i></a></h1>
+    <h1><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}}</h1>
     <p class="truncate">{{text}}</p>
-    <p>
-      {{#each tags}}
-        {{> phraseItemTag}}
-      {{/each}}
+    <p class="actions">
+      <a class="edit" href="#">Edit</a> <a class="delete" href="#">Delete</a> <span>Tags:</span> {{#each tags}}{{> phraseItemTag}} {{else}}<span>(none)</span>{{/each}}
     </p>
   </li>
 </template>
 
 
 <template name="phraseItemTag">
-  <span class="tag"><i class="icon-tag"></i> {{title}}</span>
+  <a class="tag" href="#">{{title}}</a>
 </template>
 
 

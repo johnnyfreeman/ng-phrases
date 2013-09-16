@@ -38,27 +38,28 @@
 #phrases.bulk-delete-mode .active:hover {
   background-color: #FB6B5B;
   border-color: #FB6B5B;
-  color: #fff;
 }
 
-#phrases .active .tag,
-#phrases .active:hover .tag,
-#phrases .active .date,
-#phrases .active:hover .date {
-  color: #fff;
+#phrases .actions * {
+  color: #bdc3c7;
+  margin-right: 5px;
 }
 
-#phrases .active .checkbox,
-#phrases .active:hover .checkbox{
-  color: #fff;
-}
-
-#phrases li:hover .tag {
-  color: #7f8c8d;
-}
-
-#phrases .edit,
-#phrases .delete {
-  color: #545454;
+#phrases .actions a {
+  color: #bdc3c7;
   text-decoration: none;
+}
+
+#phrases li:hover .actions a {
+  color: #7f8c8d;
+  text-decoration: underline;
+}
+
+#phrases .active .date,
+#phrases .active:hover .date,
+#phrases .active .checkbox,
+#phrases .active:hover .checkbox,
+#phrases .active .actions *,
+#phrases .active:hover .actions * {
+  color: #fff;
 }

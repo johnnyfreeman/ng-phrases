@@ -47,11 +47,10 @@ Phrase.afterSave = function (error) {
   Notifications.insert({iconClass:'icon-ok',message:'Phrase saved!', type: 'success', timeout: 2000, closeBtn: false});
 
   var $form  = $('#addPhraseForm');
-  var $titleField = $form.find('input.title');
 
   // close form or keep open and focus on title field
   if (Settings.get('bulkInsertMode') && !Session.get('phraseInEdit'))
-    $titleField.trigger('focus');
+    $form.find('input.title').trigger('focus');
   else
     $form.hide();
 

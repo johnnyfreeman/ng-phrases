@@ -77,6 +77,12 @@ Template.actionBar.events({
     if (0 === $input.val().length) {
       $input.animate({width: 185});
     }
+  },
+
+  // make double sure the phrase form is clear 
+  // when clicking the add phrase button
+  'click #addPhrase': function(e) {
+    Session.set('phraseInEdit', null);
   }
 });
 

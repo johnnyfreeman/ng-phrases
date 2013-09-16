@@ -27,16 +27,18 @@
 
 Meteor.publish('tags', function() {
   return Tags.find();
-})
+});
 
 Tags.allow({
   insert: function(userId, doc) {
     return true;
   },
   update: function(userId, doc, fieldNames, modifier) {
-    return true;
+    var user = Meteor.users.findOne(userId);
+    return user.profile.admin;
   },
   remove: function(userId, doc) {
-    return true;
+    var user = Meteor.users.findOne(userId);
+    return user.profile.admin;
   }
 });

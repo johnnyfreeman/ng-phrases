@@ -157,29 +157,35 @@ Template.addPhraseForm.isEditing = function() {
 // global var to store the 
 // selectize instance in
 Phrase.selectize = null;
+
 Template.addPhraseForm.rendered = function() {
   // init selectize
   var $tags = $(this.find('input.tags'));
-  // if (!Phrase.selectize) {
-    $tags.selectize({
-      delimiter: ',',
-      persist: false,
-      create: function(input) {
-        return {
-          title: input
-        }
-      },
-      valueField: '_id',
-      labelField: 'title',
-      searchField: ['title'],
-      options: Tags.find().fetch(),
-      maxOptions: 5,
-      sortField: 'title'
-    });
-    Phrase.selectize = $tags[0].selectize;
-  // }
 
+  // little garbage collection
+  if (Phrase.selectize)
+    Phrase.selectize.destroy();
 
+  // init new inst of selectize
+  $tags.selectize({
+    delimiter: ',',
+    persist: true,
+    create: function(input) {
+      return {
+        title: input,
+        _id: input
+      }
+    },
+    valueField: '_id',
+    labelField: 'title',
+    searchField: ['title'],
+    options: Tags.find().fetch(),
+    maxOptions: 5,
+    sortField: 'title'
+  });
+
+  // save new instance
+  Phrase.selectize = $tags[0].selectize;
 };
 
 // activate tag when clicking on tag

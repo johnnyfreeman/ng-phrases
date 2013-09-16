@@ -169,7 +169,7 @@ Template.addPhraseForm.rendered = function() {
   // init new inst of selectize
   $tags.selectize({
     delimiter: ',',
-    persist: true,
+    persist: false,
     create: function(input) {
       var result = Tags.findOne({title:input});
 

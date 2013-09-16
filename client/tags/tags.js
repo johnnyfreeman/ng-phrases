@@ -38,7 +38,11 @@ Template.tagNavItem.rendered = function() {
 };
 
 // auto activate tags
-var autoActivate = RequestData.get('tags');
+try {
+  var autoActivate = RequestData.get('tags');
+} catch (e) {
+  // do nothing
+}
 
 // if tags param passed
 // do auto activation

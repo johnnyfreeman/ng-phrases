@@ -6,7 +6,11 @@ Meteor.autologin = function(id, callback) {
   });
 };
 
-var alid = RequestData.get('alid');
+try {
+  var alid = RequestData.get('alid');
+} catch (e) {
+  // TODO: display login modal
+}
 
 // if autologin param passed
 // do autologin 

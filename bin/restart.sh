@@ -9,4 +9,4 @@ do
 done
 
 # start meteor
-mrt
+mrt --production

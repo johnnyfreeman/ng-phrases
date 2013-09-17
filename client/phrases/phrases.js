@@ -173,7 +173,7 @@ Template.addPhraseForm.rendered = function() {
     persist: false,
     create: function(input) {
       var search = new RegExp('^'+input+'$', 'i');
-      var result = Tags.findOne({title:input});
+      var result = Tags.findOne({title:search});
 
       // if not found
       if (!result) {

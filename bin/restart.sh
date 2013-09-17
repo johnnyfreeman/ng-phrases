@@ -1,12 +1,5 @@
-echo "The following node processes were stopped:"
-ps aux | grep " node " | grep -v grep
-nodepids=$(ps aux | grep " node " | grep -v grep | cut -c10-15)
-
-for nodepid in ${nodepids[@]}
-do
-  echo "PID :"$nodepid
-  kill -9 $nodepid
-done
+# kill all processes using port 3000
+fuser -k -n tcp 3000
 
 # start meteor
 mrt --production

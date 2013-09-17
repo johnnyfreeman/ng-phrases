@@ -49,6 +49,10 @@
   border-color: #FB6B5B;
 }
 
+#phrases.bulk-delete-mode .active {
+  border-color: #FB5B4A;
+}
+
 #phrases .actions * {
   color: #bdc3c7;
   margin-right: 5px;

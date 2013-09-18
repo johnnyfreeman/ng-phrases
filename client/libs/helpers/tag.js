@@ -1,30 +1,42 @@
 Tag = {};
 
+// toggles phrase active state
 Tag.toggleActivation = function(id) {
-  if (Tag.isActive(id)) {
-    Tag.deactivate(id);
-  } else {
-    Tag.activate(id);
-  }
+  var key = 'activeTags.'+id;
+  var isActive = Session.get(key);
+  return Session.set(key, !isActive);
 };
 
+// deactivate
 Tag.deactivate = function(id) {
-  if (Tag.isActive(id)) {
-    var tags = Session.get('active_tags');
-    tags.remove(id);
-    Session.set('active_tags', tags);
-  }
+  return Session.set('activeTags.'+id, false);
 };
 
+// activate
 Tag.activate = function(id) {
-  if (!Tag.isActive(id)) {
-    var tags = Session.get('active_tags');
-    tags.push(id);
-    Session.set('active_tags', tags);
-  }
+  return Session.set('activeTags.'+id, true);
 };
 
-// is this id in the active_tags list?
+// is this id in the active_Tags list?
 Tag.isActive = function(id) {
-  return Session.get('active_tags').indexOf(id) >= 0 ? true : false;
+  return Session.equals('activeTags.'+id, true)
+};
+
+Tag.allActive = function () {
+  var namespace = 'activeTags.';
+  var active = [];
+
+  for (var key in Session.keys) {
+    // avoid looping through prototypes
+    if (!Session.keys.hasOwnProperty(key)) 
+      continue;
+
+    // if this key is an activePhrase key
+    // and it is set to true, add to array
+    if (key.indexOf(namespace) === 0 && Session.equals(key, true)) {
+      active.push(key.substr(namespace.length));
+    }
+  }
+
+  return active;
 };

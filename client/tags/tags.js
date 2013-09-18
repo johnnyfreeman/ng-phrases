@@ -1,9 +1,6 @@
 // subscribe to all tags that the server is publishing
 App.subs.tags = Meteor.subscribe('tags');
 
-// active tags list
-Session.setDefault('active_tags', []);
-
 
 // This user's tags
 Template.tagNav.tags = function () {
@@ -16,7 +13,7 @@ Template.tagNav.rendered = function () {
   }
 };
 
-// return "active" class if contained in the active_tags list
+// return "active" class if contained in the activeTags list
 Template.tagNavItem.active = function () {
   return Tag.isActive(this._id) ? 'active' : '';
 };
@@ -46,6 +43,20 @@ Template.tagNavItem.rendered = function() {
   if (App.perfDebugging) {
     console.log('tagNavItem rendered', this);
   }
+};
+
+// when a new tagNavItem template is created we make 
+// sure that a session exists to hold it's 'active' state
+Template.tagNavItem.created = function() {
+  var activeNamespace = 'activeTags.'+this.data._id;
+  if (Session.equals(activeNamespace), undefined)
+    Session.setDefault(activeNamespace, false);
+};
+
+// when a new tagNavItem template is destroyed 
+// we destroy it's 'active' state session variable
+Template.tagNavItem.destroyed = function() {
+  Session.set('activeTags.'+this.data._id, undefined);
 };
 
 // auto activate tags

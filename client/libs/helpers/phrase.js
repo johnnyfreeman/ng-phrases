@@ -3,34 +3,24 @@ Phrase = {};
 
 // toggles phrase active state
 Phrase.toggleActivation = function(id) {
-  if (Phrase.isActive(id)) {
-    Phrase.deactivate(id);
-  } else {
-    Phrase.activate(id);
-  }
+  var key = 'activePhrases.'+id;
+  var isActive = Session.get(key);
+  return Session.set(key, !isActive);
 };
 
 // deactivate
 Phrase.deactivate = function(id) {
-  if (Phrase.isActive(id)) {
-    var phrases = Session.get('active_phrases');
-    phrases.remove(id);
-    Session.set('active_phrases', phrases);
-  }
+  return Session.set('activePhrases.'+id, false);
 };
 
 // activate
 Phrase.activate = function(id) {
-  if (!Phrase.isActive(id)) {
-    var phrases = Session.get('active_phrases');
-    phrases.push(id);
-    Session.set('active_phrases', phrases);
-  }
+  return Session.set('activePhrases.'+id, true);
 };
 
 // is this id in the active_phrases list?
 Phrase.isActive = function(id) {
-  return Session.get('active_phrases').indexOf(id) >= 0 ? true : false;
+  return Session.equals('activePhrases.'+id, true)
 };
 
 // callback to pass to insert and update functions
@@ -56,6 +46,25 @@ Phrase.afterSave = function (error) {
 
   if (Session.get('phraseInEdit'))
     Session.set('phraseInEdit', null);
+};
+
+Phrase.allActive = function () {
+  var namespace = 'activePhrases.';
+  var active = [];
+
+  for (var key in Session.keys) {
+    // avoid looping through prototypes
+    if (!Session.keys.hasOwnProperty(key)) 
+      continue;
+
+    // if this key is an activePhrase key
+    // and it is set to true, add to array
+    if (key.indexOf(namespace) === 0 && Session.equals(key, true)) {
+      active.push(key.substr(namespace.length));
+    }
+  }
+
+  return active;
 };
 
 // reset the phrase form

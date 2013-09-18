@@ -17,7 +17,7 @@ Template.main.rendered = function(e) {
 
 // loading helper
 Template.main.appReady = function () {
-  return App.subs.tags.ready() && App.subs.phrases.ready();
+  return App.subsReady();
 };
 
 // storage for loading notification
@@ -32,7 +32,7 @@ Meteor.startup(function() {
 // when app is ready, remove loading notification
 Meteor.startup(function() {
   Deps.autorun(function(autorun) {
-    if (App.subs.tags.ready() && App.subs.phrases.ready()) {
+    if (App.subsReady()) {
       Notifications.remove(loadingId);
       autorun.stop();
     }
@@ -41,7 +41,7 @@ Meteor.startup(function() {
 
 
 Template.listingInfo.activeTags = function() {
-  var activeTags = Tags.find({_id: {$in: Session.get('active_tags')}});
+  var activeTags = Tags.find({_id: {$in: Tag.allActive()}});
   return activeTags.count() > 0 ? activeTags : false;
 };
 

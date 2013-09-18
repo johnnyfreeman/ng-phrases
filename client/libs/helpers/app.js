@@ -3,6 +3,13 @@ App = {};
 
 // namespace for app subscriptions
 App.subs = {};
+App.subs.settings = Meteor.subscribe('settings');
+
+App.subsReady = function() {
+  return App.subs.phrases.ready() 
+      && App.subs.tags.ready() 
+      && App.subs.settings.ready();
+};
 
 // register event handler
 App.on = function(eventName, callback) {

@@ -1,11 +1,9 @@
 // subscribe to all phrases that the server is publishing
 App.subs.phrases = Meteor.subscribe('phrases');
 
-Session.setDefault('active_phrases', []);
-
 Template.phrases.phrases = function () {
   // get phrases based on active tags
-  var activeTags = Session.get('active_tags');
+  var activeTags = Tag.allActive();
   var selector = {};
   var sort = {};
 
@@ -35,19 +33,16 @@ Template.phrases.events({
     e.preventDefault();
 
     // delete all active phrases
-    Meteor.call('removePhrases', Session.get('active_phrases'), function (error, result) {
+    Meteor.call('removePhrases', Phrase.allActive(), function (error, result) {
       if (error) {
         Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
         return;
       }
 
-      var message = Session.get('active_phrases').length == 1 ? 'Phrase deleted!' : 'Phrases deleted!';
+      var message = Phrase.allActive().length == 1 ? 'Phrase deleted!' : 'Phrases deleted!';
 
       // notification
       Notifications.insert({iconClass:'icon-remove',message:message, type: 'success', timeout: 2000, closeBtn: false});
-
-      // deactivate all phrases
-      Session.set('active_phrases', []);
     });
   },
   // add shadow to action bar when 
@@ -111,6 +106,20 @@ Template.phraseItem.rendered = function () {
   if (App.perfDebugging) {
     console.log('phraseItem rendered', this);
   }
+};
+
+// when a new phraseItem template is created we make 
+// sure that a session exists to hold it's 'active' state
+Template.phraseItem.created = function() {
+  var activeNamespace = 'activePhrases.'+this.data._id;
+  if (Session.equals(activeNamespace), undefined)
+    Session.setDefault(activeNamespace, false);
+};
+
+// when a new phraseItem template is destroyed 
+// we destroy it's 'active' state session variable
+Template.phraseItem.destroyed = function() {
+  Session.set('activePhrases.'+this.data._id, undefined);
 };
 
 Template.phraseItem.events({

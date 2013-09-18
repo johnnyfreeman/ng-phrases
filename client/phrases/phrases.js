@@ -53,12 +53,15 @@ Template.phrases.events({
   // add shadow to action bar when 
   // scrolling through phrases
   'scroll .scroll': function(e) {
-    var $element = $('.listingInfo');
+    var $listingInfo = $('.listingInfo');
+    var $infoBar = $('.info-bar');
     var scrollPos = e.currentTarget.scrollTop;
     if (scrollPos == 0) {
-      $element.css('box-shadow', 'none');
+      $listingInfo.css('box-shadow', 'none');
+      $infoBar.css('box-shadow', 'none');
     } else {
-      $element.css('box-shadow', '0 3px 6px rgba(0,0,0,0.1)');
+      $listingInfo.css('box-shadow', '0 3px 6px rgba(0,0,0,0.1)');
+      $infoBar.css('box-shadow', '0 -3px 6px rgba(0,0,0,0.1)');
     };
   }
 });

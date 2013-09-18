@@ -77,6 +77,10 @@ Template.phrases.rendered = function(e) {
   // reset the action bar shadow when phrases 
   // are (re)rendered to keep ui consistant
   $('.action-bar').css('box-shadow', 'none');
+
+  if (App.perfDebugging) {
+    console.log('phrases rendered', this);
+  }
 };
 
 Template.phrases.bulkDeleteMode = function () {
@@ -101,6 +105,12 @@ Template.phraseItem.tags = function () {
 
 Template.phraseItem.timeago = function () {
   return moment(this.timestamp).fromNow();
+};
+
+Template.phraseItem.rendered = function () {
+  if (App.perfDebugging) {
+    console.log('phraseItem rendered', this);
+  }
 };
 
 Template.phraseItem.events({
@@ -195,6 +205,11 @@ Template.addPhraseForm.rendered = function() {
 
   // save new instance
   Phrase.selectize = $tags[0].selectize;
+
+
+  if (App.perfDebugging) {
+    console.log('addPhraseForm rendered', this);
+  }
 };
 
 // Meteor.startup(function() {

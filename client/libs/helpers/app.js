@@ -23,3 +23,11 @@ App.off = function(eventName, callback) {
 App.trigger = function(eventName) {
   bean.fire(App, eventName);
 };
+
+App.perfDebugging = false;
+
+try {
+  App.perfDebugging = RequestData.get('perfDebugging');
+} catch (e) {
+  // do nothing
+}

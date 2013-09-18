@@ -7,6 +7,11 @@ Template.main.rendered = function(e) {
   size: '5px',
   height: '591px'
   });
+
+
+  if (App.perfDebugging) {
+    console.log('main rendered', this);
+  }
 };
 
 
@@ -38,4 +43,12 @@ Meteor.startup(function() {
 Template.listingInfo.activeTags = function() {
   var activeTags = Tags.find({_id: {$in: Session.get('active_tags')}});
   return activeTags.count() > 0 ? activeTags : false;
-}
+};
+
+
+
+Template.listingInfo.rendered = function () {
+  if (App.perfDebugging) {
+    console.log('listingInfo rendered', this);
+  }
+};

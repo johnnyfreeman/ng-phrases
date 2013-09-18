@@ -9,6 +9,10 @@ Template.actionBar.rendered = function () {
   if (Session.get('phraseInEdit')) {
     $('#addPhraseForm').show();
   }
+
+  if (App.perfDebugging) {
+    console.log('actionBar rendered', this);
+  }
 };
 
 Template.actionBar.events({

@@ -40,3 +40,9 @@ Template.settingsForm.events({
     Notifications.insert({iconClass:'icon-ok',message:'Phrases sorted by '+label, type: 'info', timeout: 2000, closeBtn: false});
   }
 });
+
+Template.settingsForm.rendered = function() {
+  if (App.perfDebugging) {
+    console.log('settingsForm rendered', this);
+  }
+};

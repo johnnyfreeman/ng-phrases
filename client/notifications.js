@@ -9,8 +9,18 @@ Template.notifications.notifications = function () {
   return Notifications.find();
 };
 
-Template.notificationItem.rendered = function() {
-  // init plugins
+
+Template.notifications.rendered = function () {
+  if (App.perfDebugging) {
+    console.log('notifications rendered', this);
+  }
+};
+
+
+Template.notificationItem.rendered = function () {
+  if (App.perfDebugging) {
+    console.log('notificationItem rendered', this);
+  }
 };
 
 // remove notifications 3 seconds after they are created

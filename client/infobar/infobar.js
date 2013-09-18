@@ -25,3 +25,9 @@ Template.infoBar.charCount = function () {
 Template.infoBar.bulkDeleteMode = function () {
   return Settings.get('bulkDeleteMode');
 };
+
+Template.infoBar.rendered = function () {
+  if (App.perfDebugging) {
+    console.log('infoBar rendered', this);
+  }
+};

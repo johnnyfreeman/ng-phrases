@@ -10,6 +10,12 @@ Template.tagNav.tags = function () {
   return Tags.find({}, {sort:{title:1}});
 };
 
+Template.tagNav.rendered = function () {
+  if (App.perfDebugging) {
+    console.log('tanNav rendered', this);
+  }
+};
+
 // return "active" class if contained in the active_tags list
 Template.tagNavItem.active = function () {
   return Tag.isActive(this._id) ? 'active' : '';
@@ -35,6 +41,11 @@ Template.tagNavItem.rendered = function() {
   // that the phrases list doesn't go blank afterwards
   if (Tag.isActive(this.data._id) && !Phrases.find({tags: this.data._id}).count())
     Tag.deactivate(this.data._id);
+
+
+  if (App.perfDebugging) {
+    console.log('tagNavItem rendered', this);
+  }
 };
 
 // auto activate tags
@@ -66,3 +77,19 @@ Template.tagLink.events({
     Tag.activate(this._id);
   }
 });
+
+
+
+Template.tagLink.rendered = function () {
+  if (App.perfDebugging) {
+    console.log('tagLink rendered', this);
+  }
+};
+
+
+
+Template.tagSpan.rendered = function () {
+  if (App.perfDebugging) {
+    console.log('tagSpan rendered', this);
+  }
+};

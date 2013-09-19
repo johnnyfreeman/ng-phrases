@@ -113,7 +113,7 @@ Template.phraseItem.events
   "click .delete": ->
     
     # Notifications.insert({iconClass:'icon-warning-sign',message:'Are you sure you want to delete this phrase? Yes No', type: 'warning', timeout: 0, closeBtn: true});
-    
+
     # delete all active phrases
     Meteor.call "removePhrases", [@_id], (error, result) ->
       if error

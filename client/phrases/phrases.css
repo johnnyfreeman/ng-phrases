@@ -79,8 +79,8 @@
 
 #phrases .empty {
   background-color: transparent;
-  border: none !important;
-  color: #bbb;
+  color: #BBC5DD;
+  cursor: default;
   padding: 200px 15px;
   text-align: center;
 }

@@ -44,21 +44,21 @@ Template.phrases.events({
       // notification
       Notifications.insert({iconClass:'icon-remove',message:message, type: 'success', timeout: 2000, closeBtn: false});
     });
-  },
+  }//,
   // add shadow to action bar when 
   // scrolling through phrases
-  'scroll .scroll': function(e) {
-    var $listingInfo = $('.listingInfo');
-    var $infoBar = $('.info-bar');
-    var scrollPos = e.currentTarget.scrollTop;
-    if (scrollPos == 0) {
-      $listingInfo.css('box-shadow', 'none');
-      $infoBar.css('box-shadow', 'none');
-    } else {
-      $listingInfo.css('box-shadow', '0 3px 6px rgba(0,0,0,0.1)');
-      $infoBar.css('box-shadow', '0 -3px 6px rgba(0,0,0,0.1)');
-    };
-  }
+  // 'scroll .scroll': function(e) {
+  //   var $listingInfo = $('.listingInfo');
+  //   var $infoBar = $('.info-bar');
+  //   var scrollPos = e.currentTarget.scrollTop;
+  //   if (scrollPos == 0) {
+  //     $listingInfo.css('box-shadow', 'none');
+  //     $infoBar.css('box-shadow', 'none');
+  //   } else {
+  //     $listingInfo.css('box-shadow', '0 3px 6px rgba(0,0,0,0.1)');
+  //     $infoBar.css('box-shadow', '0 -3px 6px rgba(0,0,0,0.1)');
+  //   };
+  // }
 });
 
 Template.phrases.rendered = function(e) {
@@ -66,7 +66,7 @@ Template.phrases.rendered = function(e) {
   $(this.find('.scroll')).slimScroll({
     color: '#999',
     size: '5px',
-    height: '426px'
+    height: '429px'
   });
 
   // reset the action bar shadow when phrases 

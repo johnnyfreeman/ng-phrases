@@ -2,6 +2,8 @@ activeState = 'activeState'
 
 # provides an active state for a model
 class @ActiveState
+  constructor: ->
+    
 
   # toggles active state
   toggleActivation: ->

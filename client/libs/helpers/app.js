@@ -34,7 +34,7 @@ App.trigger = function(eventName) {
 App.perfDebugging = false;
 
 try {
-  App.perfDebugging = RequestData.get('perfDebugging');
+  App.perfDebugging = RequestData.get('perfDebugging') == 'true' ? true : false;
 } catch (e) {
   // do nothing
 }

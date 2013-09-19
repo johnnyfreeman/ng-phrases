@@ -77,8 +77,10 @@
   color: #fff;
 }
 
-#phrases .empty {
+#phrases .empty,
+#phrases .empty:hover {
   background-color: transparent;
+  border: none;
   color: #BBC5DD;
   cursor: default;
   padding: 200px 15px;

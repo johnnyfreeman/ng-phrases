@@ -3,7 +3,7 @@ App.subs.phrases = Meteor.subscribe("phrases")
 Template.phrases.phrases = ->
   
   # get phrases based on active tags
-  activeTags = ActiveState.allActive('tags')
+  activeTags = Session.get('activeState.tags')
   selector = {}
   sort = {}
   if activeTags.length > 0
@@ -33,7 +33,7 @@ Template.phrases.events "submit form": (e) ->
   e.preventDefault()
   
   # delete all active phrases
-  Meteor.call "removePhrases", ActiveState.allActive('phrases'), (error, result) ->
+  Meteor.call "removePhrases", Session.get('activeState.phrases'), (error, result) ->
     if error
       Notifications.insert
         iconClass: "icon-warning-sign"
@@ -43,7 +43,7 @@ Template.phrases.events "submit form": (e) ->
         closeBtn: true
 
       return
-    message = (if ActiveState.allActive('phrases').length is 1 then "Phrase deleted!" else "Phrases deleted!")
+    message = (if Session.get('activeState.phrases').length is 1 then "Phrase deleted!" else "Phrases deleted!")
     
     # notification
     Notifications.insert

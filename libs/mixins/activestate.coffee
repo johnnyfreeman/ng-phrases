@@ -5,31 +5,40 @@ class @ActiveState
 
   # toggles active state
   toggleActivation: ->
-    key = activeState + '.' + @activeStateNamespace + '.' + @_id
-    Session.set key, !Session.get(key)
+    if @isActive() then @deactivate() else @activate()
 
   # deactivate
   deactivate: ->
-    Session.set activeState + '.' + @activeStateNamespace + '.' + @_id, false
+    namespace = activeState + '.' + @activeStateNamespace
+    if @isActive()
+      Session.set namespace + '.' + @_id, false
+      allActive = Session.get(namespace)
+      allActive.remove(@_id)
+      Session.set namespace, allActive
 
   # activate
   activate: ->
-    Session.set activeState + '.' + @activeStateNamespace + '.' + @_id, true
+    namespace = activeState + '.' + @activeStateNamespace
+    if !@isActive()
+      Session.set activeState + '.' + @activeStateNamespace + '.' + @_id, true
+      allActive = Session.get(namespace)
+      allActive.push(@_id)
+      Session.set namespace, allActive
 
   # is this object in it's active state?
   isActive: ->
     Session.equals activeState + '.' + @activeStateNamespace + '.' + @_id, true
 
-
-ActiveState.allActive = (namespace) ->
-  namespace += '.'
-  active = []
-  for key of Session.keys
-    # avoid looping through prototypes
-    continue unless Session.keys.hasOwnProperty(key)
+# # global helper to get all active based on namespace
+# ActiveState.allActive = (namespace) ->
+#   namespace += '.'
+#   active = []
+#   for key of Session.keys
+#     # avoid looping through prototypes
+#     continue unless Session.keys.hasOwnProperty(key)
     
-    # if this key is an activePhrase key
-    # and it is set to true, add to array
-    active.push key.substr(namespace.length) if key.indexOf(namespace) is 0 and Session.equals(key, true)
-  # return active ids in namespace
-  active
+#     # if this key is an activePhrase key
+#     # and it is set to true, add to array
+#     active.push key.substr(namespace.length) if key.indexOf(namespace) is 0 and Session.get(key)
+#   # return active ids in namespace
+#   active

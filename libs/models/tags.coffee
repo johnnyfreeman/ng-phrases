@@ -4,9 +4,10 @@ class @Tag extends Model
     super(doc)
     @activeStateNamespace = 'tags'
     key = 'activeState.' + @activeStateNamespace + '.' + @_id
-    if Session.equals(key, undefined)
-      console.log 'setting default session:', key
-      Session.setDefault key, false
+    
+    # create session variables 
+    Session.setDefault key, false if Session.equals(key, undefined)
+    Session.setDefault 'activeState.' + @activeStateNamespace, [] if Session.equals('activeState.' + @activeStateNamespace, undefined)
 
 # mixin for active state
 _.extend Tag.prototype, ActiveState.prototype

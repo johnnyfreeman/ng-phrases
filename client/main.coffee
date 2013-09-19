@@ -37,7 +37,7 @@ Meteor.startup ->
 
 Template.listingInfo.activeTags = ->
   activeTags = Tags.find(_id:
-    $in: ActiveState.allActive('tags')
+    $in: Session.get('activeState.tags')
   )
   (if activeTags.count() > 0 then activeTags else false)
 

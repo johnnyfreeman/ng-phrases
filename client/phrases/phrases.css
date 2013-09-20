@@ -1,6 +1,5 @@
 /* Phrases */
 #phrases {
-  border-bottom: 1px solid #e4e9ed;
   margin: 0;
   padding-left: 0;
 }
@@ -21,10 +20,11 @@
   z-index: 1;
 }
 
-#phrases li:first-child {
-  border-top: none;
-}
+/* hide the top border of the first
+   and the bottom border of the last */
+#phrases li:first-child { border-top: none; }
 
+/* hover state */
 #phrases li:hover {
   background-color: #F1F5F9;
 }
@@ -75,4 +75,14 @@
 #phrases .active .actions *,
 #phrases .active:hover .actions * {
   color: #fff;
+}
+
+#phrases .empty,
+#phrases .empty:hover {
+  background-color: transparent;
+  border: none;
+  color: #BBC5DD;
+  cursor: default;
+  padding: 200px 15px;
+  text-align: center;
 }

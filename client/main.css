@@ -62,7 +62,7 @@ form {
 /* Scrolling */
 #left .scroll, #right .scroll { overflow-y: hidden; }
 #left .scroll { height: 591px;}
-#right .scroll { height: 426px;}
+#right .scroll { height: 429px;}
 #right .scroll:hover, #left .scroll:hover { overflow-y: scroll;}
 
 /* Left Column */
@@ -157,13 +157,12 @@ form {
 
 /* LISTING INFO */
 .listingInfo {
-  background-color: #5DCFF3;
-  border-bottom: 1px solid #4CCAF2;
-  border-top: 1px solid #4CCAF2;
+  background-color: #594F8D;
   color: #fff;
   font-size: 12px;
   padding: 10px 15px;
   text-shadow: 0 1px 0px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
   /* places the listingInfo el above the phrases so the shadow will be visible */
   z-index: 1;
   position: relative;
@@ -174,7 +173,7 @@ form {
 }
 
 .listingInfo .tag {
-  background-color: #3CC5F1;
+  background-color: #4B4276;
   border-radius: 4px;
   color: #fff;
   display: inline-block;

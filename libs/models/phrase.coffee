@@ -1,15 +1,18 @@
 # Phrase model
 class @Phrase extends Model
   constructor: (doc) ->
+    # call constructor for Model class
     super(doc)
-    
-    if Meteor.isClient
-      @activeStateNamespace = 'phrases'
-      key = 'activeState.' + @activeStateNamespace + '.' + @_id
-      
-      # create session variables 
-      Session.setDefault key, false if Session.equals(key, undefined)
-      Session.setDefault 'activeState.' + @activeStateNamespace, [] if Session.equals('activeState.' + @activeStateNamespace, undefined)
+    @activeState = PhraseActiveStateCollection.getModelInstance @_id
 
-# mixin for active state
-_.extend Phrase.prototype, ActiveState.prototype
+  isActive: ->
+    @activeState.isActive()
+
+  activate: ->
+    @activeState.activate()
+
+  deactivate: ->
+    @activeState.deactivate()
+
+  toggleActivation: ->
+    @activeState.toggleActivation()

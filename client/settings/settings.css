@@ -30,6 +30,31 @@
   border-radius: 0px 0px 4px 4px;
 }
 
+#settingsForm input,
+#settingsForm select {
+  float: right;
+}
+
+.setting {
+  cursor: pointer;
+  display: block;
+  padding: 10px 15px;
+  margin: -10px -15px;
+}
+
+.setting input {
+  vertical-align: -2px;
+}
+
+.setting:hover {
+  background-color: #F9FAFC;
+}
+
 /* when bulk insert setting is in popup title */
-.popup-title .bulkInsertSetting { float: right; }
-.popup-title .bulkInsertSetting input { margin-left: 5px; }
+.popup-title .bulkInsert.setting { 
+  border-left: 1px solid #EBEEF5;
+  display: block;
+  float: right;
+  padding: 10px 15px;
+  margin: -10px -15px;
+}

@@ -66,11 +66,20 @@ if autoActivate
 
 
 # activate tag when clicking on tag
-Template.tagLink.events click: ->
-  @activate()
+Template.tagLink.events click: (e) ->
+  e.preventDefault()
+  @toggleActivation()
+
+# return 'active' class if contained in the activeTags list
+Template.tagLink.activeClass = ->
+  (if @isActive() then 'active' else '')
 
 Template.tagLink.rendered = ->
   console.log 'tagLink rendered', this  if App.perfDebugging
+
+# return 'active' class if contained in the activeTags list
+Template.tagSpan.activeClass = ->
+  (if @isActive() then 'active' else '')
 
 Template.tagSpan.rendered = ->
   console.log 'tagSpan rendered', this  if App.perfDebugging

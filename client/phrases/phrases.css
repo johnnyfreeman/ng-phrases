@@ -86,3 +86,17 @@
   padding: 200px 15px;
   text-align: center;
 }
+
+#phrases .tag {
+  border-radius: 4px;
+  padding: 2px 2px;
+  margin: -2px 0;
+}
+
+#phrases .tag.active {
+  background-color: #F2F4F8;
+}
+
+#phrases .active .tag.active {
+  background-color: transparent;
+}

@@ -1,12 +1,12 @@
 Template.main.rendered = (e) ->
   
   # slimscroll for tags
-  $(@find("#left .scroll")).slimScroll
-    color: "#999"
-    size: "5px"
-    height: "591px"
+  $(@find('#left .scroll')).slimScroll
+    color: '#999'
+    size: '5px'
+    height: '591px'
 
-  console.log "main rendered", this  if App.perfDebugging
+  console.log 'main rendered', this  if App.perfDebugging
 
 
 # loading helper
@@ -20,8 +20,8 @@ loadingId = undefined
 # on every start up add loading notification
 Meteor.startup ->
   loadingId = Notifications.insert(
-    iconClass: "icon-spinner icon-spin"
-    message: "Loading..."
+    iconClass: 'icon-spinner icon-spin'
+    message: 'Loading...'
     timeout: 0
     closeBtn: false
   )
@@ -37,9 +37,9 @@ Meteor.startup ->
 
 Template.listingInfo.activeTags = ->
   activeTags = Tags.find(_id:
-    $in: Session.get('activeState.tags')
+    $in: TagActiveStateCollection.getAll()
   )
   (if activeTags.count() > 0 then activeTags else false)
 
 Template.listingInfo.rendered = ->
-  console.log "listingInfo rendered", this  if App.perfDebugging
+  console.log 'listingInfo rendered', this  if App.perfDebugging

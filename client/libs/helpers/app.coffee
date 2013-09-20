@@ -3,7 +3,7 @@
 
 # namespace for app subscriptions
 App.subs = {}
-App.subs.settings = Meteor.subscribe("settings")
+App.subs.settings = Meteor.subscribe('settings')
 App.subsReady = ->
   App.subs.phrases.ready() and App.subs.tags.ready() and App.subs.settings.ready()
 
@@ -30,4 +30,4 @@ App.trigger = (eventName) ->
 App.perfDebugging = false
 
 try
-  App.perfDebugging = (if RequestData.get("perfDebugging") is "true" then true else false)
+  App.perfDebugging = (if RequestData.get('perfDebugging') is 'true' then true else false)

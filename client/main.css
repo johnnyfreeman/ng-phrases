@@ -5,6 +5,10 @@
 /* removes dotted line */
 a:active, a:focus, input, textarea { outline-style: none; -moz-outline-style:none; }
 
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: white;
   color: #575757;
@@ -50,6 +54,7 @@ form {
 
 #container {
   background-color: #fff;
+  overflow: hidden; /* contains floats */
   width: 800px;
 }
 

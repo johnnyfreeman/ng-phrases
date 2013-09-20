@@ -1,23 +1,23 @@
 modeEnabled = (key) ->
   Settings.get(key) is true
 
-Template.settingsForm.bulkInsertModeChecked = ->
+Template.bulkInsertSetting.checked = ->
   (if modeEnabled('bulkInsertMode') then 'checked' else '')
 
-Template.settingsForm.bulkDeleteModeChecked = ->
+Template.bulkDeleteSetting.checked = ->
   (if modeEnabled('bulkDeleteMode') then 'checked' else '')
 
-Template.settingsForm.sortPhrasesByBody = ->
+Template.sortPhrasesBySetting.byBody = ->
   (if Settings.get('sortPhrasesBy') is 'body' then 'selected' else '')
 
-Template.settingsForm.sortPhrasesByDate = ->
+Template.sortPhrasesBySetting.byDate = ->
   (if Settings.get('sortPhrasesBy') is 'date' then 'selected' else '')
 
-Template.settingsForm.sortPhrasesByTitle = ->
+Template.sortPhrasesBySetting.byTitle = ->
   (if Settings.get('sortPhrasesBy') is 'title' then 'selected' else '')
 
-Template.settingsForm.events
-  'change [name=\'bulk-insert-mode\']': (e) ->
+Template.bulkInsertSetting.events
+  'change input': (e) ->
     val = $(e.currentTarget).is(':checked')
     Settings.set 'bulkInsertMode', val
     Notifications.insert
@@ -28,7 +28,8 @@ Template.settingsForm.events
       closeBtn: false
 
 
-  'change [name=\'bulk-delete-mode\']': (e) ->
+Template.bulkDeleteSetting.events
+  'change input': (e) ->
     val = $(e.currentTarget).is(':checked')
     Settings.set 'bulkDeleteMode', val
     Notifications.insert
@@ -39,7 +40,8 @@ Template.settingsForm.events
       closeBtn: false
 
 
-  'change [name=\'sort-phrases-by\']': (e) ->
+Template.sortPhrasesBySetting.events
+  'change select': (e) ->
     val = $(e.currentTarget).val()
     label = $(e.currentTarget).find(':selected').text()
     Settings.set 'sortPhrasesBy', val
@@ -53,3 +55,12 @@ Template.settingsForm.events
 
 Template.settingsForm.rendered = ->
   console.log 'settingsForm rendered', this  if App.perfDebugging
+
+Template.bulkInsertSetting.rendered = ->
+  console.log 'bulkInsertSetting rendered', this  if App.perfDebugging
+
+Template.bulkDeleteSetting.rendered = ->
+  console.log 'bulkDeleteSetting rendered', this  if App.perfDebugging
+
+Template.sortPhrasesBySetting.rendered = ->
+  console.log 'sortPhrasesBySetting rendered', this  if App.perfDebugging

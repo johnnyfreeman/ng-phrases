@@ -160,21 +160,6 @@ Template.addPhraseForm.isEditing = ->
   Session.get('phraseInEdit') isnt null
 
 
-Template.addPhraseForm.bulkInsertModeChecked = ->
-  (if Settings.get('bulkInsertMode') is true then 'checked' else '')
-
-Template.addPhraseForm.events
-  'change [name=\'bulk-insert-mode\']': (e) ->
-    val = $(e.currentTarget).is(':checked')
-    Settings.set 'bulkInsertMode', val
-    Notifications.insert
-      iconClass: 'icon-ok'
-      message: 'Bulk Insert Mode is ' + ((if val then 'on' else 'off'))
-      type: 'info'
-      timeout: 2000
-      closeBtn: false
-
-
 # global var to store the 
 # selectize instance in
 AddPhraseFormHelper.selectize = null

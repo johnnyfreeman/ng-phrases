@@ -1,0 +1,34 @@
+
+
+/* ------- SETTINGS FORM --------- */
+#settingsForm {
+  /* popup position */
+  top: 64px;
+  right: 15px;
+}
+
+#settingsForm textarea {
+  height: 355px;
+}
+
+#settingsForm a:hover .icon-user,
+#settingsForm a:hover .icon-calendar,
+#settingsForm a:hover .icon-align-justify,
+#settingsForm a:hover .icon-font {
+  color: #fff;
+}
+
+/* arrow shadow */
+#settingsForm:before {
+  left: auto;
+  right: 10px;
+}
+/* arrow */
+#settingsForm:after {
+  left: auto;
+  right: 11px;
+}
+
+#settingsForm .btn-submit {
+  border-radius: 0px 0px 4px 4px;
+}

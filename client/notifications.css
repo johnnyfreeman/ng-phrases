@@ -3,15 +3,14 @@
   position: absolute;
   top: 0;
   margin: 0;
-  text-align: center;
-  width: 800px;
   z-index: 3;
 }
 
 .notifications {
   border-radius: 0 0 4px 4px;
-  display: inline-block;
+  display: block;
   margin: 0 auto;
+  max-width: 764px; /* container width - 30 */
   padding-left: 0;
   text-align: left;
   overflow: hidden;

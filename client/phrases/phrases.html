@@ -37,6 +37,9 @@
     {{else}}
       <strong>Add a new phrase&hellip;</strong>
     {{/if}}
+    <label class="pull-right">
+      Bulk Insert <input {{bulkInsertModeChecked}} name="bulk-insert-mode" type="checkbox" value="true">
+    </label>
   </div>
   <input class="id" name="id" type="hidden" value="{{id}}">
   <div class="popup-section no-padding">

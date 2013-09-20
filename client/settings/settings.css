@@ -1,6 +1,3 @@
-
-
-/* ------- SETTINGS FORM --------- */
 #settingsForm {
   /* popup position */
   top: 64px;
@@ -32,3 +29,7 @@
 #settingsForm .btn-submit {
   border-radius: 0px 0px 4px 4px;
 }
+
+/* when bulk insert setting is in popup title */
+.popup-title .bulkInsertSetting { float: right; }
+.popup-title .bulkInsertSetting input { margin-left: 5px; }

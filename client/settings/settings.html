@@ -14,21 +14,21 @@
 </template>
 
 <template name="bulkInsertSetting">
-  <label>
+  <label class="bulkInsertSetting">
     <input {{checked}} class="pull-right" name="bulk-insert-mode" type="checkbox" value="true">
     Bulk Insert Mode
   </label>
 </template>
 
 <template name="bulkDeleteSetting">
-  <label>
+  <label class="bulkDeleteSetting">
     <input {{checked}} class="pull-right" name="bulk-delete-mode" type="checkbox">
     Bulk Delete Mode
   </label>
 </template>
 
 <template name="sortPhrasesBySetting">
-  <label>
+  <label class="sortPhrasesBySetting">
     <select class="pull-right" id="sortPhrasesBy" name="sort-phrases-by">
       <option {{byBody}} value="text">Body</option>
       <option {{byDate}} value="timestamp">Date</option>

@@ -51,10 +51,10 @@
 }
 
 /* when bulk insert setting is in popup title */
-.popup-title .bulkInsert.setting { 
-  border-left: 1px solid #EBEEF5;
-  display: block;
+.popup-title .setting { 
   float: right;
-  padding: 10px 15px;
-  margin: -10px -15px;
+}
+
+.popup-title .setting:hover {
+  background-color: transparent;
 }

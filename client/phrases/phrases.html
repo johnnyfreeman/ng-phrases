@@ -21,8 +21,8 @@
       <i class="{{icon}}"></i>
       <input class="hidden" name="phrases[]" type="checkbox" value="{{text}}" {{{checked}}}>
     </div>
-    <h1><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}}</h1>
-    <p class="truncate">{{text}}</p>
+    <h1 class="truncate" title="{{title}}"><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}}</h1>
+    <p class="truncate" title="{{text}}">{{text}}</p>
     <p class="actions">
       <a class="edit" href="#">Edit</a> <a class="delete" href="#">Delete</a> <span>Tags:</span> {{#each tags}}{{> tagLink}} {{else}}<span>(none)</span>{{/each}}
     </p>

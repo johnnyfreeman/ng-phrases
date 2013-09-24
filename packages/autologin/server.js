@@ -6,7 +6,7 @@ Accounts.registerLoginHandler(function (options) {
     return undefined;
 
   // search for user by autologin id
-  var user = Meteor.users.findOne({profile: { autologinId: options.autologin}});
+  var user = MMeteor.users.findOne({'profile.autologinId': options.autologin});
   if (!user)
     throw new Meteor.Error(403, "The autologin id '"+options.autologin+"' has not been tethered to an account yet");
 

@@ -8,18 +8,13 @@
 }
 
 #tags li {
-  border-bottom: 1px solid #444C5C;
-  border-top: 1px solid #545E70;
   list-style: none;
-}
-
-#tags li.active {
-  border-bottom: 1px solid #3D4452;
-  border-top: 1px solid #4C5566;
 }
 
 #tags a {
   background-color: #4C5566;
+  border-bottom: 1px solid #444C5C;
+  border-top: 1px solid #545E70;
   color: #a7afbd;
   display: block;
   font-weight: bold;
@@ -28,14 +23,19 @@
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
 }
 
+#tags .active {
+  border-bottom: 1px solid #3D4452;
+  border-top: 1px solid #4C5566;
+}
+
 #tags a:hover,
 #tags a:hover .icon-tag,
 #tags a:hover .count {
   color: #fff;
 }
 
-#tags .active a,
-#tags .active a:hover {
+#tags .active,
+#tags .active:hover {
   background-color: #444C5C;
   color: #fff;
 }

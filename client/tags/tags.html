@@ -1,7 +1,7 @@
 <template name="tagNav">
   <ul id="tags">
     {{#each tags}}
-      <li class="{{activeClass}}">
+      <li>
         {{> tagLinkWithCount}}
       </li>
     {{else}}
@@ -15,7 +15,7 @@
 </template>
 
 <template name="tagLinkWithCount">
-    <a href="#">
+    <a class="truncate {{activeClass}}" href="#">
       <span class="count">{{count}}</span>
       <i class="icon-tag"></i> {{title}}
     </a>

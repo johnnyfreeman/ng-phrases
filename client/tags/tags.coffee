@@ -1,5 +1,5 @@
 # subscribe to all tags that the server is publishing
-App.subs.tags = Meteor.subscribe('tags')
+App.subs.tags = Meteor.subscribe 'tags'
 
 # This user's tags
 Template.tagNav.tags = ->

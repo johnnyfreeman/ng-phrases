@@ -17,31 +17,31 @@ Template.tagNav.rendered = ->
 
 
 # return 'active' class if contained in the activeTags list
-Template.tagNavItem.activeClass = ->
+Template.tagLinkWithCount.activeClass = ->
   (if @isActive() then 'active' else '')
 
 
 # Tag's phrase-count
-Template.tagNavItem.count = ->
+Template.tagLinkWithCount.count = ->
   # get all phrases for this user where it has this as one of it's tags
   Phrases.find(tags: @_id).count()
 
 # when a tag template is destroyed, let's make sure it's deactivated
-Template.tagNavItem.destroyed = -> @data.deactivate()
+Template.tagLinkWithCount.destroyed = -> @data.deactivate()
 
 
 # click on tag to make it 'active'
-Template.tagNavItem.events click: (e) ->
+Template.tagLinkWithCount.events click: (e) ->
   e.preventDefault()
   @toggleActivation()
 
-Template.tagNavItem.rendered = ->
+Template.tagLinkWithCount.rendered = ->
   
   # automatically deactivate tags with zero phrases
   # this will ensure the when Phrases are deleted, 
   # that the phrases list doesn't go blank afterwards
   @data.deactivate if @data.isActive() and not Phrases.find(tags: @data._id).count()
-  console.log 'tagNavItem rendered', this  if App.perfDebugging
+  console.log 'tagLinkWithCount rendered', this  if App.perfDebugging
 
 
 # auto activate tags

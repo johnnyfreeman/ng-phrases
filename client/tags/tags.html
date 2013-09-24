@@ -14,16 +14,17 @@
   </ul>
 </template>
 
+
+<template name="tagLink">
+  <a class="tag {{activeClass}}" href="#">{{title}}</a>
+</template>
+
+
 <template name="tagLinkWithCount">
     <a class="truncate {{activeClass}}" href="#">
       <span class="count">{{count}}</span>
       <i class="icon-tag"></i> {{title}}
     </a>
-</template>
-
-
-<template name="tagLink">
-  <a class="tag {{activeClass}}" href="#">{{title}}</a>
 </template>
 
 

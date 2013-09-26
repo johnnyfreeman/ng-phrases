@@ -93,20 +93,12 @@ Template.phraseItem.animationClass = ->
   (if activeTags.length is 0 or _.difference(activeTags, @tags).length is 0 then 'fadeInDown' else 'fadeOutUp')
 
 
+
 Template.phraseItem.timeago = ->
   moment(@timestamp).fromNow()
 
 Template.phraseItem.rendered = ->
   console.log 'phraseItem rendered', this  if App.perfDebugging
-
-  visiblePhrases = @find '.fadeInDown'
-  hiddenPhrases = @find '.fadeOutUp'
-
-  $(visiblePhrases).show()
-
-  Meteor.setTimeout ->
-    $(hiddenPhrases).hide()
-  , 300
 
 Template.phraseItem.events
   click: (e) ->

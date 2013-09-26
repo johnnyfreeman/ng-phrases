@@ -1,23 +1,33 @@
 # subscribe to all phrases that the server is publishing
 App.subs.phrases = Meteor.subscribe('phrases')
-
-# all phrases
 Template.phrases.phrases = ->
   
-  # create sort object
+  # get phrases based on active tags
+  activeTags = TagActiveStateCollection.getAll()
+  selector = {}
   sort = {}
-  field = Settings.get 'sortPhrasesBy'
-  direction = if field is 'timestamp' then -1 else 1
-  sort[field] = direction
-
-  # return Phrases cursor
-  Phrases.find {}, {sort: sort}
+  if activeTags.length > 0
+    selector = tags:
+      $all: activeTags
+  
+  # selector = {tags: {$in: activeTags}};
+  if Settings.get('sortPhrasesBy')
+    
+    # sort phrase decending for timestamp
+    if Settings.get('sortPhrasesBy') is 'timestamp'
+      sort[Settings.get('sortPhrasesBy')] = -1
+    
+    # ascending otherwise
+    else
+      sort[Settings.get('sortPhrasesBy')] = 1
+  Phrases.find selector,
+    sort: sort
 
 
 Template.phrases.events 'submit form': (e) ->
   
   # submit normally if delete mode off
-  return unless Settings.get('bulkDeleteMode')
+  return  unless Settings.get('bulkDeleteMode')
   
   # prevent form submission
   e.preventDefault()
@@ -60,7 +70,7 @@ Template.phrases.rendered = (e) ->
   # reset the action bar shadow when phrases 
   # are (re)rendered to keep ui consistant
   $('.action-bar').css 'box-shadow', 'none'
-  console.log 'phrases rendered', this if App.perfDebugging
+  console.log 'phrases rendered', this  if App.perfDebugging
 
 Template.phrases.bulkDeleteMode = ->
   (if Settings.get('bulkDeleteMode') then 'bulk-delete-mode' else '')
@@ -74,24 +84,9 @@ Template.phraseItem.checked = ->
 Template.phraseItem.icon = ->
   (if @isActive() then 'icon-check' else 'icon-check-empty')
 
-Template.phraseItem.tags = -> 
-  Tags.find {_id: {$in: @tags}}
-
-Template.phraseItem.visible = ->
-
-  # get array of active tags
-  activeTags = TagActiveStateCollection.getAll()
-
-  # true if there are no active tags or if this phrase contains an active tag
-  return activeTags.length is 0 or _.difference(activeTags, @tags).length is 0
-
-Template.phraseItem.animationClass = ->
-  # get array of active tags
-  activeTags = TagActiveStateCollection.getAll()
-
-  # true if there are no active tags or if this phrase contains an active tag
-  (if activeTags.length is 0 or _.difference(activeTags, @tags).length is 0 then 'fadeInDown' else 'fadeOutUp')
-
+Template.phraseItem.tags = ->
+  Tags.find _id:
+    $in: @tags
 
 
 Template.phraseItem.timeago = ->

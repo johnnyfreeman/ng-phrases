@@ -30,10 +30,10 @@ class @ActiveStateCollection
       inst.deactivate()
 
   activate: (id) ->
-    @_modelInstances[id].activate()
+    @getModelInstance(id).activate()
 
   deactivate: (id) ->
-    @_modelInstances[id].deactivate()
+    @getModelInstance(id).deactivate()
 
   depend: ->
     @_dep.depend()

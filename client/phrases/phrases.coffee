@@ -5,23 +5,18 @@ Template.phrases.phrases = ->
   # get phrases based on active tags
   activeTags = TagActiveStateCollection.getAll()
   selector = {}
-  sort = {}
+
+  # limit results to those who have ALL active tags
   if activeTags.length > 0
-    selector = tags:
-      $all: activeTags
-  
-  # selector = {tags: {$in: activeTags}};
-  if Settings.get('sortPhrasesBy')
-    
-    # sort phrase decending for timestamp
-    if Settings.get('sortPhrasesBy') is 'timestamp'
-      sort[Settings.get('sortPhrasesBy')] = -1
-    
-    # ascending otherwise
-    else
-      sort[Settings.get('sortPhrasesBy')] = 1
-  Phrases.find selector,
-    sort: sort
+    selector['tags'] = {$all: activeTags} 
+
+  # build sort object
+  sort = {}
+  sortKey = Settings.get('sortPhrasesBy')
+  sort[sortKey] = (if sortKey is "timestamp" then -1 else 1)
+
+  # return Phrases cursor
+  Phrases.find selector, {sort: sort}
 
 
 Template.phrases.events 'submit form': (e) ->

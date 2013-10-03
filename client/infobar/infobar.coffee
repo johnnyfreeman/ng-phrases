@@ -21,6 +21,3 @@ Template.infoBar.charCount = ->
 
 Template.infoBar.bulkDeleteMode = ->
   Settings.get 'bulkDeleteMode'
-
-Template.infoBar.rendered = ->
-  console.log 'infoBar rendered', this  if App.perfDebugging

@@ -54,10 +54,3 @@ Template.sortPhrasesBySetting.events
       type: 'info'
       timeout: 2000
       closeBtn: false
-
-
-# ------ performance debugging ------
-Template.settingsForm.rendered = -> console.log 'settingsForm rendered', this if App.perfDebugging
-Template.bulkInsertSetting.rendered = -> console.log 'bulkInsertSetting rendered', this if App.perfDebugging
-Template.bulkDeleteSetting.rendered = -> console.log 'bulkDeleteSetting rendered', this if App.perfDebugging
-Template.sortPhrasesBySetting.rendered = -> console.log 'sortPhrasesBySetting rendered', this if App.perfDebugging

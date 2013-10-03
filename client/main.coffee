@@ -6,8 +6,6 @@ Template.main.rendered = (e) ->
     size: '5px'
     height: '591px'
 
-  console.log 'main rendered', this  if App.perfDebugging
-
 
 # loading helper
 Template.main.appReady = ->
@@ -40,6 +38,3 @@ Template.listingInfo.activeTags = ->
     $in: TagActiveStateCollection.getAll()
   )
   (if activeTags.count() > 0 then activeTags else false)
-
-Template.listingInfo.rendered = ->
-  console.log 'listingInfo rendered', this  if App.perfDebugging

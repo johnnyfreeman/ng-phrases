@@ -12,10 +12,6 @@ Template.tagNav.tags = ->
   Tags.find({_id: {$in: uniqueTags}}, {sort: title: 1})
 
 
-Template.tagNav.rendered = ->
-  console.log 'tagNav rendered', this  if App.perfDebugging
-
-
 # return 'active' class if contained in the activeTags list
 Template.tagLinkWithCount.activeClass = ->
   (if @isActive() then 'active' else '')
@@ -41,7 +37,6 @@ Template.tagLinkWithCount.rendered = ->
   # this will ensure the when Phrases are deleted, 
   # that the phrases list doesn't go blank afterwards
   @data.deactivate if @data.isActive() and not Phrases.find(tags: @data._id).count()
-  console.log 'tagLinkWithCount rendered', this  if App.perfDebugging
 
 
 # auto activate tags
@@ -74,12 +69,6 @@ Template.tagLink.events click: (e) ->
 Template.tagLink.activeClass = ->
   (if @isActive() then 'active' else '')
 
-Template.tagLink.rendered = ->
-  console.log 'tagLink rendered', this  if App.perfDebugging
-
 # return 'active' class if contained in the activeTags list
 Template.tagSpan.activeClass = ->
   (if @isActive() then 'active' else '')
-
-Template.tagSpan.rendered = ->
-  console.log 'tagSpan rendered', this  if App.perfDebugging

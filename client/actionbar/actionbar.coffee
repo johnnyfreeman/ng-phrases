@@ -7,7 +7,6 @@ Template.actionBar.rendered = ->
   # Init popups
   $('[data-popup]').popup()
   $('#addPhraseForm').show()  if Session.get('phraseInEdit')
-  console.log 'actionBar rendered', this  if App.perfDebugging
 
 Template.actionBar.events
   

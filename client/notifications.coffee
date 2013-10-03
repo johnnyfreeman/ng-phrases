@@ -5,12 +5,6 @@
 Template.notifications.notifications = ->
   Notifications.find()
 
-Template.notifications.rendered = ->
-  console.log 'notifications rendered', this  if App.perfDebugging
-
-Template.notificationItem.rendered = ->
-  console.log 'notificationItem rendered', this  if App.perfDebugging
-
   # center .notifications-wrapper
   containerWidth = $('#container').outerWidth()
   $notificationWrapper = $('.notification-wrapper')

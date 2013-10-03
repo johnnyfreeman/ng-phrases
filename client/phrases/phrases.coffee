@@ -65,7 +65,6 @@ Template.phrases.rendered = (e) ->
   # reset the action bar shadow when phrases 
   # are (re)rendered to keep ui consistant
   $('.action-bar').css 'box-shadow', 'none'
-  console.log 'phrases rendered', this  if App.perfDebugging
 
 Template.phrases.bulkDeleteMode = ->
   (if Settings.get('bulkDeleteMode') then 'bulk-delete-mode' else '')
@@ -86,9 +85,6 @@ Template.phraseItem.tags = ->
 
 Template.phraseItem.timeago = ->
   moment(@timestamp).fromNow()
-
-Template.phraseItem.rendered = ->
-  console.log 'phraseItem rendered', this  if App.perfDebugging
 
 Template.phraseItem.events
   click: (e) ->
@@ -190,7 +186,6 @@ Template.addPhraseForm.rendered = ->
   
   # save new instance
   AddPhraseFormHelper.selectize = $tags[0].selectize
-  console.log 'addPhraseForm rendered', this  if App.perfDebugging
 
 # Meteor.startup(function() {
 #   Deps.autorun(function() {

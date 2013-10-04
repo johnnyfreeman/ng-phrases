@@ -2,10 +2,11 @@
 @App = {}
 
 # namespace for app subscriptions
-App.subs = {}
-App.subs.settings = Meteor.subscribe('settings')
-App.subsReady = ->
-  App.subs.phrases.ready() and App.subs.tags.ready() and App.subs.settings.ready()
+if Meteor.isClient
+  App.subs = {}
+  App.subs.settings = Meteor.subscribe('settings')
+  App.subsReady = ->
+    App.subs.phrases.ready() and App.subs.tags.ready() and App.subs.settings.ready()
 
 
 # register event handler

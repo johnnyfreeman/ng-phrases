@@ -1,26 +1,36 @@
-var wrappedFind = Meteor.Collection.prototype.find;
+var prefDebugging;
 
-Meteor.Collection.prototype.find = function () {
-  var cursor = wrappedFind.apply(this, arguments);
-  var collectionName = this._name;
+try {
+  prefDebugging = RequestData.get('perfDebugging');
+} catch(e) {
+  
+}
 
-  cursor.observeChanges({
-    added: function (id, fields) {
-      console.log(collectionName, 'added', id, fields);
-    },
+if (prefDebugging == 'true') {
+  var wrappedFind = Meteor.Collection.prototype.find;
 
-    changed: function (id, fields) {
-      console.log(collectionName, 'changed', id, fields);
-    },
+  Meteor.Collection.prototype.find = function () {
+    var cursor = wrappedFind.apply(this, arguments);
+    var collectionName = this._name;
 
-    movedBefore: function (id, before) {
-      console.log(collectionName, 'movedBefore', id, before);
-    },
+    cursor.observeChanges({
+      added: function (id, fields) {
+        console.log(collectionName, 'added', id, fields);
+      },
 
-    removed: function (id) {
-      console.log(collectionName, 'removed', id);
-    }
-  });
+      changed: function (id, fields) {
+        console.log(collectionName, 'changed', id, fields);
+      },
 
-  return cursor;
-};
+      movedBefore: function (id, before) {
+        console.log(collectionName, 'movedBefore', id, before);
+      },
+
+      removed: function (id) {
+        console.log(collectionName, 'removed', id);
+      }
+    });
+
+    return cursor;
+  };
+}

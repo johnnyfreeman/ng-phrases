@@ -26,31 +26,34 @@ Template.phrases.events 'submit form': (e) ->
   
   # prevent form submission
   e.preventDefault()
+
+  confirmed = confirm 'Are you sure you want to permenantly delete ALL the selected phrases?'
   
-  # delete all active phrases
-  Meteor.call 'removePhrases', PhraseActiveStateCollection.getAll(), (error, result) ->
-    if error
+  if confirmed
+    # delete all active phrases
+    Meteor.call 'removePhrases', PhraseActiveStateCollection.getAll(), (error, result) ->
+      if error
+        Notifications.insert
+          iconClass: 'icon-warning-sign'
+          message: error.message
+          type: 'danger'
+          timeout: 0
+          closeBtn: true
+
+        return
+
+      # deactivate all phrases
+      PhraseActiveStateCollection.deactivateAll()
+
+      message = (if PhraseActiveStateCollection.getAll().length is 1 then 'Phrase deleted!' else 'Phrases deleted!')
+      
+      # notification
       Notifications.insert
-        iconClass: 'icon-warning-sign'
-        message: error.message
-        type: 'danger'
-        timeout: 0
-        closeBtn: true
-
-      return
-
-    # deactivate all phrases
-    PhraseActiveStateCollection.deactivateAll()
-
-    message = (if PhraseActiveStateCollection.getAll().length is 1 then 'Phrase deleted!' else 'Phrases deleted!')
-    
-    # notification
-    Notifications.insert
-      iconClass: 'icon-remove'
-      message: message
-      type: 'success'
-      timeout: 2000
-      closeBtn: false
+        iconClass: 'icon-remove'
+        message: message
+        type: 'success'
+        timeout: 2000
+        closeBtn: false
 
 
 Template.phrases.rendered = (e) ->
@@ -108,31 +111,35 @@ Template.phraseItem.events
   'click .delete': ->
     
     # Notifications.insert({iconClass:'icon-warning-sign',message:'Are you sure you want to delete this phrase? Yes No', type: 'warning', timeout: 0, closeBtn: true});
-
+    
     id = @_id
 
-    # delete all active phrases
-    Meteor.call 'removePhrases', [id], (error, result) ->
-      if error
+    confirmed = confirm 'Are you sure you want to permenantly delete this phrase?'
+  
+    if confirmed
+
+      # delete all active phrases
+      Meteor.call 'removePhrases', [id], (error, result) ->
+        if error
+          Notifications.insert
+            iconClass: 'icon-warning-sign'
+            message: error.message
+            type: 'danger'
+            timeout: 0
+            closeBtn: true
+
+          return
+
+        # deactivate the phrase since it is now deleted
+        PhraseActiveStateCollection.deactivate(id)
+        
+        # notification
         Notifications.insert
-          iconClass: 'icon-warning-sign'
-          message: error.message
-          type: 'danger'
-          timeout: 0
-          closeBtn: true
-
-        return
-
-      # deactivate the phrase since it is now deleted
-      PhraseActiveStateCollection.deactivate(id)
-      
-      # notification
-      Notifications.insert
-        iconClass: 'icon-ok'
-        message: 'Phrase deleted'
-        type: 'success'
-        timeout: 2000
-        closeBtn: false
+          iconClass: 'icon-ok'
+          message: 'Phrase deleted'
+          type: 'success'
+          timeout: 2000
+          closeBtn: false
 
 
 

@@ -1,14 +1,18 @@
 # subscribe to all phrases that the server is publishing
-App.subs.phrases = Meteor.subscribe('phrases')
-Template.phrases.phrases = ->
-  
-  # get phrases based on active tags
-  activeTags = TagActiveStateCollection.getAll()
-  selector = {}
+Deps.autorun (c) -> 
+  console.log 'autorunning...', TagActiveStateCollection.getAll()
+  App.subs.phrases = Meteor.subscribe 'phrases', TagActiveStateCollection.getAll()
 
-  # limit results to those who have ALL active tags
-  if activeTags.length > 0
-    selector['tags'] = {$all: activeTags} 
+  # c.onInvalidate ->
+  #   Meteor._debug activeTags
+  #   Notifications.insert(
+  #     iconClass: 'icon-spinner icon-spin'
+  #     message: 'Loading...'
+  #     timeout: 0
+  #     closeBtn: false
+  #   )
+
+Template.phrases.phrases = ->
 
   # build sort object
   sort = {}
@@ -16,7 +20,7 @@ Template.phrases.phrases = ->
   sort[sortKey] = (if sortKey is "timestamp" then -1 else 1)
 
   # return Phrases cursor
-  Phrases.find selector, {sort: sort}
+  Phrases.find {}, {sort: sort}
 
 
 Template.phrases.events 'submit form': (e) ->

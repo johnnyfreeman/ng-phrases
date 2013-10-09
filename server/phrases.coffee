@@ -11,8 +11,6 @@ Meteor.publish 'phrases', (activeTags) ->
   if activeTags.length > 0
     selector['tags'] = {$all: activeTags}
 
-  console.log selector
-
   Phrases.find selector
 
 

@@ -1,16 +1,15 @@
 # subscribe to all phrases that the server is publishing
+phrasesLoading = undefined
 Deps.autorun (c) -> 
-  console.log 'autorunning...', TagActiveStateCollection.getAll()
-  App.subs.phrases = Meteor.subscribe 'phrases', TagActiveStateCollection.getAll()
+  App.subs.phrases = Meteor.subscribe 'phrases', TagActiveStateCollection.getAll().slice(0)
 
-  # c.onInvalidate ->
-  #   Meteor._debug activeTags
-  #   Notifications.insert(
-  #     iconClass: 'icon-spinner icon-spin'
-  #     message: 'Loading...'
-  #     timeout: 0
-  #     closeBtn: false
-  #   )
+  c.onInvalidate ->
+    phrasesLoading = Notifications.insert
+      iconClass: 'icon-spinner icon-spin'
+      message: 'Loading...'
+      timeout: 0
+      closeBtn: false
+    
 
 Template.phrases.phrases = ->
 
@@ -72,6 +71,9 @@ Template.phrases.rendered = (e) ->
   # reset the action bar shadow when phrases 
   # are (re)rendered to keep ui consistant
   $('.action-bar').css 'box-shadow', 'none'
+
+  Meteor.defer ->
+    Notifications.remove phrasesLoading
 
 Template.phrases.bulkDeleteMode = ->
   (if Settings.get('bulkDeleteMode') then 'bulk-delete-mode' else '')

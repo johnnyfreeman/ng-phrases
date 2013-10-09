@@ -1,7 +1,7 @@
 # subscribe to all phrases that the server is publishing
 phrasesLoading = undefined
 Deps.autorun (c) -> 
-  App.subs.phrases = Meteor.subscribe 'phrases', TagActiveStateCollection.getAll().slice(0)
+  App.subs.phrases = Meteor.subscribe 'phrases', TagActiveStateCollection.getAll()
 
   c.onInvalidate ->
     phrasesLoading = Notifications.insert

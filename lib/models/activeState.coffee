@@ -9,9 +9,12 @@ class @ActiveStateCollection
     @_dep = new Deps.Dependency
     @_modelInstances = {}
 
+  # get all active in this collection
+  # return a clone of the array so that 
+  # unsub and resub subscriptions properly
   getAll: ->
     @depend()
-    @allActive
+    @allActive.slice(0)
 
   add: (id) ->
     @allActive.push id

@@ -10,11 +10,11 @@ scp -r 192.237.249.38:~/dump/ ~/
 echo "changing directory to ~/dump/meteor/ ..."
 cd ~/dump/meteor/
 
-echo "renaming all .json files to .bson to prepare for mongorestore"
-rename 's/.json$/.bson/' *.json -v
+# echo "renaming all .json files to .bson to prepare for mongorestore"
+# rename 's/.json$/.bson/' *.json -v
 
 # temp fix
-rm -v ./*.metadata.bson
+# rm -v ./*.metadata.bson
 
 echo "restoring production dump..."
-mongorestore -v --host localhost --port 3002 --db meteor .
+mongorestore --drop -v --host localhost --port 3002 --db meteor .

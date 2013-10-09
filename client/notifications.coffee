@@ -5,6 +5,7 @@
 Template.notifications.notifications = ->
   Notifications.find()
 
+Template.notifications.rendered = ->
   # center .notifications-wrapper
   containerWidth = $('#container').outerWidth()
   $notificationWrapper = $('.notification-wrapper')

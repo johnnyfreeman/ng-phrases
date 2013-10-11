@@ -11,7 +11,7 @@ class @ActiveStateCollection
 
   # get all active in this collection
   # return a clone of the array so that 
-  # unsub and resub subscriptions properly
+  # subscriptions unsub and resub properly
   getAll: ->
     @depend()
     @allActive.slice(0)

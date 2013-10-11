@@ -1,15 +1,10 @@
-Meteor.publish 'phrases', (activeTags) ->
-  check activeTags, Array
+Meteor.publish 'phrases', ->
 
   # build mongo selector
   selector = {}
 
   # limit results to those that belong to the current user
   selector['userId'] = @userId
-
-  # limit results to those who have ALL active tags
-  if activeTags.length > 0
-    selector['tags'] = {$all: activeTags}
 
   Phrases.find selector
 

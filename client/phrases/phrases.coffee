@@ -1,25 +1,21 @@
 # subscribe to all phrases that the server is publishing
-phrasesLoading = undefined
-Deps.autorun (c) -> 
-  App.subs.phrases = Meteor.subscribe 'phrases', TagActiveStateCollection.getAll()
+App.subs.phrases = Meteor.subscribe 'phrases'
 
-  c.onInvalidate ->
-    phrasesLoading = Notifications.insert
-      iconClass: 'icon-spinner icon-spin'
-      message: 'Loading...'
-      timeout: 0
-      closeBtn: false
-    
+Template.phrases.phrases =  ->
 
-Template.phrases.phrases = ->
+  # build selector object
+  selector = {}
+  activeTags = TagActiveStateCollection.getAll()
+  selector.tags = {$all: activeTags} if activeTags.length
 
   # build sort object
-  sort = {}
+  options = {}
+  options.sort = {}
   sortKey = Settings.get('sortPhrasesBy')
-  sort[sortKey] = (if sortKey is "timestamp" then -1 else 1)
+  options.sort[sortKey] = (if sortKey is "timestamp" then -1 else 1)
 
   # return Phrases cursor
-  Phrases.find {}, {sort: sort}
+  Phrases.find selector, options
 
 
 Template.phrases.events 'submit form': (e) ->
@@ -71,9 +67,6 @@ Template.phrases.rendered = (e) ->
   # reset the action bar shadow when phrases 
   # are (re)rendered to keep ui consistant
   $('.action-bar').css 'box-shadow', 'none'
-
-  Meteor.defer ->
-    Notifications.remove phrasesLoading
 
 Template.phrases.bulkDeleteMode = ->
   (if Settings.get('bulkDeleteMode') then 'bulk-delete-mode' else '')

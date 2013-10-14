@@ -12,25 +12,17 @@ Template.main.appReady = ->
   App.subsReady()
 
 
-# storage for loading notification
-loadingId = undefined
-
 # on every start up add loading notification
 Meteor.startup ->
-  loadingId = Notifications.insert(
-    iconClass: 'icon-spinner icon-spin'
-    message: 'Loading...'
-    timeout: 0
-    closeBtn: false
-  )
+  App.loader.show()
 
 
 # when app is ready, remove loading notification
 Meteor.startup ->
-  Deps.autorun (autorun) ->
+  Deps.autorun (c) ->
     if App.subsReady()
-      Notifications.remove loadingId
-      autorun.stop()
+      App.loader.hide()
+      c.stop()
 
 
 Template.listingInfo.activeTags = ->

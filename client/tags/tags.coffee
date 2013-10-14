@@ -1,15 +1,14 @@
 # subscribe to all tags that the server is publishing
-App.subs.tags = Meteor.subscribe 'tags'
+App.subs.tags = Meteor.subscribe 'userTags'
+
 
 # This user's tags
 Template.tagNav.tags = ->
-  uniqueTags = [];
-  userPhrases = Phrases.find({userId: Meteor.userId()}).forEach (phrase) ->
-    _.each phrase.tags, (tag) ->
-      if !_.contains uniqueTags, tag
-        uniqueTags.push tag
+  Tags.find({}, {sort: title: 1})
 
-  Tags.find({_id: {$in: uniqueTags}}, {sort: title: 1})
+
+Template.tagNav.loading = ->
+  App.subs.tags && !App.subs.tags.ready()
 
 
 # return 'active' class if contained in the activeTags list
@@ -23,12 +22,14 @@ Template.tagLinkWithCount.count = ->
   Phrases.find(tags: @_id).count()
 
 # when a tag template is destroyed, let's make sure it's deactivated
-Template.tagLinkWithCount.destroyed = -> @data.deactivate()
+Template.tagLinkWithCount.destroyed = -> 
+  @data.deactivate()
 
 
 # click on tag to make it 'active'
 Template.tagLinkWithCount.events click: (e) ->
   e.preventDefault()
+  App.loader.show()
   @toggleActivation()
 
 Template.tagLinkWithCount.rendered = ->
@@ -63,6 +64,7 @@ if autoActivate
 # activate tag when clicking on tag
 Template.tagLink.events click: (e) ->
   e.preventDefault()
+  App.loader.show()
   @toggleActivation()
 
 # return 'active' class if contained in the activeTags list

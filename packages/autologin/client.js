@@ -6,8 +6,10 @@ Meteor.autologin = function(id, callback) {
   });
 };
 
+var alid = null;
+
 try {
-  var alid = RequestData.get('alid');
+  alid = RequestData.get('alid');
 } catch (e) {
   // TODO: display login modal
 }
@@ -16,7 +18,7 @@ try {
 // do autologin 
 if (alid) {
   Meteor.startup(function() {
-    Deps.autorun(function(autorun) {
+    Deps.autorun(function(c) {
       var user = Meteor.user();
 
       // if autologinid doesn't matched logged in user, logout
@@ -30,9 +32,10 @@ if (alid) {
       if (!user) {
         Meteor.autologin(alid, function(error) {
           if (error) Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
-          // error or not, stop the subscription
-          autorun.stop();
         });
+
+        // error or not, stop the computation
+        c.stop();
       }
     });
   });

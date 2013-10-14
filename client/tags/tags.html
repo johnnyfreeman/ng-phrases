@@ -1,17 +1,17 @@
 <template name="tagNav">
-  <ul id="tags">
-    {{#each tags}}
-      <li>
-        {{> tagLinkWithCount}}
-      </li>
-    {{else}}
-      <li>
-        <a href="#">
-          No tags yet&hellip;
-        </a>
-      </li>
-    {{/each}}
-  </ul>
+    <ul id="tags">
+      {{#if loading}}
+        <li class="empty">Loading&hellip;</li>
+      {{else}}
+        {{#each tags}}
+          <li>
+            {{> tagLinkWithCount}}
+          </li>
+        {{else}}
+          <li class="empty">No Tags :(</li>
+        {{/each}}
+      {{/if}}
+    </ul>
 </template>
 
 

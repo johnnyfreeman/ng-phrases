@@ -1,10 +1,11 @@
-Meteor.publish 'phrases', ->
+Meteor.publish 'phrases', (activeTags) ->
 
-  # build mongo selector
+  # build selector object
   selector = {}
+  selector.tags = {$all: activeTags} if activeTags.length
 
   # limit results to those that belong to the current user
-  selector['userId'] = @userId
+  selector.userId = @userId
 
   Phrases.find selector
 

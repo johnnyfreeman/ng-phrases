@@ -28,7 +28,26 @@ App.off = (eventName, callback) ->
 App.trigger = (eventName) ->
   bean.fire App, eventName
 
+# Debugging
 App.perfDebugging = false
 
 try
   App.perfDebugging = (if RequestData.get('perfDebugging') is 'true' then true else false)
+
+
+# App loading indicator
+App.loadingId = null;
+
+App.loader =
+  id: null
+  show: ->
+    if this.id is null
+      this.id = Notifications.insert
+        iconClass: 'icon-spinner icon-spin'
+        message: 'Loading...'
+        timeout: 0
+        closeBtn: false
+  hide: ->
+    if this.id isnt null
+      Notifications.remove this.id
+      this.id = null

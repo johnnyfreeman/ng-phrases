@@ -1,13 +1,8 @@
 # subscribe to all phrases that the server is publishing
-App.subs.phrases = Meteor.subscribe 'phrases'
+Deps.autorun (c) ->
+  App.subs.phrases = Meteor.subscribe 'phrases', TagActiveStateCollection.getAll()
 
 Template.phrases.phrases =  ->
-
-  # build selector object
-  selector = {}
-  activeTags = TagActiveStateCollection.getAll()
-  selector.tags = {$all: activeTags} if activeTags.length
-
   # build sort object
   options = {}
   options.sort = {}
@@ -15,7 +10,10 @@ Template.phrases.phrases =  ->
   options.sort[sortKey] = (if sortKey is "timestamp" then -1 else 1)
 
   # return Phrases cursor
-  Phrases.find selector, options
+  Phrases.find {}, options
+
+Template.phrases.loading = ->
+  App.subs.phrases && !App.subs.phrases.ready()
 
 
 Template.phrases.events 'submit form': (e) ->
@@ -62,6 +60,8 @@ Template.phrases.rendered = (e) ->
     color: '#999'
     size: '5px'
     height: '429px'
+
+  App.loader.hide()
 
   
   # reset the action bar shadow when phrases 

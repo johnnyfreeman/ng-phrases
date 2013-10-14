@@ -1,17 +1,21 @@
 <template name="phrases">
-  <form action="" id="phraseForm" method="post">
-    <div class="scroll">
-      <ul class="{{bulkDeleteMode}}" id="phrases">
-        {{#each phrases}}
-          {{> phraseItem}}
-        {{else}}
-          <li class="empty">No Phrases :(</li>
-        {{/each}}
-      </ul>
-    </div>
+    <form action="" id="phraseForm" method="post">
+      <div class="scroll">
+        <ul class="{{bulkDeleteMode}}" id="phrases">
+          {{#if loading}}
+            <li class="empty">Loading&hellip;</li>
+          {{else}}
+            {{#each phrases}}
+              {{> phraseItem}}
+            {{else}}
+              <li class="empty">No Phrases :(</li>
+            {{/each}}
+          {{/if}}
+        </ul>
+      </div>
 
-    {{> infoBar}}
-  </form>
+      {{> infoBar}}
+    </form>
 </template>
 
 

@@ -1,31 +1,38 @@
 // TODO: this function should only run once!
-// Meteor.publish('tags', function() {
-//   var self = this;
-//   var uniqueTags = [];
-//   var userPhrases = Phrases.find({userId:this.userId});
+Meteor.publish('userTags', function() {
+  var self = this;
+  var uniqueTags = [];
+  var userPhrases = Phrases.find({userId:this.userId}, {fields: {tags: 1}});
 
-//   // TODO: figure out why this is being called three times for every one add event
-//   var observer = userPhrases.observeChanges({
-//     added: function(id, phrase) {
-//       _.each(phrase.tags, function(tag) {
-//         if (!_.contains(uniqueTags, tag)) {
-//           uniqueTags.push(tag);
-//           self.added('tags', tag, Tags.findOne(tag));
-//         };
-//       });
-//     }
-//   });
+  userPhrases.forEach(function(phrase) {
+    _.each(phrase.tags, function(tagId) {
+      if (!_.contains(uniqueTags, tagId)) {
+        uniqueTags.push(tagId);
+      };
+    });
+  });
 
-//   // stop observing when this tags stop publishing
-//   self.onStop(function() {
-//     observer.stop();
-//   });
+  var observer = userPhrases.observeChanges({
+    added: function(phraseId, phrase) {
+      _.each(phrase.tags, function(tagId) {
+        if (!_.contains(uniqueTags, tagId)) {
+          uniqueTags.push(tagId);
+          self.added('tags', tagId, Tags.findOne(tagId));
+        };
+      });
+    }
+  });
 
-//   // return Tags cursor
-//   return Tags.find({_id: {$in: uniqueTags}});
-// });
+  // stop observing when this tags stop publishing
+  self.onStop(function() {
+    observer.stop();
+  });
 
-Meteor.publish('tags', function() {
+  // return Tags cursor
+  return Tags.find({_id: {$in: uniqueTags}});
+});
+
+Meteor.publish('allTags', function() {
   return Tags.find();
 });
 

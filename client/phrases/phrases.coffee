@@ -61,7 +61,10 @@ Template.phrases.rendered = (e) ->
     size: '5px'
     height: '429px'
 
-  App.loader.hide()
+  # after the browser finishes rendering
+  # hide the loading indicator
+  Meteor.defer ->
+    App.loader.hide()
 
   
   # reset the action bar shadow when phrases 

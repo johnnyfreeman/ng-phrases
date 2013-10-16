@@ -13,7 +13,5 @@ Template.main.appReady = ->
 
 
 Template.listingInfo.activeTags = ->
-  activeTags = Tags.find(_id:
-    $in: TagActiveStateCollection.getAll()
-  )
+  activeTags = Tags.find _id: $in: TagActiveStateCollection.getAll()
   (if activeTags.count() > 0 then activeTags else false)

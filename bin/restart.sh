@@ -2,4 +2,4 @@
 fuser -k -n tcp 80
 
 # start meteor
-sudo mrt --production --port 80 &
+mrt --production --port 80 &

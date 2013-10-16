@@ -1,5 +1,5 @@
 # kill all processes using port 3000
-fuser -k -n tcp 3000
+fuser -k -n tcp 80
 
 # start meteor
-mrt --production
+sudo mrt --production --port 80 &

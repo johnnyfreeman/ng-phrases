@@ -52,6 +52,11 @@ form {
   text-overflow: ellipsis;
 }
 
+/* hide the Observatory triggers */
+#lb_id_containing_box a.observatory_trigger {
+  display: none;
+}
+
 #container {
   background-color: #fff;
   overflow: hidden; /* contains floats */

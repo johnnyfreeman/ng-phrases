@@ -5,6 +5,9 @@ class @Tag extends Model
     super(doc)
     @activeState = TagActiveStateCollection.getModelInstance @_id
 
+    # store phrases cursor for subsequent retrieval
+    @phrasesCursor = Phrases.find tags: @_id
+
   isActive: ->
     @activeState.isActive()
 
@@ -16,3 +19,6 @@ class @Tag extends Model
 
   toggleActivation: ->
     @activeState.toggleActivation()
+
+  getPhrases: ->
+    @phrasesCursor

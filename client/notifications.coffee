@@ -1,3 +1,6 @@
+# unnamed collection for notifications
+@Notifications = new Meteor.Collection(null)
+
 # init plugins
 Template.notifications.notifications = ->
   Notifications.find()

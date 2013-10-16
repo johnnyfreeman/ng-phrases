@@ -5,6 +5,8 @@ class @Phrase extends Model
     super(doc)
     @activeState = PhraseActiveStateCollection.getModelInstance @_id
 
+    @tagsCursor = Tags.find _id: $in: @tags
+
   isActive: ->
     @activeState.isActive()
 
@@ -16,3 +18,6 @@ class @Phrase extends Model
 
   toggleActivation: ->
     @activeState.toggleActivation()
+
+  getTags: ->
+    @tagsCursor

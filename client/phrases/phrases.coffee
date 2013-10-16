@@ -84,8 +84,7 @@ Template.phraseItem.icon = ->
   (if @isActive() then 'icon-check' else 'icon-check-empty')
 
 Template.phraseItem.tags = ->
-  Tags.find _id:
-    $in: @tags
+  @getTags()
 
 
 Template.phraseItem.timeago = ->

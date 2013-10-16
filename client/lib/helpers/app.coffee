@@ -1,12 +1,12 @@
 # namespace for app helpers
-@App = {}
+@App = {} if typeof App is 'undefined'
+
 
 # namespace for app subscriptions
-if Meteor.isClient
-  App.subs = {}
-  App.subs.settings = Meteor.subscribe('settings')
-  App.subsReady = ->
-    App.subs.phrases.ready() and App.subs.tags.ready() and App.subs.settings.ready()
+App.subs = {}
+App.subs.settings = Meteor.subscribe('settings')
+App.subsReady = ->
+  App.subs.phrases.ready() and App.subs.tags.ready() and App.subs.settings.ready()
 
 
 # register event handler
@@ -28,16 +28,8 @@ App.off = (eventName, callback) ->
 App.trigger = (eventName) ->
   bean.fire App, eventName
 
-# Debugging
-App.perfDebugging = false
-
-try
-  App.perfDebugging = (if RequestData.get('perfDebugging') is 'true' then true else false)
-
 
 # App loading indicator
-App.loadingId = null;
-
 App.loader =
   id: null
   show: ->

@@ -14,6 +14,3 @@
   transform: (mongoDoc) ->
     # return new Phrase instance instead of raw mongo doc
     new Phrase(mongoDoc)
-
-# unnamed collection for notifications
-@Notifications = new Meteor.Collection(null)

@@ -17,9 +17,9 @@ Template.tagLinkWithCount.activeClass = ->
 
 
 # Tag's phrase-count
-Template.tagLinkWithCount.count = ->
+Template.tagLinkWithCount.phraseCount = ->
   # get all phrases for this user where it has this as one of it's tags
-  Phrases.find(tags: @_id).count()
+  @getPhrases().count()
 
 # when a tag template is destroyed, let's make sure it's deactivated
 Template.tagLinkWithCount.destroyed = -> 

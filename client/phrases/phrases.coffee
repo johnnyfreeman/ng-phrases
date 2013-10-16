@@ -197,7 +197,6 @@ Template.addPhraseForm.rendered = ->
 
 # Meteor.startup(function() {
 #   Deps.autorun(function() {
-#     console.log('refreshing selectize options...');
 #     if (!AddPhraseFormHelper.selectize) 
 #       return;
 

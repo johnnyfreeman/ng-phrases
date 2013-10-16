@@ -15,3 +15,8 @@ Template.main.appReady = ->
 Template.listingInfo.activeTags = ->
   activeTags = Tags.find _id: $in: TagActiveStateCollection.getAll()
   (if activeTags.count() > 0 then activeTags else false)
+
+
+Deps.autorun (c) ->
+  status = Meteor.status()
+  App.log.info 'Meteor status: '+status.status, status

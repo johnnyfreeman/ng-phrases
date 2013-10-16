@@ -22,11 +22,11 @@ if (alid) {
       var user = Meteor.user();
 
       // if autologinid doesn't matched logged in user, logout
-      if (user) {
-        if (user.profile.autologinId !== alid) {
-          Meteor.logout();
-        }
-      }
+      // if (user) {
+      //   if (user.profile.autologinId !== alid) {
+      //     Meteor.logout();
+      //   }
+      // }
 
       // if user is not logged in, do autologin
       if (!user) {

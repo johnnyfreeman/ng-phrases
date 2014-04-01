@@ -4,8 +4,7 @@
     "basePackages": {
       "font-awesome": {},
       "animate-css": {},
-      "moment-alternative": {},
-      "observatory": {}
+      "moment-alternative": {}
     },
     "packages": {
       "font-awesome": {
@@ -22,21 +21,6 @@
         "git": "https://github.com/acreeger/meteor-moment.git",
         "tag": "v2.1.0.3",
         "commit": "ab7d2dd2f5035b9eb011cc8ddb34d24da4b18cde"
-      },
-      "observatory": {
-        "git": "https://github.com/jhoxray/observatory.git",
-        "tag": "v0.3.21",
-        "commit": "3d6b436af0a70b784d0f9ec4709907c77bd4fd63"
-      },
-      "observatory-apollo": {
-        "git": "https://github.com/superstringsoftware/observatory-apollo.git",
-        "tag": "v0.3.2",
-        "commit": "f704848187a4da2bd179864ae80a1f73a3fd22a6"
-      },
-      "observatory-galileo": {
-        "git": "https://github.com/superstringsoftware/observatory-galileo.git",
-        "branch": "master",
-        "commit": "f21b80e6502d38a7ce66206374b706f2cbd0228d"
       }
     }
   }

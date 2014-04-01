@@ -12,12 +12,14 @@ Accounts.registerLoginHandler(function (options) {
 
   // add token to user account
   var stampedLoginToken = Accounts._generateStampedLoginToken();
-  Meteor.users.update(user._id, {$push: {'services.resume.loginTokens': stampedLoginToken}});
+  Meteor.users.update(user._id, {
+    $push: {'services.resume.loginTokens': Accounts._hashStampedToken(stampedLoginToken)}
+  });
 
   // return account info
   return {
     token: stampedLoginToken.token,
-    id: user._id
+    userId: user._id
   };
 
 });

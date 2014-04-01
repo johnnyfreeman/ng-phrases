@@ -7,16 +7,15 @@ Template.main.rendered = (e) ->
     height: '591px'
 
 
-# loading helper
-Template.main.appReady = ->
-  App.subsReady()
-
-
 Template.listingInfo.activeTags = ->
   activeTags = Tags.find _id: $in: TagActiveStateCollection.getAll()
   (if activeTags.count() > 0 then activeTags else false)
 
 
-# Deps.autorun (c) ->
-#   status = Meteor.status()
-#   App.log.info 'Meteor status: '+status.status, status
+# show app loader when subs are not ready
+Deps.autorun ->
+  if App.subsReady()
+    App.loader.hide()
+  else
+    App.loader.show()
+  

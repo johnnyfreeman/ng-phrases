@@ -30,19 +30,20 @@ App.trigger = (eventName) ->
 
 
 # App loading indicator
-App.loader =
-  id: null
-  show: ->
-    if App.loader.id is null
-      App.loader.id = Notifications.insert
-        iconClass: 'fa fa-spinner fa-spin'
-        message: 'Loading...'
-        timeout: 0
-        closeBtn: false
-      # hide loader after flush is finished
-      Deps.afterFlush ->
-        App.loader.hide()
-  hide: ->
-    if App.loader.id isnt null
-      Notifications.remove App.loader.id
-      App.loader.id = null
+App.Loader = ->
+  @id = null
+
+App.Loader::show = ->
+  if @id is null
+    @id = Notifications.insert
+      iconClass: 'fa fa-spinner fa-spin'
+      message: 'Loading...'
+      timeout: 0
+      closeBtn: false
+
+App.Loader::hide = ->
+  if @id isnt null
+    Notifications.remove @id
+    @id = null
+
+App.loader = new App.Loader

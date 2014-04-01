@@ -31,6 +31,9 @@ Template.tagLinkWithCount.events click: (e) ->
   e.preventDefault()
   # show loader
   App.loader.show()
+  # hide loader after flush is finished
+  Deps.afterFlush ->
+    App.loader.hide()
   # toggle activation for this tag
   @toggleActivation()
 
@@ -68,6 +71,9 @@ Template.tagLink.events click: (e) ->
   e.preventDefault()
   # show loader
   App.loader.show()
+  # hide loader after flush is finished
+  Deps.afterFlush ->
+    App.loader.hide()
   # toggle activation for this tag
   @toggleActivation()
 

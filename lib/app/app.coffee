@@ -10,4 +10,4 @@ try
 
 
 # register app logger
-App.log = Observatory.getToolbox()
+# App.log = Observatory.getToolbox()

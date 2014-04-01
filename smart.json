@@ -2,7 +2,6 @@
   "packages": {
     "font-awesome": {},
     "animate-css": {},
-    "moment-alternative": {},
-    "observatory": {}
+    "moment-alternative": {}
   }
 }

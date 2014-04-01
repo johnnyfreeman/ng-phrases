@@ -3,14 +3,14 @@
   # callback to pass to insert and update functions
 AddPhraseFormHelper.afterSave = (error) ->
   if (error)
-    Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true})
+    Notifications.insert({iconClass:'fa fa-exclamation-triangle',message:error.message, type: 'danger', timeout: 0, closeBtn: true})
     return
 
   # clear form
   AddPhraseFormHelper.clearForm();
 
   # notification
-  Notifications.insert({iconClass:'icon-ok',message:'Phrase saved!', type: 'success', timeout: 2000, closeBtn: false});
+  Notifications.insert({iconClass:'fa fa-check',message:'Phrase saved!', type: 'success', timeout: 2000, closeBtn: false});
 
   $form  = $('#addPhraseForm');
 

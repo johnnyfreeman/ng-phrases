@@ -29,7 +29,7 @@
 }
 
 #tags a:hover,
-#tags a:hover .icon-tag,
+#tags a:hover .fa-tag,
 #tags a:hover .count {
   color: #fff;
 }
@@ -40,12 +40,12 @@
   color: #fff;
 }
 
-#tags .icon-tag {
+#tags .fa-tag {
   color: #a7afbd;
   margin-right: 3px;
 }
 
-#tags .active .icon-tag {
+#tags .active .fa-tag {
   color: #fff;
 }
 

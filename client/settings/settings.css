@@ -8,10 +8,10 @@
   height: 355px;
 }
 
-#settingsForm a:hover .icon-user,
-#settingsForm a:hover .icon-calendar,
-#settingsForm a:hover .icon-align-justify,
-#settingsForm a:hover .icon-font {
+#settingsForm a:hover .fa-user,
+#settingsForm a:hover .fa-calendar,
+#settingsForm a:hover .fa-align-justify,
+#settingsForm a:hover .fa-font {
   color: #fff;
 }
 
@@ -51,7 +51,7 @@
 }
 
 /* when bulk insert setting is in popup title */
-.popup-title .setting { 
+.popup-title .setting {
   float: right;
 }
 

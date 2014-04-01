@@ -1,5 +1,5 @@
-# The ActiveStateCollection is designed to house a bunch 
-# of activestate models. Also, when an active state is 
+# The ActiveStateCollection is designed to house a bunch
+# of activestate models. Also, when an active state is
 # changed, the collection is chanced as well.
 class @ActiveStateCollection
   constructor: ->
@@ -10,7 +10,7 @@ class @ActiveStateCollection
     @_modelInstances = {}
 
   # get all active in this collection
-  # return a clone of the array so that 
+  # return a clone of the array so that
   # subscriptions unsub and resub properly
   getAll: ->
     @depend()

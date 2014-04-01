@@ -1,5 +1,5 @@
-* { 
-  box-sizing: border-box; 
+* {
+  box-sizing: border-box;
 }
 
 /* removes dotted line */
@@ -161,7 +161,7 @@ form {
   text-align: center;
 }
 
-.loading .icon-spinner {
+.loading .fa-spinner {
 }
 
 

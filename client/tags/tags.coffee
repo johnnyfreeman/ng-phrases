@@ -22,20 +22,22 @@ Template.tagLinkWithCount.phraseCount = ->
   @getPhrases().count()
 
 # when a tag template is destroyed, let's make sure it's deactivated
-Template.tagLinkWithCount.destroyed = -> 
+Template.tagLinkWithCount.destroyed = ->
   @data.deactivate()
 
 
 # click on tag to make it 'active'
 Template.tagLinkWithCount.events click: (e) ->
   e.preventDefault()
+  # show loader
   App.loader.show()
+  # toggle activation for this tag
   @toggleActivation()
 
 Template.tagLinkWithCount.rendered = ->
-  
+
   # automatically deactivate tags with zero phrases
-  # this will ensure the when Phrases are deleted, 
+  # this will ensure the when Phrases are deleted,
   # that the phrases list doesn't go blank afterwards
   @data.deactivate if @data.isActive() and not Phrases.find(tags: @data._id).count()
 
@@ -64,7 +66,9 @@ if autoActivate
 # activate tag when clicking on tag
 Template.tagLink.events click: (e) ->
   e.preventDefault()
+  # show loader
   App.loader.show()
+  # toggle activation for this tag
   @toggleActivation()
 
 # return 'active' class if contained in the activeTags list

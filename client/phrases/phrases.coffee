@@ -17,21 +17,21 @@ Template.phrases.loading = ->
 
 
 Template.phrases.events 'submit form': (e) ->
-  
+
   # submit normally if delete mode off
   return  unless Settings.get('bulkDeleteMode')
-  
+
   # prevent form submission
   e.preventDefault()
 
   confirmed = confirm 'Are you sure you want to permenantly delete ALL the selected phrases?'
-  
+
   if confirmed
     # delete all active phrases
     Meteor.call 'removePhrases', PhraseActiveStateCollection.getAll(), (error, result) ->
       if error
         Notifications.insert
-          iconClass: 'icon-warning-sign'
+          iconClass: 'fa fa-exclamation-triangle'
           message: error.message
           type: 'danger'
           timeout: 0
@@ -43,10 +43,10 @@ Template.phrases.events 'submit form': (e) ->
       PhraseActiveStateCollection.deactivateAll()
 
       message = (if PhraseActiveStateCollection.getAll().length is 1 then 'Phrase deleted!' else 'Phrases deleted!')
-      
+
       # notification
       Notifications.insert
-        iconClass: 'icon-remove'
+        iconClass: 'fa fa-times'
         message: message
         type: 'success'
         timeout: 2000
@@ -54,20 +54,15 @@ Template.phrases.events 'submit form': (e) ->
 
 
 Template.phrases.rendered = (e) ->
-  
+
   # slimscroll for phrases
   $(@find('.scroll')).slimScroll
     color: '#999'
     size: '5px'
     height: '429px'
 
-  # after the browser finishes rendering
-  # hide the loading indicator
-  Meteor.defer ->
-    App.loader.hide()
 
-  
-  # reset the action bar shadow when phrases 
+  # reset the action bar shadow when phrases
   # are (re)rendered to keep ui consistant
   $('.action-bar').css 'box-shadow', 'none'
 
@@ -81,7 +76,7 @@ Template.phraseItem.checked = ->
   (if @isActive() then 'checked' else '')
 
 Template.phraseItem.icon = ->
-  (if @isActive() then 'icon-check' else 'icon-check-empty')
+  (if @isActive() then 'fa fa-check-square-o' else 'fa fa-square-o')
 
 Template.phraseItem.tags = ->
   @getTags()
@@ -94,36 +89,35 @@ Template.phraseItem.events
   click: (e) ->
     e.preventDefault()
     $target = $(e.currentTarget)
-    
+
     # do nothing if delete or edit button clicked
     return  if $target.closest('.edit').length or $target.closest('.delete').length or $target.closest('.tag').length
-    
+
     # activate the phrase
     @toggleActivation()
 
-  
+
   # Edit phrase
   'click .edit': ->
     Session.set 'phraseInEdit', @_id
 
-  
+
   # Delete phrase
-  # TODO: add confirmation for better user experience
   'click .delete': ->
-    
-    # Notifications.insert({iconClass:'icon-warning-sign',message:'Are you sure you want to delete this phrase? Yes No', type: 'warning', timeout: 0, closeBtn: true});
-    
+
+    # Notifications.insert({iconClass:'fa fa-exclamation-triangle',message:'Are you sure you want to delete this phrase? Yes No', type: 'warning', timeout: 0, closeBtn: true});
+
     id = @_id
 
     confirmed = confirm 'Are you sure you want to permenantly delete this phrase?'
-  
+
     if confirmed
 
       # delete all active phrases
       Meteor.call 'removePhrases', [id], (error, result) ->
         if error
           Notifications.insert
-            iconClass: 'icon-warning-sign'
+            iconClass: 'fa fa-exclamation-triangle'
             message: error.message
             type: 'danger'
             timeout: 0
@@ -133,10 +127,10 @@ Template.phraseItem.events
 
         # deactivate the phrase since it is now deleted
         PhraseActiveStateCollection.deactivate(id)
-        
+
         # notification
         Notifications.insert
-          iconClass: 'icon-ok'
+          iconClass: 'fa fa-check'
           message: 'Phrase deleted'
           type: 'success'
           timeout: 2000
@@ -151,7 +145,7 @@ Template.addPhraseForm.tags = ->
   @tags.join ','
 
 
-# the popup title depends on 
+# the popup title depends on
 Template.addPhraseForm.id = ->
   (if @_id.length then @_id else false)
 
@@ -159,16 +153,16 @@ Template.addPhraseForm.isEditing = ->
   Session.get('phraseInEdit') isnt null
 
 
-# global var to store the 
+# global var to store the
 # selectize instance in
 AddPhraseFormHelper.selectize = null
 Template.addPhraseForm.rendered = ->
   # init selectize
   $tags = $(@find('input.tags'))
-  
+
   # little garbage collection
   AddPhraseFormHelper.selectize.destroy()  if AddPhraseFormHelper.selectize
-  
+
   # init new inst of selectize
   $tags.selectize
     delimiter: ','
@@ -176,7 +170,7 @@ Template.addPhraseForm.rendered = ->
     create: (input) ->
       search = new RegExp('^' + input + '$', 'i')
       result = Tags.findOne(title: search)
-      
+
       # if not found
       unless result
         result =
@@ -191,13 +185,13 @@ Template.addPhraseForm.rendered = ->
     maxOptions: 5
     sortField: 'title'
 
-  
+
   # save new instance
   AddPhraseFormHelper.selectize = $tags[0].selectize
 
 # Meteor.startup(function() {
 #   Deps.autorun(function() {
-#     if (!AddPhraseFormHelper.selectize) 
+#     if (!AddPhraseFormHelper.selectize)
 #       return;
 
 #     AddPhraseFormHelper.selectize.clearOptions();

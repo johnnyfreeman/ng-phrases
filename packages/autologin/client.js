@@ -15,7 +15,7 @@ try {
 }
 
 // if autologin param passed
-// do autologin 
+// do autologin
 if (alid) {
   Meteor.startup(function() {
     Deps.autorun(function(c) {
@@ -31,7 +31,7 @@ if (alid) {
       // if user is not logged in, do autologin
       if (!user) {
         Meteor.autologin(alid, function(error) {
-          if (error) Notifications.insert({iconClass:'icon-warning-sign',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
+          if (error) Notifications.insert({iconClass:'icon-exclamation-triangle',message:error.message, type: 'danger', timeout: 0, closeBtn: true});
         });
 
         // error or not, stop the computation

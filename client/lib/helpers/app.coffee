@@ -33,13 +33,16 @@ App.trigger = (eventName) ->
 App.loader =
   id: null
   show: ->
-    if this.id is null
-      this.id = Notifications.insert
-        iconClass: 'icon-spinner icon-spin'
+    if App.loader.id is null
+      App.loader.id = Notifications.insert
+        iconClass: 'fa fa-spinner fa-spin'
         message: 'Loading...'
         timeout: 0
         closeBtn: false
+      # hide loader after flush is finished
+      Deps.afterFlush ->
+        App.loader.hide()
   hide: ->
-    if this.id isnt null
-      Notifications.remove this.id
-      this.id = null
+    if App.loader.id isnt null
+      Notifications.remove App.loader.id
+      App.loader.id = null

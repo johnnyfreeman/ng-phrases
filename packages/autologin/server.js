@@ -16,7 +16,7 @@ Accounts.registerLoginHandler(function (options) {
 
   // return account info
   return {
-    token: stampedLoginToken.token, 
+    token: stampedLoginToken.token,
     id: user._id
   };
 

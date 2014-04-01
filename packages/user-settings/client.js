@@ -16,7 +16,18 @@ var _settings = function() {
 
 // Get individual setting
 Settings.get = function(key) {
-  return Session.get('settingsLoaded') ? _settings()[key] : undefined;
+
+  if (!Session.get('settingsLoaded')) {
+    return undefined;
+  }
+
+  var settings = _settings();
+
+  if (settings === undefined || !settings.hasOwnProperty(key) || !Session.get('settingsLoaded')) {
+    return undefined;
+  }
+
+  return settings[key];
 };
 
 // Set new value for a specific setting
@@ -26,7 +37,7 @@ Settings.set = function(key, value) {
 
   var data = {};
   data[key] = value;
-  
+
   // get default settings
   var defaultSettings = Settings.findOne({userId:'default'});
   delete defaultSettings._id;
@@ -37,7 +48,7 @@ Settings.set = function(key, value) {
   userSettings[key] = value;
   delete userSettings._id;
   delete userSettings.userId;
-  
+
   // if currently using defaults AND new settings are not equal to the defaults
   if (_settings().userId === 'default' && JSON.stringify(userSettings) !== JSON.stringify(defaultSettings))
     Settings.insert(_.extend(userSettings, {userId:Meteor.userId()}));

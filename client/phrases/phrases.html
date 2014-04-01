@@ -23,7 +23,7 @@
   <li class="{{active}}">
     <div class="checkbox">
       <i class="{{icon}}"></i>
-      <input class="hidden" name="phrases[]" type="checkbox" value="{{text}}" {{{checked}}}>
+      <input class="hidden" name="phrases[]" type="checkbox" value="{{text}}" {{checked}}>
     </div>
     <h1 class="truncate" title="{{title}}"><small class="date" data-timestamp="{{timestamp}}">{{timeago}}</small>{{title}}</h1>
     <p class="truncate" title="{{text}}">{{text}}</p>
@@ -54,6 +54,6 @@
     <textarea name="phrase" placeholder="Body&hellip;">{{text}}</textarea>
   </div>
   <div>
-    <button class="btn btn-success pull-right btn-submit" type="submit"><i class="icon-ok"></i> Save Phrase</button>
+    <button class="btn btn-success pull-right btn-submit" type="submit"><i class="fa fa-check"></i> Save Phrase</button>
   </div>
 </template>

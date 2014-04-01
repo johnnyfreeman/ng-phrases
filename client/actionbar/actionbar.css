@@ -9,7 +9,7 @@
   height: 72px;
 
   /* place action-bar above phrases AND infobar ** DO NOT REMOVE */
-  position: relative; 
+  position: relative;
   z-index: 2;
 }
 
@@ -19,7 +19,7 @@
   display: inline-block;
 }
 
-.search-field .icon-search {
+.search-field .fa-search {
   color: #919599;
   left: 10px;
   position: absolute;
@@ -73,10 +73,10 @@ input.search.placeholder:hover {
   height: 355px;
 }
 
-#addPhraseForm a:hover .icon-user,
-#addPhraseForm a:hover .icon-calendar,
-#addPhraseForm a:hover .icon-align-justify,
-#addPhraseForm a:hover .icon-font {
+#addPhraseForm a:hover .fa-user,
+#addPhraseForm a:hover .fa-calendar,
+#addPhraseForm a:hover .fa-align-justify,
+#addPhraseForm a:hover .fa-font {
   color: #fff;
 }
 

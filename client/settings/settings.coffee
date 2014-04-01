@@ -1,4 +1,4 @@
-# ------ bulkInsertSetting Template ------ 
+# ------ bulkInsertSetting Template ------
 
 Template.bulkInsertSetting.checked = ->
   (if Settings.get('bulkInsertMode') is true then 'checked' else '')
@@ -8,13 +8,13 @@ Template.bulkInsertSetting.events
     val = $(e.currentTarget).is(':checked')
     Settings.set 'bulkInsertMode', val
     Notifications.insert
-      iconClass: 'icon-ok'
+      iconClass: 'fa fa-check'
       message: 'Bulk Insert Mode is ' + ((if val then 'on' else 'off'))
       type: 'info'
       timeout: 2000
       closeBtn: false
 
-# ------ bulkDeleteSetting Template ------ 
+# ------ bulkDeleteSetting Template ------
 
 Template.bulkDeleteSetting.checked = ->
   (if Settings.get('bulkDeleteMode') is true then 'checked' else '')
@@ -25,13 +25,13 @@ Template.bulkDeleteSetting.events
     val = $(e.currentTarget).is(':checked')
     Settings.set 'bulkDeleteMode', val
     Notifications.insert
-      iconClass: 'icon-ok'
+      iconClass: 'fa fa-check'
       message: 'Bulk Delete Mode is ' + ((if val then 'on' else 'off'))
       type: 'info'
       timeout: 2000
       closeBtn: false
 
-# ------ sortPhrasesBySetting Template ------ 
+# ------ sortPhrasesBySetting Template ------
 
 Template.sortPhrasesBySetting.byBody = ->
   (if Settings.get('sortPhrasesBy') is 'body' then 'selected' else '')
@@ -49,7 +49,7 @@ Template.sortPhrasesBySetting.events
     label = $(e.currentTarget).find(':selected').text()
     Settings.set 'sortPhrasesBy', val
     Notifications.insert
-      iconClass: 'icon-ok'
+      iconClass: 'fa fa-check'
       message: 'Phrases sorted by ' + label
       type: 'info'
       timeout: 2000
